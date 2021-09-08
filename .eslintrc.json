@@ -36,7 +36,7 @@
     "max-len": "off",
     "import/prefer-default-export": "off",
     "no-empty-function": "off",
-    " react/jsx-boolean-value": "off",
+    "react/jsx-boolean-value": "off",
     "react/no-array-index-key": "off"
   }
 }
