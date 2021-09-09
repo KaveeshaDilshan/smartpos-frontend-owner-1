@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
 
 function Header() {
@@ -9,4 +10,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default withRouter(Header);

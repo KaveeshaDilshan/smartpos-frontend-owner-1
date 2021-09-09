@@ -6,6 +6,7 @@ function Layout(props) {
     <>
       <Header />
       {props.children}
+      <h1>Mahela</h1>
     </>
   );
 }
