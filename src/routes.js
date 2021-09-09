@@ -1,5 +1,6 @@
 import { BASE_ROUTE } from './const/config';
-import Home from './views/home/Home';
+import Home from './views/Home/Home';
+import Warehouse from './views/Warehouses/Warehouse';
 
 const routes = [
   {
@@ -7,6 +8,7 @@ const routes = [
     render: Home,
     layout: BASE_ROUTE,
   },
+  { path: 'warehouses', render: Warehouse, layout: BASE_ROUTE },
 ];
 
 export default routes;

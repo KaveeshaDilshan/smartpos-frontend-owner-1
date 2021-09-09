@@ -7,8 +7,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Layout />
-        <Routes />
+        <Layout>
+          <Routes />
+        </Layout>
       </Switch>
     </BrowserRouter>
   );
