@@ -13,3 +13,17 @@ export const getWarehousesSuccess = (data) => {
     payload: data,
   };
 };
+
+export const getOneWarehouse = (data) => {
+  return {
+    type: actionTypes.GET_ONE_WAREHOUSE,
+    payload: data,
+  };
+};
+
+export const getOneWarehouseSuccess = (data) => {
+  return {
+    type: actionTypes.GET_ONE_WAREHOUSE_SUCCESS,
+    payload: data.data.result,
+  };
+};

@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes';
 const initialState = {
   warehouses: [],
   loading: false,
+  warehouse: {},
 };
 
 const warehouseReducer = (state = initialState, action) => {
@@ -10,10 +11,11 @@ const warehouseReducer = (state = initialState, action) => {
     case actionTypes.GET_WAREHOUSE_SUCCESS:
       return {
         ...state,
-        warehouses: [...state.warehouses, ...action.payload],
+        warehouses: [...action.payload],
         loading: true,
       };
-
+    case actionTypes.GET_ONE_WAREHOUSE_SUCCESS:
+      return { ...state, warehouse: action.payload };
     default:
       return state;
   }

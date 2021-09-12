@@ -5,16 +5,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginTop: '20px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
   },
   title: {
     fontSize: 14,
@@ -24,17 +20,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function WarehouseItem({
-  name,
-  location,
-  telephone,
-  managerName,
-}) {
+function WarehouseItem({ id, name, location, telephone, managerName }) {
+  const history = useHistory();
   const classes = useStyles();
   const fullName = managerName
     ? `${managerName.firstName} ${managerName.lastName}`
     : 'No manager is assigned yet';
-
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -52,12 +43,21 @@ export default function WarehouseItem({
           {telephone}
         </Typography>
         <Typography variant="body2" component="p">
-          Manager - {fullName}
+          Manager -{' '}
+          <span style={{ color: !managerName && 'red' }}>{fullName}</span>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Show Details</Button>
+        <Button
+          size="small"
+          type="submit"
+          onClick={() => history.push(`/warehouses/${id}`)}
+        >
+          Show Details
+        </Button>
       </CardActions>
     </Card>
   );
 }
+
+export default WarehouseItem;

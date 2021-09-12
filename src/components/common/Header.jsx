@@ -2,10 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
 
-function Header() {
+function Header(props) {
   return (
     <>
-      <PrimarySearchAppBar />
+      <PrimarySearchAppBar search={props.search} setSearch={props.setSearch} />
     </>
   );
 }
