@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "owner-smart-pos-app",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

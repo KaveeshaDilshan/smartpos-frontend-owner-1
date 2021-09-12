@@ -4,9 +4,8 @@ import Header from '../components/common/Header';
 function Layout(props) {
   return (
     <>
-      <Header />
+      <Header search={props.search} setSearch={props.setSearch} />
       {props.children}
-      <h1>Mahela</h1>
     </>
   );
 }

@@ -38,6 +38,7 @@
     "no-empty-function": "off",
     "react/jsx-boolean-value": "off",
     "no-underscore-dangle": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "spaced-comment": "off"
   }
 }

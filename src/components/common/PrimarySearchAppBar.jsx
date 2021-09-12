@@ -36,6 +36,11 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}>
+      {/* <input */}
+      {/*  type="text" */}
+      {/*  values={props.search} */}
+      {/*  onChange={(e) => props.setSearch(e.target.value)} */}
+      {/* /> */}
       <AppBar position="static">
         <Toolbar>
           <IconButton
