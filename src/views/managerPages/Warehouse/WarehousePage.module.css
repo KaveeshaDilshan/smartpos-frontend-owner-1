@@ -1,0 +1,19 @@
+.warehousepage {
+  margin-left: 230px;
+  padding: 25px;
+  min-width: fit-content;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.searchbar {
+  margin-right: 10px;
+  display: flex;
+}
+.addNew__button {
+  font-size: 12px !important;
+  width: 120px;
+  height: 30px;
+}
