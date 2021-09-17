@@ -27,3 +27,10 @@ export const getOneWarehouseSuccess = (data) => {
     payload: data.data.result,
   };
 };
+
+export const addWarehouse = (data) => {
+  return {
+    type: actionTypes.ADD_WAREHOUSE,
+    payload: data,
+  };
+};

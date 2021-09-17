@@ -1,4 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/axios';
 import { BASE_URL } from '../../const/config';
@@ -45,7 +46,30 @@ export function* handleGetOneWarehouse(action) {
   }
 }
 
+const addWarehouse = async (data) => {
+  await axios.post(`${BASE_URL}/admin/warehouse`, data);
+};
+
+export function* handleAddWarehouse(action) {
+  try {
+    yield call(addWarehouse, action.payload);
+    toast.success('Successfully added the manager', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    window.location.reload();
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}
+
 function* watchWarehouseSagas() {
+  yield takeLatest(actionTypes.ADD_WAREHOUSE, handleAddWarehouse);
   yield takeLatest(actionTypes.GET_WAREHOUSES, handleGetWarehouses);
   yield takeLatest(actionTypes.GET_ONE_WAREHOUSE, handleGetOneWarehouse);
 }

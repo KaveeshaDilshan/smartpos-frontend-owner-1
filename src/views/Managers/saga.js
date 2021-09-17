@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import * as actionTypes from './actionTypes';
 import { BASE_URL } from '../../const/config';
 // import { auth } from '../../const/firebase.config';
@@ -62,14 +63,27 @@ export function* handleGetAllManagers() {
 }
 
 const addManager = async (data) => {
-  await axios.post(`${BASE_URL}/users/register`, data);
+  const result = await axios.post(`${BASE_URL}/users/register`, data);
+  return result;
 };
 
 export function* handleAddManager(action) {
-  console.log(action);
   try {
-    yield call(addManager, action.payload);
+    const result = yield call(addManager, action.payload);
+    toast.success('Successfully added the manager', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    console.log(result, 'gg');
   } catch (error) {
+    toast.error(error.response.data.message);
+    console.log(error.response, 'gg');
+
     console.log(error);
   }
 }
