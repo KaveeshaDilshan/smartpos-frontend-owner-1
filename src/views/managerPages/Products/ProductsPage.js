@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Row, Col } from 'reactstrap';
 import {
   Button,
   CircularProgress,
@@ -12,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
+import ManagerLayout from '../../ManagerLayout';
 
 function ProductsPage() {
   const dispatch = useDispatch();
@@ -25,63 +27,71 @@ function ProductsPage() {
 
   return (
     <>
-      <div className={styles.productspage}>
-        <div className={styles.top}>
-          <Button
-            className={styles.addNew__button}
-            variant="contained"
-            type="button"
-            onClick={() => history.push('/manager/products/addnew')}
-          >
-            <AddIcon /> Add New
-          </Button>
-        </div>
-        <Divider />
-        <Divider />
-        <br />
-        <div className={styles.bottom}>
-          {!loading ? (
-            <>
-              <Typography
-                component="h2"
-                variant="h6"
-                color="primary"
-                gutterBottom
-              >
-                Products List
-              </Typography>
-              <Grid container direction="row" spacing={2}>
-                {allProducts.map((product) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={3}
-                    lg={2}
-                    className={styles.product}
-                    key={product._id}
+      <ManagerLayout>
+        <Container>
+          <Row>
+            <Col>
+              <div className={styles.productspage}>
+                <div className={styles.top}>
+                  <Button
+                    className={styles.addNew__button}
+                    variant="contained"
+                    type="button"
+                    onClick={() => history.push('/manager/products/addnew')}
                   >
-                    <ProductItem
-                      productId={product._id}
-                      name={product.name}
-                      categoryName={product.categoryId.name}
-                      unitPrice={product.unitPrice}
-                      photoURL={product.photo}
-                      description={product.description}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-            </>
-          ) : (
-            <>
-              <div style={{ textAlign: 'center', marginTop: 50 }}>
-                <CircularProgress style={{ color: 'red' }} />
+                    <AddIcon /> Add New
+                  </Button>
+                </div>
+                <Divider />
+                <Divider />
+                <br />
+                <div className={styles.bottom}>
+                  {!loading ? (
+                    <>
+                      <Typography
+                        component="h2"
+                        variant="h6"
+                        color="primary"
+                        gutterBottom
+                      >
+                        Products List
+                      </Typography>
+                      <Grid container direction="row" spacing={2}>
+                        {allProducts.map((product) => (
+                          <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            lg={2}
+                            className={styles.product}
+                            key={product._id}
+                          >
+                            <ProductItem
+                              productId={product._id}
+                              name={product.name}
+                              categoryName={product.categoryId.name}
+                              unitPrice={product.unitPrice}
+                              photoURL={product.photo}
+                              description={product.description}
+                            />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ textAlign: 'center', marginTop: 50 }}>
+                        <CircularProgress style={{ color: 'red' }} />
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            </>
-          )}
-        </div>
-      </div>
+            </Col>
+          </Row>
+        </Container>
+      </ManagerLayout>
     </>
   );
 }
