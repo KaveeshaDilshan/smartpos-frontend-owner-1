@@ -38,14 +38,14 @@ function SideBar() {
       {/*<Component name="Dashboard" route="dashboard" currentSelect="Dashboard" />*/}
       <Component
         name="Warehouse"
-        route="/warehouses"
-        currentSelect="/warehouses"
+        route="/admin/warehouses"
+        currentSelect="admin/warehouses"
         Icon={HomeWorkIcon}
       />
       <Component
         name="Manager"
-        route="/managers"
-        currentSelect="/managers"
+        route="/admin/managers"
+        currentSelect="admin/managers"
         Icon={PeopleIcon}
       />
       {/*<Component*/}
