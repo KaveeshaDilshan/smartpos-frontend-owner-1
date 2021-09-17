@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
-import SearchBar from '../../common/searchBar/SearchBar';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
@@ -28,14 +27,11 @@ function ProductsPage() {
     <>
       <div className={styles.productspage}>
         <div className={styles.top}>
-          <div className={styles.searchbar}>
-            <SearchBar placeholder="by name" />
-          </div>
           <Button
             className={styles.addNew__button}
             variant="contained"
             type="button"
-            onClick={() => history.push('/products/addnew')}
+            onClick={() => history.push('/manager/products/addnew')}
           >
             <AddIcon /> Add New
           </Button>

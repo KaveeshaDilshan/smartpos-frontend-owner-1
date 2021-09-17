@@ -4,7 +4,6 @@ import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useHistory } from 'react-router-dom';
-import SearchBar from '../../common/searchBar/SearchBar';
 import styles from './WarehousePage.module.css';
 import WarehouseItem from './components/WarehouseItem';
 
@@ -15,9 +14,6 @@ function managerWarehousePage() {
     <div className={styles.warehousepage}>
       <div className={styles.page_top}>
         <div className={styles.top}>
-          <div className={styles.searchbar}>
-            <SearchBar placeholder="by name" />
-          </div>
           <Autocomplete
             id="combo-box-demo"
             options={top100Films}
@@ -32,7 +28,7 @@ function managerWarehousePage() {
             className={styles.addNew__button}
             variant="contained"
             type="button"
-            onClick={() => history.push('/products/addnew')}
+            onClick={() => history.push('/manager/products/addnew')}
           >
             <AddIcon /> Add New
           </Button>

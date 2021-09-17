@@ -51,7 +51,7 @@ function WarehouseItem({ id, name, location, telephone, managerName }) {
         <Button
           size="small"
           type="submit"
-          onClick={() => history.push(`/warehouses/${id}`)}
+          onClick={() => history.push(`/admin/warehouses/${id}`)}
         >
           Show Details
         </Button>

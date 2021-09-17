@@ -1,5 +1,4 @@
 import React from 'react';
-import SalesChart from './components/SalesChart';
 // import { useHistory } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
@@ -14,12 +13,13 @@ function Dashboard() {
   //   }
   // }, []);
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.test}>
-        <h1>Dashboard</h1>
-        <SalesChart />
+    <>
+      <div className={styles.dashboard}>
+        <div className={styles.test}>
+          <h1>Dashboard</h1>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

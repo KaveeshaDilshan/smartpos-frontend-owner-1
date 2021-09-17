@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './productActionTypes';
-import { BASE_URL } from '../../../utils/config';
+import { BASE_URL } from '../../../../const/config';
 
 export function* getAllProducts() {
   try {
-    const { data } = yield axios.get(`${BASE_URL}/product?sortBy=+name`);
+    const { data } = yield axios.get(
+      `${BASE_URL}/manager/product?sortBy=+name`
+    );
     yield put({
       type: actionTypes.GET_ALL_PRODUCTS_SUCCESS,
       data,
@@ -20,7 +22,7 @@ export function* getAllProducts() {
 }
 
 const getOneProductCall = async (id) => {
-  const result = await axios.get(`${BASE_URL}/product/${id}`);
+  const result = await axios.get(`${BASE_URL}/manager/product/${id}`);
   return result;
 };
 
@@ -42,12 +44,12 @@ export function* getOneProduct(action) {
 
 export function* addProduct(action) {
   try {
-    yield axios.post(`${BASE_URL}/product`, action.data);
+    yield axios.post(`${BASE_URL}/manager/product`, action.data);
     yield put({
       type: actionTypes.ADD_PRODUCT_SUCCESS,
     });
 
-    toast.success('new product is added successfuly');
+    toast.success('New product is added successfully');
   } catch (error) {
     toast.error(error.response.data.message);
     yield put({
@@ -59,14 +61,14 @@ export function* addProduct(action) {
 export function* updateProduct(action) {
   const { id } = action.data;
   try {
-    yield axios.patch(`${BASE_URL}/product/${id}`, action.data.details);
+    yield axios.patch(`${BASE_URL}/manager/product/${id}`, action.data.details);
     const { data } = yield call(getOneProductCall, id);
     yield put({
       type: actionTypes.UPDATE_PRODUCT_SUCCESS,
       data,
     });
 
-    toast.success('product is updated successfuly');
+    toast.success('Product is updated successfully');
   } catch (error) {
     console.log(error);
     toast.error(error.response);
@@ -77,10 +79,10 @@ export function* updateProduct(action) {
 }
 
 function* ManagerProductSagas() {
-  yield takeLatest(productActionTypes.GET_ALL_PRODUCTS, getAllProducts);
-  yield takeLatest(productActionTypes.ADD_PRODUCT, addProduct);
-  yield takeLatest(productActionTypes.GET_ONE_PRODUCT, getOneProduct);
-  yield takeLatest(productActionTypes.UPDATE_PRODUCT, updateProduct);
+  yield takeLatest(actionTypes.GET_ALL_PRODUCTS, getAllProducts);
+  yield takeLatest(actionTypes.ADD_PRODUCT, addProduct);
+  yield takeLatest(actionTypes.GET_ONE_PRODUCT, getOneProduct);
+  yield takeLatest(actionTypes.UPDATE_PRODUCT, updateProduct);
 }
 
 const managerProductSagas = [ManagerProductSagas];

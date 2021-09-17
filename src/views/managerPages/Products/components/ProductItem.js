@@ -148,7 +148,7 @@ export default function ProductItem({
           <EditIcon
             className={classes.edit}
             color="action"
-            onClick={() => history.push(`/products/${productId}`)}
+            onClick={() => history.push(`/manager/products/${productId}`)}
           />
           <DeleteIcon
             className={classes.delete}

@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { put } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './categoryActionTypes';
-import { BASE_URL } from '../';
+import { BASE_URL } from '../../../../const/config';
 
 export function* getAllCategories() {
   try {
-    const { data } = yield axios.get(`${BASE_URL}/category?sortBy=+name`);
+    const { data } = yield axios.get(
+      `${BASE_URL}/manager/category?sortBy=+name`
+    );
     yield put({
       type: actionTypes.GET_ALL_CATEGORIES_SUCCESS,
       data,
@@ -18,7 +20,7 @@ export function* getAllCategories() {
 
 export function* addCategory(action) {
   try {
-    yield axios.post(`${BASE_URL}/category`, action.data);
+    yield axios.post(`${BASE_URL}/manager/category`, action.data);
     yield put({
       type: actionTypes.ADD_CATEGORY_SUCCESS,
     });
@@ -32,11 +34,10 @@ export function* addCategory(action) {
 }
 
 function* ManagerCategorySagas() {
-  yield takeLatest(categoryActionTypes.GET_ALL_CATEGORIES, getAllCategories);
-  yield takeLatest(categoryActionTypes.ADD_CATEGORY, addCategory);
+  yield takeLatest(actionTypes.GET_ALL_CATEGORIES, getAllCategories);
+  yield takeLatest(actionTypes.ADD_CATEGORY, addCategory);
 }
 
 const managerCategorySagas = [ManagerCategorySagas];
 
 export default managerCategorySagas;
-
