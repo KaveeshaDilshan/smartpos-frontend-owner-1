@@ -6,14 +6,18 @@ import { getOneWarehouseSuccess, getWarehousesSuccess } from './actions';
 
 // import { checkErrorResponse } from '../../util/commonFunctions';
 
-const getAllWarehouses = async () => {
-  const result = await axios.get(`${BASE_URL}/warehouse?sortBy=+name`);
+const getAllWarehouses = async (search) => {
+  const result = await axios.get(
+    `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}`
+  );
+  console.log(result, 'result');
   return result;
 };
 
-export function* handleGetWarehouses() {
+export function* handleGetWarehouses(data) {
+  const search = data.payload;
   try {
-    const response = yield call(getAllWarehouses);
+    const response = yield call(getAllWarehouses, search);
     if (response.status !== 201) {
       console.log('error');
     } else {
@@ -27,7 +31,7 @@ export function* handleGetWarehouses() {
 }
 
 const getOneWarehouse = async (id) => {
-  const result = await axios.get(`${BASE_URL}/warehouse/${id}`);
+  const result = await axios.get(`${BASE_URL}/admin/warehouse/${id}`);
   return result;
 };
 

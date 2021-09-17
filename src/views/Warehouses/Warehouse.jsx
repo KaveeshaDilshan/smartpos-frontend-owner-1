@@ -7,12 +7,11 @@ import Layout from '../Layout';
 
 function Warehouse() {
   const dispatch = useDispatch();
-  const [query] = useState('');
-  useEffect(() => {
-    dispatch(getWarehouses(query));
-  }, []);
-  const warehouses = useSelector((state) => state.warehouseReducer.warehouses);
   const [search, setSearch] = useState('');
+  const warehouses = useSelector((state) => state.warehouseReducer.warehouses);
+  useEffect(() => {
+    dispatch(getWarehouses(search));
+  }, [search]);
   return (
     <Layout search={search} setSearch={setSearch}>
       <Container>
@@ -20,7 +19,6 @@ function Warehouse() {
           {warehouses.map((warehouse) => {
             return (
               <Col key={warehouse._id} className="col-md-6 col-sm-12 col-lg-4">
-                {search}
                 <WarehouseItem
                   id={warehouse._id}
                   name={warehouse.name}

@@ -7,9 +7,15 @@ export const getOneManager = (data) => {
   };
 };
 
-export const getAllManagers = (data) => {
+export const getAllManagers = () => {
   return {
     type: actionTypes.GET_ALL_MANAGERS,
+  };
+};
+
+export const addManager = (data) => {
+  return {
+    type: actionTypes.ADD_MANAGER,
     payload: data,
   };
 };

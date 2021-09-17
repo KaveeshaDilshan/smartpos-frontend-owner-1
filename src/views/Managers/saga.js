@@ -2,10 +2,10 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { BASE_URL } from '../../const/config';
-import { auth } from '../../const/firebase.config';
+// import { auth } from '../../const/firebase.config';
 
 const getOneManager = async (id) => {
-  const result = await axios.get(`${BASE_URL}/managers/${id}`);
+  const result = await axios.get(`${BASE_URL}/admin/managers/${id}`);
   return result;
 };
 
@@ -20,30 +20,32 @@ export function* handleGetOneManager(action) {
 }
 
 const getAllManagers = async () => {
-  auth
-    .createUserWithEmailAndPassword('mahela@gmail.com', 'mahela')
-    .then((userCredential) => {
-      const { user } = userCredential;
-      console.log(user, 'ww');
-    })
-    .catch((error) => {
-      console.log(error);
-      // ..
-    });
+  // auth
+  //   .createUserWithEmailAndPassword('mahela@gmail.com', 'mahela')
+  //   .then((userCredential) => {
+  //     const { user } = userCredential;
+  //     console.log(user, 'ww');
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     // ..
+  //   });
+  //
+  // auth
+  //   .signInWithEmailAndPassword('mahela@gmail.com', 'mahela')
+  //   .then((userCredential) => {
+  //     const { user } = userCredential;
+  //     console.log(user, 'gg');
+  //     console.log(user.getIdToken());
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
-  auth
-    .signInWithEmailAndPassword('mahela@gmail.com', 'mahela')
-    .then((userCredential) => {
-      const { user } = userCredential;
-      console.log(user, 'gg');
-      console.log(user.getIdToken());
-      // ...
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  const result = await axios.get(`${BASE_URL}/managers/?sortBy=+createdAt`);
+  const result = await axios.get(
+    `${BASE_URL}/admin/managers/?sortBy=+createdAt`
+  );
   return result;
 };
 
@@ -59,7 +61,21 @@ export function* handleGetAllManagers() {
   }
 }
 
+const addManager = async (data) => {
+  await axios.post(`${BASE_URL}/users/register`, data);
+};
+
+export function* handleAddManager(action) {
+  console.log(action);
+  try {
+    yield call(addManager, action.payload);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* watchManagerSagas() {
+  yield takeLatest(actionTypes.ADD_MANAGER, handleAddManager);
   yield takeLatest(actionTypes.GET_ONE_MANAGER, handleGetOneManager);
   yield takeLatest(actionTypes.GET_ALL_MANAGERS, handleGetAllManagers);
 }
