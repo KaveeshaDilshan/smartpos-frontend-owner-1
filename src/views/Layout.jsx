@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'reactstrap';
 import Header from '../components/common/Header';
-import SideBar from '../components/common/SideBar';
+import SideBar from '../components/common/AdminLayout/SideBar';
 
 function Layout(props) {
   return (

@@ -4,6 +4,7 @@ import { Container, Col, Row } from 'reactstrap';
 import { getWarehouses } from './actions';
 import WarehouseItem from './components/WarehouseItem';
 import Layout from '../Layout';
+import AddWarehouse from './components/AddWarehouse';
 
 function Warehouse() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function Warehouse() {
               </Col>
             );
           })}
+          {AddWarehouse()}
         </Row>
       </Container>
     </Layout>

@@ -1,0 +1,79 @@
+/* .leftpart{
+    background-color: rgb(9, 58, 80) ;
+    color:white;
+    min-height: 500px ;
+    padding: 6px 30px;
+    text-align: center;
+}
+.avatar__box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+.avatar{
+    height: 150px !important;
+    width: 150px !important;
+}
+.managername__box{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.leftpart__bottom{
+    margin-top: 50px;
+    text-align: left;
+}
+.leftpart__bottom__row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.leftpart__icon{
+    margin-right: 10px ;
+}
+.rightpart{
+    padding: 50px 20px;
+} */
+
+.leftpart {
+  background-color: rgb(9, 58, 80);
+  color: white;
+  min-height: 500px;
+  padding: 6px 30px;
+  font-size: 15px;
+  text-align: center;
+}
+.avatar__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+.avatar {
+  height: 150px !important;
+  width: 150px !important;
+}
+.managername__box {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.leftpart__bottom {
+  margin-top: 50px;
+  text-align: left;
+}
+.leftpart__bottom__row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.leftpart__icon {
+  margin-right: 10px;
+}
+.rightpart {
+  padding: 50px 20px;
+  font-size: 15px;
+}
