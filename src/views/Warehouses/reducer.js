@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
   warehouses: [],
+  managers: [],
   loading: false,
   warehouse: {},
 };
