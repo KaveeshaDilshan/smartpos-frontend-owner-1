@@ -1,11 +1,12 @@
 .main {
     min-width: 180px;
+    position: fixed;
     padding-top: 10px;
     margin-left: -5px;
-    background:#F3F7FB;
+    background: #F3F7FB;
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
-    height:90vh;
+    height: 90vh;
 }
 
 .component {
