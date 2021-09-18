@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './SalespersonsPage.module.css';
-import { TableComponent } from './components/TableComponent';
 import ManagerLayout from '../../ManagerLayout';
+import { getAllSalespersons } from './redux/salespersonsActions';
+import TableComponent from './components/TableComponent';
 
 function SalespersonsPage() {
   const history = useHistory();
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+
+  const allSalespersons = useSelector(
+    (state) => state.salespersonsReducer.allSalespersons
+  );
+  console.log(allSalespersons);
+  // const loading = useSelector((state) => state.categoryReducer.loading);
+
+  React.useEffect(() => {
+    dispatch(getAllSalespersons(search));
+  }, [search]);
   return (
     <>
-      <ManagerLayout>
+      <ManagerLayout search={search} setSearch={setSearch}>
         <div className={styles.salespersonspage}>
           <div className={styles.page__top}>
             <Button
@@ -21,7 +35,7 @@ function SalespersonsPage() {
               <AddIcon /> Add New
             </Button>
           </div>
-          <TableComponent />
+          <TableComponent data={allSalespersons} />
         </div>
       </ManagerLayout>
     </>

@@ -15,7 +15,11 @@ export function* getAllCategories(action) {
       data,
     });
   } catch (error) {
-    toast.error(error.response.data.message);
+    if (error.response.data) {
+      toast.error('Network Error');
+    } else {
+      toast.error(error.response.data.message);
+    }
   }
 }
 

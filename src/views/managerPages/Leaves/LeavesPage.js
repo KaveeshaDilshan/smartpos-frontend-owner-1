@@ -63,9 +63,9 @@ function LeavesPage() {
 
             {!loading ? (
               <tbody>
-                {allLeaves.map((leave) => (
+                {allLeaves.map((leave, index) => (
                   <tr key={leave._id}>
-                    <th scope="row">1</th>
+                    <th scope="row">{index + 1}</th>
                     <td>
                       {leave.userId.firstName} {leave.userId.lastName}
                     </td>

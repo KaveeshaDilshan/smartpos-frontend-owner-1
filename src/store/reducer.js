@@ -5,6 +5,7 @@ import salespersonsReducer from '../views/managerPages/Salespersons/redux/salesp
 import categoryReducer from '../views/managerPages/Category/redux/categoryReducer';
 import productReducer from '../views/managerPages/Products/redux/productReducer';
 import leavesReducer from '../views/managerPages/Leaves/redux/leavesReducer';
+import dashboardReducer from '../views/managerPages/Dashboard/redux/dashboardReducer';
 
 const rootReducer = combineReducers({
   // appReducer: appReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   categoryReducer,
   productReducer,
   leavesReducer,
+  dashboardReducer,
 });
 
 export default rootReducer;
