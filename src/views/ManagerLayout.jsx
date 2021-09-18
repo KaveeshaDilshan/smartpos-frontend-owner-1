@@ -12,7 +12,9 @@ function ManagerLayout(props) {
           <Col className="col-2">
             <ManagerSideBar />
           </Col>
-          <Col className="col-10 layout"> {props.children}</Col>
+          <Col className="col-10 layout" style={{ minHeight: '88vh' }}>
+            {props.children}
+          </Col>
         </Row>
       </div>
     </>

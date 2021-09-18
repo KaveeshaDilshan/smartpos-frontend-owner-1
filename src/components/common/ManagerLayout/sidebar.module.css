@@ -1,6 +1,7 @@
 .main {
     min-width: 180px;
     position: fixed;
+    z-index: 50;
     padding-top: 10px;
     margin-left: -5px;
     background: #F3F7FB;

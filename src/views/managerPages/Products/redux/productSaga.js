@@ -71,7 +71,6 @@ export function* updateProduct(action) {
 
     toast.success('Product is updated successfully');
   } catch (error) {
-    console.log(error);
     toast.error(error.response);
     yield put({
       type: actionTypes.UPDATE_PRODUCT_ERROR,

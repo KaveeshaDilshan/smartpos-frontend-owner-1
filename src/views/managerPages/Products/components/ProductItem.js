@@ -20,7 +20,7 @@ import ConfirmationBox from '../../common/ConfirmationBox';
 
 const useStyles = makeStyles({
   root: {
-    // maxWidth: 250,
+    maxWidth: 180,
     backgroundColor: 'rgb(232, 255, 230)',
     // maxHeight: 300,
     // marginTop: '5px',
@@ -102,7 +102,6 @@ export default function ProductItem({
   useEffect(() => {
     if (deleteConfirm === true) {
       setConfirm(false);
-      console.log(deleteConfirm);
     }
   }, [deleteConfirm]);
 
@@ -142,7 +141,7 @@ export default function ProductItem({
             size="small"
             onClick={setDetailsBoxOn}
           >
-            Show Details
+            Details
           </Button>
           <EditIcon
             className={classes.edit}
