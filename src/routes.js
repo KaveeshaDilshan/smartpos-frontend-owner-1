@@ -53,7 +53,7 @@ const routes = [
     render: SalespersonTracking,
     layout: BASE_MANAGER_ROUTE,
   },
-  { path: 'sales', render: SalesPage, layout: BASE_MANAGER_ROUTE },
+  { path: 'salesDetails', render: SalesPage, layout: BASE_MANAGER_ROUTE },
   {
     path: 'warehouse',
     render: managerWarehousePage,
@@ -65,7 +65,11 @@ const routes = [
     render: AddNewProduct,
     layout: BASE_MANAGER_ROUTE,
   },
-  { path: 'products/:id', render: ProductDetails, layout: BASE_MANAGER_ROUTE },
+  {
+    path: 'products/getOne/:id',
+    render: ProductDetails,
+    layout: BASE_MANAGER_ROUTE,
+  },
   { path: 'category', render: CategoryPage, layout: BASE_MANAGER_ROUTE },
   { path: 'leaves', render: LeavesPage, layout: BASE_MANAGER_ROUTE },
 ];

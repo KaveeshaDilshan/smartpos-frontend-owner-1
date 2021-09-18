@@ -1,9 +1,12 @@
 import React from 'react';
+import ManagerLayout from '../../ManagerLayout';
 
 function AddNewSalesperson() {
   return (
     <>
-      <div>add new salespersonspage</div>
+      <ManagerLayout>
+        <div>add new salespersonspage</div>
+      </ManagerLayout>
     </>
   );
 }

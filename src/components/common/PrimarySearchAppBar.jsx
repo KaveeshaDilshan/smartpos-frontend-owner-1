@@ -165,7 +165,7 @@ export default function PrimarySearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            SMART POS - OWNER
+            SMART POS SYSTEM
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
