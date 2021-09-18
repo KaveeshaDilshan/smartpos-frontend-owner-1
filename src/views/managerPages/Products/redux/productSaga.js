@@ -4,10 +4,11 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './productActionTypes';
 import { BASE_URL } from '../../../../const/config';
 
-export function* getAllProducts() {
+export function* getAllProducts(action) {
+  const search = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/product?sortBy=+name`
+      `${BASE_URL}/manager/product?sortBy=+name&query=${search}`
     );
     yield put({
       type: actionTypes.GET_ALL_PRODUCTS_SUCCESS,
@@ -70,7 +71,6 @@ export function* updateProduct(action) {
 
     toast.success('Product is updated successfully');
   } catch (error) {
-    console.log(error);
     toast.error(error.response);
     yield put({
       type: actionTypes.UPDATE_PRODUCT_ERROR,

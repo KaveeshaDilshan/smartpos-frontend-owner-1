@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './SalesPage.module.css';
 import { Formik, Form, Field } from 'formik';
+import ManagerLayout from '../../ManagerLayout';
 
 const initialValues = {
   from: '2021/09/05',
@@ -14,15 +15,18 @@ const onSubmit = (values) => {
 function SalesPage() {
   return (
     <>
-      <div className={styles.salespage}>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          <Form className={styles.top}>
-            <Field type="date" id="from" name="from" />
-            <Field type="date" id="to" name="to" />
-            <button type="submit">Select</button>
-          </Form>
-        </Formik>
-      </div>
+      <ManagerLayout>
+        {' '}
+        <div className={styles.salespage}>
+          <Formik initialValues={initialValues} onSubmit={onSubmit}>
+            <Form className={styles.top}>
+              <Field type="date" id="from" name="from" />
+              <Field type="date" id="to" name="to" />
+              <button type="submit">Select</button>
+            </Form>
+          </Formik>
+        </div>
+      </ManagerLayout>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Divider, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
@@ -9,24 +9,30 @@ import WarehouseItem from './components/WarehouseItem';
 import ManagerLayout from '../../ManagerLayout';
 
 function managerWarehousePage() {
-  const top100Films = [{ title: 'Toys' }, { title: 'Biscuit' }];
+  const top100Films = ['Toys', 'Biscuit'];
   const history = useHistory();
+  const [categorySelect, setCategorySelect] = useState('');
+  console.log(categorySelect);
   return (
     <>
       <ManagerLayout>
         <div className={styles.warehousepage}>
           <div className={styles.page_top}>
             <div className={styles.top}>
-              <Autocomplete
-                id="combo-box-demo"
-                options={top100Films}
-                getOptionLabel={(option) => option.title}
-                style={{ width: 300 }}
-                size="small"
-                renderInput={(params) => (
-                  <TextField {...params} label="Category" variant="outlined" />
-                )}
-              />
+              <div>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={top100Films}
+                  onChange={(e, value) => setCategorySelect(value)}
+                  style={{ width: 300 }}
+                  size="small"
+                  renderInput={(params) => (
+                    <TextField {...params} label="Category" />
+                  )}
+                />
+              </div>
+
               <Button
                 className={styles.addNew__button}
                 variant="contained"

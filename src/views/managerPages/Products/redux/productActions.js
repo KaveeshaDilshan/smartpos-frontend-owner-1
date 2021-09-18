@@ -1,7 +1,7 @@
 import * as actionTypes from './productActionTypes';
 
-export function getAllProducts() {
-  return { type: actionTypes.GET_ALL_PRODUCTS };
+export function getAllProducts(data) {
+  return { type: actionTypes.GET_ALL_PRODUCTS, data };
 }
 export function getOneProduct(data) {
   return { type: actionTypes.GET_ONE_PRODUCT, data };
