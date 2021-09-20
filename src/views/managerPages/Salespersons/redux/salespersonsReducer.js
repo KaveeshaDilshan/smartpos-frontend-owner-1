@@ -5,6 +5,8 @@ const initialState = {
   allSalespersons: [],
   loading: false,
   oneSalesperson: {},
+  shops: [],
+  oneSalespersonDailyProducts: {},
 };
 
 function reducer(state = initialState, action) {
@@ -34,6 +36,16 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         oneSalesperson: action.data.result,
+      };
+    case actionTypes.GET_WAREHOUSE_SHOPS_SUCCESS:
+      return {
+        ...state,
+        shops: action.data.items,
+      };
+    case actionTypes.GET_SALESPERSON_DAILY_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        oneSalespersonDailyProducts: action.data.result,
       };
     default:
       return state;

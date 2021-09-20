@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import Button from '@material-ui/core/Button';
-import ManagerLayout from '../../ManagerLayout';
-import { addSalesperson } from './redux/salespersonsActions';
+import ManagerLayout from '../../../ManagerLayout';
+import { addSalesperson } from '../redux/salespersonsActions';
 
 function AddNewSalesperson() {
   const dispatch = useDispatch();

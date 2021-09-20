@@ -4,12 +4,30 @@ import { Button, Table } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Moment from 'react-moment';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { makeStyles } from '@material-ui/core/styles';
 import styles from './LeavesPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getLeaves, updateLeaves } from './redux/leavesActions';
+import LeaveDetailsBox from './components/LeaveDetailsBox';
+
+const useStyles = makeStyles({
+  eyeIcon: {
+    color: 'blue',
+    '&:hover': {
+      backgroundColor: 'blue',
+      color: 'white',
+      borderRadius: 5,
+      cursor: 'pointer',
+    },
+  },
+});
 
 function LeavesPage() {
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const [clickView, setClickView] = useState(false);
+  const [description, setescription] = useState('');
   const [search, setSearch] = useState('pending');
   const allLeaves = useSelector((state) => state.leavesReducer.allLeaves);
   const loading = useSelector((state) => state.leavesReducer.loading);
@@ -34,13 +52,16 @@ function LeavesPage() {
       updateLeaves({
         id: leaveId,
         details: {
-          approved: 'disapproved',
+          approved: 'reject',
         },
       })
     );
     dispatch(getLeaves(search));
   };
-
+  const showReason = (reason) => {
+    setescription(reason);
+    setClickView(true);
+  };
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch}>
@@ -57,6 +78,7 @@ function LeavesPage() {
                 <th>Email</th>
                 <th>From</th>
                 <th>To</th>
+                <th>Reason</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -77,6 +99,12 @@ function LeavesPage() {
                       <Moment format="YYYY/MM/DD">{leave.to}</Moment>
                     </td>
                     <td>
+                      <VisibilityIcon
+                        className={classes.eyeIcon}
+                        onClick={() => showReason(leave.description)}
+                      />
+                    </td>
+                    <td>
                       {leave.approved === 'pending' ? (
                         <>
                           <Button
@@ -93,7 +121,7 @@ function LeavesPage() {
                             size="sm"
                             onClick={() => handleClickDisapprove(leave._id)}
                           >
-                            Disapprove
+                            Reject
                           </Button>
                         </>
                       ) : (
@@ -111,6 +139,11 @@ function LeavesPage() {
               </>
             )}
           </Table>
+          <LeaveDetailsBox
+            open={clickView}
+            handleClose={setClickView}
+            description={description}
+          />
         </div>
       </ManagerLayout>
     </>
