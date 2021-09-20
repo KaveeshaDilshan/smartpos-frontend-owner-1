@@ -7,7 +7,7 @@ import {
   Marker,
 } from 'react-google-maps';
 import styles from './Tracking.module.css';
-import ManagerLayout from '../../ManagerLayout';
+import ManagerLayout from '../../../ManagerLayout';
 
 const MapContainer = withScriptjs(
   withGoogleMap((props) => (

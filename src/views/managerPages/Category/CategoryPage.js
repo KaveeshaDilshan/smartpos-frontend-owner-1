@@ -27,7 +27,7 @@ function CategoryPage() {
 
   const onSubmit = (values) => {
     dispatch(addCategory({ name: values.category_name }));
-    dispatch(getAllCategories());
+    dispatch(getAllCategories(search));
   };
 
   const validate = (values) => {
