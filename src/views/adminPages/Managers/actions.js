@@ -19,3 +19,9 @@ export const addManager = (data) => {
     payload: data,
   };
 };
+
+export const getAllUnassignedManagers = () => {
+  return {
+    type: actionTypes.GET_ALL_UNASSIGNED_MANAGERS,
+  };
+};

@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginTop: '20px',
+    minHeight: 200,
   },
   title: {
     fontSize: 14,
@@ -18,9 +19,12 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  but: {
+    marginBottom: 0,
+  },
 });
 
-function WarehouseItem({ id, name, location, telephone, managerName }) {
+function WarehouseItem({ id, name, district, telephone, managerName }) {
   const history = useHistory();
   const classes = useStyles();
   const fullName = managerName
@@ -37,7 +41,7 @@ function WarehouseItem({ id, name, location, telephone, managerName }) {
           color="textSecondary"
           gutterBottom
         >
-          {location}
+          {district}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {telephone}
@@ -51,6 +55,7 @@ function WarehouseItem({ id, name, location, telephone, managerName }) {
         <Button
           size="small"
           type="submit"
+          className={classes.but}
           onClick={() => history.push(`/admin/warehouses/${id}`)}
         >
           Show Details

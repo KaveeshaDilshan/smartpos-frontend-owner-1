@@ -4,7 +4,7 @@ import { Col, Container, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
 import Button from '@material-ui/core/Button';
 import { addManager, getAllManagers } from './actions';
-import Layout from '../Layout';
+import Layout from '../../Layout';
 //import { passwordRegex } from '../../util/regex';
 
 function Managers() {
