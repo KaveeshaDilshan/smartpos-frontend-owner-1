@@ -9,10 +9,12 @@ import managerWarehousePage from './views/managerPages/Warehouse/managerWarehous
 import SalesPage from './views/managerPages/Sales/SalesPage';
 import CategoryPage from './views/managerPages/Category/CategoryPage';
 import LeavesPage from './views/managerPages/Leaves/LeavesPage';
-import AddNewSalesperson from './views/managerPages/Salespersons/AddNewSalesperson';
-import SalespersonTracking from './views/managerPages/Salespersons/Tracking';
+import AddNewSalesperson from './views/managerPages/Salespersons/components/AddNewSalesperson';
+import SalespersonTracking from './views/managerPages/Salespersons/components/Tracking';
 import AddNewProduct from './views/managerPages/Products/components/AddNewProduct';
 import ProductDetails from './views/managerPages/Products/components/ProductDetails';
+import OneSalesperson from './views/managerPages/Salespersons/components/OneSalesperson';
+import EditSalesperson from './views/managerPages/Salespersons/components/EditSalesperson';
 import AnalyticsPage from './views/adminPages/Analytics/AnalyticsPage';
 import Managers from './views/adminPages/Managers/Managers';
 import Salesperson from './views/adminPages/Salespersons/Salesperson';
@@ -34,8 +36,6 @@ const routes = [
     render: Managers,
     layout: BASE_ADMIN_ROUTE,
   },
-  { path: 'salespersons', render: Salesperson, layout: BASE_ADMIN_ROUTE },
-  { path: 'analytics', render: AnalyticsPage, layout: BASE_ADMIN_ROUTE },
   {
     path: '',
     render: Dashboard,

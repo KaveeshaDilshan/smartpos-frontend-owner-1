@@ -16,11 +16,14 @@ function SalespersonsPage() {
   const allSalespersons = useSelector(
     (state) => state.salespersonsReducer.allSalespersons
   );
-  console.log(allSalespersons);
   // const loading = useSelector((state) => state.categoryReducer.loading);
 
+  const warehouseID = useSelector(
+    (state) => state.dashboardReducer.warehouseID
+  );
+
   React.useEffect(() => {
-    dispatch(getAllSalespersons(search));
+    dispatch(getAllSalespersons({ search, warehouseID }));
   }, [search]);
   return (
     <>

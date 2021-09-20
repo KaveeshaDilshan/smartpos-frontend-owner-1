@@ -7,9 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import { useHistory } from 'react-router-dom';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+// import { useHistory } from 'react-router-dom';
+// import EditIcon from '@material-ui/icons/Edit';
+// import DeleteIcon from '@material-ui/icons/Delete';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -22,8 +22,10 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 180,
     backgroundColor: 'rgb(232, 255, 230)',
-    // maxHeight: 300,
-    // marginTop: '5px',
+    '&:hover': {
+      boxShadow: '0px 0px 7px 0px black',
+      background: '#f8f7f7',
+    },
   },
   name: {
     fontSize: 15,
@@ -80,7 +82,7 @@ const useStyles = makeStyles({
 });
 
 export default function ProductItem({
-  productId,
+  // productId,
   name,
   categoryName,
   unitPrice,
@@ -88,7 +90,7 @@ export default function ProductItem({
   description,
 }) {
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [confirmBoxOn, setconfirmBoxOn] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
@@ -141,20 +143,20 @@ export default function ProductItem({
             size="small"
             onClick={setDetailsBoxOn}
           >
-            Details
+            Show Details
           </Button>
-          <EditIcon
-            className={classes.edit}
-            color="action"
-            onClick={() =>
-              history.push(`/manager/products/getOne/${productId}`)
-            }
-          />
-          <DeleteIcon
-            className={classes.delete}
-            color="action"
-            onClick={setconfirmBoxOn}
-          />
+          {/*<EditIcon*/}
+          {/*  className={classes.edit}*/}
+          {/*  color="action"*/}
+          {/*  onClick={() =>*/}
+          {/*    history.push(`/manager/products/getOne/${productId}`)*/}
+          {/*  }*/}
+          {/*/>*/}
+          {/*<DeleteIcon*/}
+          {/*  className={classes.delete}*/}
+          {/*  color="action"*/}
+          {/*  onClick={setconfirmBoxOn}*/}
+          {/*/>*/}
         </CardActions>
       </Card>
       <ConfirmationBox
