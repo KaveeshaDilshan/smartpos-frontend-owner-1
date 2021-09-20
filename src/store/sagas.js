@@ -1,8 +1,8 @@
 import { all, fork } from 'redux-saga/effects';
-import warehouseSagas from '../views/Warehouses/saga';
-import managerSagas from '../views/Managers/saga';
+import warehouseSagas from '../views/adminPages/Warehouses/saga';
 import managerCategorySagas from '../views/managerPages/Category/redux/categorySaga';
 import managerProductSagas from '../views/managerPages/Products/redux/productSaga';
+import managerSagas from '../views/adminPages/Managers/saga';
 import managerLeavesSagas from '../views/managerPages/Leaves/redux/leavesSaga';
 import managerSalespersonsSagas from '../views/managerPages/Salespersons/redux/salespersonsSaga';
 import managerWarehouseSagas from '../views/managerPages/Warehouse/redux/warehouseSaga';

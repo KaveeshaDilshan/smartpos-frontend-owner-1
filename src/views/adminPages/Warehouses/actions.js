@@ -34,3 +34,10 @@ export const addWarehouse = (data) => {
     payload: data,
   };
 };
+
+export const assignManager = (data) => {
+  return {
+    type: actionTypes.ASSIGN_MANAGER,
+    payload: data,
+  };
+};
