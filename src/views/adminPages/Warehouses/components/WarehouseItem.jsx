@@ -6,6 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
+import clsx from 'clsx';
+
+//=> 'foo bar baz'
 
 const useStyles = makeStyles({
   root: {
@@ -31,19 +34,25 @@ function WarehouseItem({ id, name, district, telephone, managerName }) {
     ? `${managerName.firstName} ${managerName.lastName}`
     : 'No manager is assigned yet';
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={clsx('shadow', classes.root)} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h5">
           {name}
         </Typography>
+        <div style={{ height: '20px' }}>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {district}
+          </Typography>
+        </div>
         <Typography
-          className={classes.title}
+          className={classes.pos}
           color="textSecondary"
-          gutterBottom
+          style={{ height: '20px' }}
         >
-          {district}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
           {telephone}
         </Typography>
         <Typography variant="body2" component="p">

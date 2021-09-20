@@ -5,17 +5,17 @@ import axios from '../../../axios/axios';
 import { BASE_URL } from '../../../const/config';
 import { getOneWarehouseSuccess, getWarehousesSuccess } from './actions';
 
-const getAllWarehouses = async (search) => {
+const getAllWarehouses = async (search, page) => {
   const result = await axios.get(
-    `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}`
+    `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}&limit=9&page=${page}`
   );
   return result;
 };
 
 export function* handleGetWarehouses(data) {
-  const search = data.payload;
+  const { search, page } = data.payload;
   try {
-    const response = yield call(getAllWarehouses, search);
+    const response = yield call(getAllWarehouses, search, page);
     if (response.status !== 201) {
       toast.error(response.data.message);
     } else {
