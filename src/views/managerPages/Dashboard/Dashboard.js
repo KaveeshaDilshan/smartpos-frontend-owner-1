@@ -1,6 +1,7 @@
 import React from 'react';
 // import { useHistory } from 'react-router-dom';
 import styles from './Dashboard.module.css';
+import ManagerLayout from '../../ManagerLayout';
 
 function Dashboard() {
   // const history = useHistory();
@@ -14,11 +15,13 @@ function Dashboard() {
   // }, []);
   return (
     <>
-      <div className={styles.dashboard}>
-        <div className={styles.test}>
-          <h1>Dashboard</h1>
+      <ManagerLayout>
+        <div className={styles.dashboard}>
+          <div className={styles.test}>
+            <h1>Dashboard</h1>
+          </div>
         </div>
-      </div>
+      </ManagerLayout>
     </>
   );
 }

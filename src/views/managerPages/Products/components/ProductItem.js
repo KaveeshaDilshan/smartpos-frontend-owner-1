@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -21,7 +20,7 @@ import ConfirmationBox from '../../common/ConfirmationBox';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 200,
+    maxWidth: 180,
     backgroundColor: 'rgb(232, 255, 230)',
     // maxHeight: 300,
     // marginTop: '5px',
@@ -103,7 +102,6 @@ export default function ProductItem({
   useEffect(() => {
     if (deleteConfirm === true) {
       setConfirm(false);
-      console.log(deleteConfirm);
     }
   }, [deleteConfirm]);
 
@@ -143,12 +141,14 @@ export default function ProductItem({
             size="small"
             onClick={setDetailsBoxOn}
           >
-            Show Details
+            Details
           </Button>
           <EditIcon
             className={classes.edit}
             color="action"
-            onClick={() => history.push(`/manager/products/${productId}`)}
+            onClick={() =>
+              history.push(`/manager/products/getOne/${productId}`)
+            }
           />
           <DeleteIcon
             className={classes.delete}
