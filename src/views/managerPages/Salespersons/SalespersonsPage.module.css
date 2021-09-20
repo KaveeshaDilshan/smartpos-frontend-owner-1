@@ -1,5 +1,4 @@
 .salespersonspage {
-  margin-left: 230px;
   padding: 15px;
   min-width: fit-content;
 }
@@ -7,10 +6,6 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-}
-.searchbar {
-  margin-right: 10px;
-  display: flex;
 }
 .addNew__button {
   width: 140px;

@@ -7,7 +7,6 @@ import styles from './sidebar.module.css';
 function SideBar() {
   const history = useHistory();
   const Component = ({ name, route, currentSelect, Icon }) => {
-    console.log(route);
     return (
       <>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
@@ -37,23 +36,29 @@ function SideBar() {
     <div className={styles.main}>
       {/*<Component name="Dashboard" route="dashboard" currentSelect="Dashboard" />*/}
       <Component
-        name="Warehouse"
+        name="Warehouses"
         route="/admin/warehouses"
         currentSelect="admin/warehouses"
         Icon={HomeWorkIcon}
       />
       <Component
-        name="Manager"
+        name="Managers"
         route="/admin/managers"
         currentSelect="admin/managers"
         Icon={PeopleIcon}
       />
-      {/*<Component*/}
-      {/*  name="Salesperson"*/}
-      {/*  route="salesperson"*/}
-      {/*  currentSelect="Salesperson"*/}
-      {/*/>*/}
-      {/*<Component name="Sales" route="sales" currentSelect="Sales" />*/}
+      <Component
+        name="Salespersons"
+        route="/admin/salespersons"
+        currentSelect="admin/salespersons"
+        Icon={PeopleIcon}
+      />
+      <Component
+        name="Sales Analytics"
+        route="/admin/analytics"
+        currentSelect="admin/analytics"
+        Icon={PeopleIcon}
+      />
     </div>
   );
 }

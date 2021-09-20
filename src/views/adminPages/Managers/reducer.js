@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
   manager: {},
-  managers: [],
+  unassignedManagers: [],
 };
 
 const managerReducer = (state = initialState, action) => {
@@ -16,6 +16,11 @@ const managerReducer = (state = initialState, action) => {
       return {
         ...state,
         managers: [...action.payload.items],
+      };
+    case actionTypes.GET_ALL_UNASSIGNED_MANAGERS_SUCCESS:
+      return {
+        ...state,
+        unassignedManagers: [...action.payload],
       };
     default:
       return initialState;

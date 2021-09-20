@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Form, Label, FormGroup, Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, TextField } from '@material-ui/core';
+import { Avatar, Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import styles from './warehouse.module.css';
-import { getOneWarehouse } from '../actions';
-import Layout from '../../Layout';
-import { getAllManagers } from '../../Managers/actions';
-//import image from './Capture.PNG';
+import { assignManager, getOneWarehouse } from '../actions';
+import Layout from '../../../Layout';
+import { getAllUnassignedManagers } from '../../Managers/actions';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
   const { id } = props.match.params;
-
+  const [selectedManager, setSelectedManager] = useState('');
   const { warehouse } = useSelector((state) => state.warehouseReducer);
   useEffect(() => dispatch(getOneWarehouse(id)), []);
 
-  const managers = useSelector((state) => state.managerReducer.managers);
+  const managers = useSelector(
+    (state) => state.managerReducer.unassignedManagers
+  );
 
-  useEffect(() => dispatch(getAllManagers()), [warehouse]);
-
+  useEffect(() => dispatch(getAllUnassignedManagers()), [warehouse]);
   const managerComponent = (manager) => {
     return (
       <>
@@ -119,11 +119,19 @@ function WarehousePage(props) {
   };
 
   const assignManagerComponent = (managerArray) => {
-    const manage = managerArray.map((m) => m.firstName);
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(
+        assignManager({
+          managerId: selectedManager,
+          warehouseId: warehouse._id,
+        })
+      );
+    };
     return (
       <>
         <Row className="mt-5">
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label
                 style={{
@@ -137,12 +145,21 @@ function WarehousePage(props) {
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={manage}
+                options={managerArray}
+                onChange={(e, newValue) =>
+                  setSelectedManager(newValue._id ? newValue._id : null)
+                }
+                value={`${selectedManager.firstName} ${selectedManager.lastName}`}
+                getOptionLabel={(option) =>
+                  `${option.firstName} ${option.lastName}`
+                }
+                defaultValue={`${selectedManager.firstName} ${selectedManager.lastName}`}
                 sx={{ width: 300 }}
                 renderInput={(params) => (
                   <TextField {...params} label="Movie" />
                 )}
               />
+              <Button type="submit">Assign Manager</Button>
             </FormGroup>
           </Form>
         </Row>

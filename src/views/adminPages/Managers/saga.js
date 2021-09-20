@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import * as actionTypes from './actionTypes';
-import { BASE_URL } from '../../const/config';
+import { BASE_URL } from '../../../const/config';
 // import { auth } from '../../const/firebase.config';
 
 const getOneManager = async (id) => {
@@ -16,7 +16,7 @@ export function* handleGetOneManager(action) {
     const result = yield call(getOneManager, id);
     yield put({ type: actionTypes.GET_ONE_MANAGER_SUCCESS, payload: result });
   } catch (error) {
-    console.log(error, '17 saga manager');
+    toast.error(error.response.data.message);
   }
 }
 
@@ -58,7 +58,7 @@ export function* handleGetAllManagers() {
       payload: result.data,
     });
   } catch (error) {
-    console.log(error, '30 sasga manager');
+    toast.error(error.response.data.message);
   }
 }
 
@@ -69,7 +69,7 @@ const addManager = async (data) => {
 
 export function* handleAddManager(action) {
   try {
-    const result = yield call(addManager, action.payload);
+    yield call(addManager, action.payload);
     toast.success('Successfully added the manager', {
       position: 'top-right',
       autoClose: 5000,
@@ -79,16 +79,33 @@ export function* handleAddManager(action) {
       draggable: true,
       progress: undefined,
     });
-    console.log(result, 'gg');
   } catch (error) {
     toast.error(error.response.data.message);
-    console.log(error.response, 'gg');
+  }
+}
 
-    console.log(error);
+const getUnassignedManagers = async () => {
+  const result = await axios.get(`${BASE_URL}/admin/managers/unassigned`);
+  return result.data;
+};
+
+export function* handleGetUnassignedManagers() {
+  try {
+    const result = yield call(getUnassignedManagers);
+    yield put({
+      type: actionTypes.GET_ALL_UNASSIGNED_MANAGERS_SUCCESS,
+      payload: result.result,
+    });
+  } catch (error) {
+    toast.error(error.response.data.message);
   }
 }
 
 function* watchManagerSagas() {
+  yield takeLatest(
+    actionTypes.GET_ALL_UNASSIGNED_MANAGERS,
+    handleGetUnassignedManagers
+  );
   yield takeLatest(actionTypes.ADD_MANAGER, handleAddManager);
   yield takeLatest(actionTypes.GET_ONE_MANAGER, handleGetOneManager);
   yield takeLatest(actionTypes.GET_ALL_MANAGERS, handleGetAllManagers);
