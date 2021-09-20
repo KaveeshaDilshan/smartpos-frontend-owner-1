@@ -17,6 +17,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -165,7 +168,7 @@ export default function PrimarySearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            SMART POS - OWNER
+            SMART POS SYSTEM
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

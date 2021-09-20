@@ -1,17 +1,21 @@
 .main {
     min-width: 180px;
+    position: fixed;
+    z-index: 50;
     padding-top: 10px;
     margin-left: -5px;
-    background:#F3F7FB;
+    background: #F3F7FB;
     border-bottom-right-radius: 10px;
     border-top-left-radius: 10px;
-    height:90vh;
+    height: 90vh;
 }
 
 .component {
     border: none;
+    border-radius: 5px;
     min-width: 205px;
     margin-left: 5px;
+    margin-right: 5px;
     padding: 10px;
     font-size: 16px;
     min-height: 40px;

@@ -4,17 +4,22 @@ import { put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './categoryActionTypes';
 import { BASE_URL } from '../../../../const/config';
 
-export function* getAllCategories() {
+export function* getAllCategories(action) {
+  const search = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/category?sortBy=+name`
+      `${BASE_URL}/manager/category?sortBy=+name&query=${search}`
     );
     yield put({
       type: actionTypes.GET_ALL_CATEGORIES_SUCCESS,
       data,
     });
   } catch (error) {
-    toast.error(error.response.data.message);
+    if (error.response.data) {
+      toast.error('Network Error');
+    } else {
+      toast.error(error.response.data.message);
+    }
   }
 }
 
