@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
     background: '#ffff',
     borderRadius: 5,
     boxShadow: '0px 0px 5px gray',
-    cursor: 'pointer',
     '&:hover': {
       boxShadow: '0px 0px 5px 0px black',
       background: '#f8f7f7',
@@ -26,6 +25,7 @@ const useStyles = makeStyles(() => ({
     marginLeft: 10,
     fontSize: 30,
     '&:hover': {
+      cursor: 'pointer',
       color: 'rgb(78, 90, 247)',
     },
   },
@@ -75,9 +75,20 @@ function WarehouseItem({ productId, poto, productName, unitPrice, count }) {
             width: '100%',
           }}
         >
-          <div style={{ fontSize: 20, fontWeight: 450 }}>{productName}</div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: 20,
+              fontWeight: 450,
+              width: '50%',
+            }}
+          >
+            <div>{productName}</div>
+            <div>Rs {unitPrice}</div>
+          </div>
 
-          <div style={{ fontSize: 20, fontWeight: 450 }}>Rs {unitPrice}</div>
           <div
             style={{
               marginRight: 10,
