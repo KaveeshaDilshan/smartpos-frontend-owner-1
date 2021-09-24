@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Container, Row, Col } from 'reactstrap';
 import {
-  Button,
+  // Button,
   CircularProgress,
   Divider,
   Grid,
   TextField,
   Typography,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import { useHistory } from 'react-router-dom';
+// import AddIcon from '@material-ui/icons/Add';
+// import { useHistory } from 'react-router-dom';
 import { Autocomplete } from '@material-ui/lab';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
@@ -22,7 +22,7 @@ function ProductsPage() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [categorySelect, setCategorySelect] = useState('');
-  const history = useHistory();
+  // const history = useHistory();
   const allProducts = useSelector((state) => state.productReducer.allProducts);
   const loading = useSelector((state) => state.productReducer.loading);
 
@@ -55,14 +55,14 @@ function ProductsPage() {
                 )}
               />
             </div>
-            <Button
-              className={styles.addNew__button}
-              variant="contained"
-              type="button"
-              onClick={() => history.push('/manager/products/addnew')}
-            >
-              <AddIcon /> Add New
-            </Button>
+            {/*<Button*/}
+            {/*  className={styles.addNew__button}*/}
+            {/*  variant="contained"*/}
+            {/*  type="button"*/}
+            {/*  onClick={() => history.push('/manager/products/addnew')}*/}
+            {/*>*/}
+            {/*  <AddIcon /> Add New*/}
+            {/*</Button>*/}
           </div>
           <Divider />
           <Divider />

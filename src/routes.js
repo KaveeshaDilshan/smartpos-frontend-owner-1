@@ -9,10 +9,12 @@ import managerWarehousePage from './views/managerPages/Warehouse/managerWarehous
 import SalesPage from './views/managerPages/Sales/SalesPage';
 import CategoryPage from './views/managerPages/Category/CategoryPage';
 import LeavesPage from './views/managerPages/Leaves/LeavesPage';
-import AddNewSalesperson from './views/managerPages/Salespersons/AddNewSalesperson';
-import SalespersonTracking from './views/managerPages/Salespersons/Tracking';
+import AddNewSalesperson from './views/managerPages/Salespersons/components/AddNewSalesperson';
+import SalespersonTracking from './views/managerPages/Salespersons/components/Tracking';
 import AddNewProduct from './views/managerPages/Products/components/AddNewProduct';
 import ProductDetails from './views/managerPages/Products/components/ProductDetails';
+import OneSalesperson from './views/managerPages/Salespersons/components/OneSalesperson';
+import EditSalesperson from './views/managerPages/Salespersons/components/EditSalesperson';
 import AnalyticsPage from './views/adminPages/Analytics/AnalyticsPage';
 import Salesperson from './views/adminPages/Salespersons/SalespersonPage';
 import AddManager from './views/adminPages/Managers/AddManager';
@@ -62,6 +64,16 @@ const routes = [
   {
     path: 'salespersons/tracking/:id',
     render: SalespersonTracking,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/moredetails/:id',
+    render: OneSalesperson,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/edit/:id',
+    render: EditSalesperson,
     layout: BASE_MANAGER_ROUTE,
   },
   { path: 'salesDetails', render: SalesPage, layout: BASE_MANAGER_ROUTE },
