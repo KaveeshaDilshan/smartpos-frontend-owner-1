@@ -10,8 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { Pagination } from '@material-ui/lab';
+// import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+// import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const columns = [
   { id: 'index', label: '#', maxWidth: 50 },
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableComponent({ data }) {
+export default function TableComponent({ data, setPage }) {
   const rows = data.map((d, i) => ({
     ...d,
     name: `${d.firstName} ${d.lastName}`,
@@ -126,27 +127,21 @@ export default function TableComponent({ data }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/*<TablePagination*/}
-      {/*  // rowsPerPageOptions={[10, 25, 100]}*/}
-      {/*  rowsPerPageOptions={[5]}*/}
-      {/*  component="div"*/}
-      {/*  count={rows.length}*/}
-      {/*  rowsPerPage={rowsPerPage}*/}
-      {/*  page={page}*/}
-      {/*  onPageChange={handleChangePage}*/}
-      {/*  onRowsPerPageChange={handleChangeRowsPerPage}*/}
-      {/*/>*/}
       <div
         style={{
           width: '100%',
-          textAlign: 'right',
-          paddingRight: 40,
-          paddingBottom: 5,
-          paddingTop: 5,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '5px 0',
         }}
       >
-        <ArrowBackIosIcon />
-        <ArrowForwardIosIcon />
+        <div>
+          <Pagination
+            count={10}
+            onChange={(e, p) => setPage(p)}
+            color="primary"
+          />
+        </div>
       </div>
     </Paper>
   );

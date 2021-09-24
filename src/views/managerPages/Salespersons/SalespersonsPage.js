@@ -11,8 +11,8 @@ import TableComponent from './components/TableComponent';
 function SalespersonsPage() {
   const history = useHistory();
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-
   const allSalespersons = useSelector(
     (state) => state.salespersonsReducer.allSalespersons
   );
@@ -23,8 +23,8 @@ function SalespersonsPage() {
   );
 
   React.useEffect(() => {
-    dispatch(getAllSalespersons({ search, warehouseID }));
-  }, [search]);
+    dispatch(getAllSalespersons({ search, warehouseID, page }));
+  }, [search, page]);
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch}>
@@ -38,7 +38,7 @@ function SalespersonsPage() {
               <AddIcon /> Add New
             </Button>
           </div>
-          <TableComponent data={allSalespersons} />
+          <TableComponent data={allSalespersons} setPage={setPage} />
         </div>
       </ManagerLayout>
     </>

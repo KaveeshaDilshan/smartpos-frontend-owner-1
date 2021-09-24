@@ -36,6 +36,8 @@ const routes = [
     render: Managers,
     layout: BASE_ADMIN_ROUTE,
   },
+  { path: 'salespersons', render: Salesperson, layout: BASE_ADMIN_ROUTE },
+  { path: 'analytics', render: AnalyticsPage, layout: BASE_ADMIN_ROUTE },
   {
     path: '',
     render: Dashboard,
@@ -54,6 +56,16 @@ const routes = [
   {
     path: 'salespersons/tracking/:id',
     render: SalespersonTracking,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/moredetails/:id',
+    render: OneSalesperson,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/edit/:id',
+    render: EditSalesperson,
     layout: BASE_MANAGER_ROUTE,
   },
   { path: 'salesDetails', render: SalesPage, layout: BASE_MANAGER_ROUTE },

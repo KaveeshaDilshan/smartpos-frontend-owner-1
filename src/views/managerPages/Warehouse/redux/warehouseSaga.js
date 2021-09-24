@@ -36,7 +36,6 @@ export function* addProductToWarehouse(action) {
 
 export function* changeWarehouseProductQuantity(action) {
   const { warehouseID, details } = action.data;
-  console.log(details);
   try {
     yield axios.patch(`${BASE_URL}/manager/warehouse/${warehouseID}`, details);
     toast.success('Product quantity is changed successfully');
