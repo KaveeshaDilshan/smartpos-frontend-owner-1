@@ -39,6 +39,7 @@ export default function ProductCard({
             <Typography>Unit Price - {unitPrice}</Typography>
             <Typography>Quantity - {quantity}</Typography>
             <Typography>Sales - {sales}</Typography>
+            <Typography>Cost - Rs. {sales * unitPrice}</Typography>
           </div>
         </div>
       </CardActionArea>

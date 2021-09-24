@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
 import { BASE_URL } from '../../../const/config';
@@ -80,9 +81,13 @@ export function* handleGetOneSalespersonProducts(data) {
   const { id, oneDate } = data.payload;
   try {
     const result = yield call(getOneSalespersonProducts, id, oneDate);
+
     yield put({
       type: actionTypes.GET_ONE_SALESPERSON_PRODUCTS_ONE_DAY_SUCCESS,
-      payload: result.data,
+      payload: {
+        data: result.data,
+        oneDate: moment(oneDate).format('YYYY-MM-DD'),
+      },
     });
   } catch (error) {
     toast.error(error.response.data.message);
