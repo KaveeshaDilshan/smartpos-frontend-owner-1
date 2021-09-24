@@ -41,7 +41,6 @@ export function* getOneSalesperson(action) {
 }
 
 export function* addSalesperson(action) {
-  console.log(action.data);
   try {
     yield axios.post(`${BASE_URL}/manager/salespersons`, action.data);
     toast.success('New Salesperson is added successfully');

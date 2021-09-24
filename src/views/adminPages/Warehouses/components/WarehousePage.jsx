@@ -162,15 +162,30 @@ function WarehousePage(props) {
                   <TextField {...params} label="Movie" />
                 )}
               />
-              <Button type="submit">Assign Manager</Button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                Assign A Manager
+              </Button>
+              <div style={{ marginLeft: 10, marginRight: 10 }}>OR</div>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                Add New Manager
+              </Button>
             </FormGroup>
           </Form>
         </Row>
       </>
     );
   };
-
-  if (Object.keys(warehouse).length === 0) {
+  if (!warehouse || Object.keys(warehouse).length === 0) {
     return <Loading />;
   }
   return (

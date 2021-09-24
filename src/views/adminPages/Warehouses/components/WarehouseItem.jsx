@@ -37,7 +37,7 @@ function WarehouseItem({ id, name, district, telephone, managerName }) {
     <Card className={clsx('shadow', classes.root)} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h5">
-          {name}
+          Warehouse Name - {name}
         </Typography>
         <div style={{ height: '20px' }}>
           <Typography
@@ -45,7 +45,7 @@ function WarehouseItem({ id, name, district, telephone, managerName }) {
             color="textSecondary"
             gutterBottom
           >
-            {district}
+            District - {district}
           </Typography>
         </div>
         <Typography
@@ -53,7 +53,7 @@ function WarehouseItem({ id, name, district, telephone, managerName }) {
           color="textSecondary"
           style={{ height: '20px' }}
         >
-          {telephone}
+          Telephone - {telephone}
         </Typography>
         <Typography variant="body2" component="p">
           Manager -{' '}
