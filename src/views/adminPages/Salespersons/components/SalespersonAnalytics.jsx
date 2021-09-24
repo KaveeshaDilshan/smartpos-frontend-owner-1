@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
-import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -22,7 +19,6 @@ import {
   Bar,
 } from 'recharts';
 import DateFnsUtils from '@date-io/date-fns';
-import { Switch } from '@material-ui/core';
 import Layout from '../../../Layout';
 import {
   getOneSalesperson,
@@ -40,9 +36,9 @@ function SalespersonAnalytics(props) {
   const [currentChart, setCurrentChart] = useState('income');
   const { days, totalIncome, totalSales, totalQuantity, salespersonProducts } =
     useSelector((state) => state.adminSalespersonReducer);
-  const salesperson = useSelector(
-    (state) => state.adminSalespersonReducer.salesperson
-  );
+  // const salesperson = useSelector(
+  //   (state) => state.adminSalespersonReducer.salesperson
+  // );
   useEffect(() => dispatch(getOneSalesperson(id)), []);
   useEffect(
     () => dispatch(getOneSalespersonAnalytics({ id, startDate, endDate })),
@@ -84,7 +80,7 @@ function SalespersonAnalytics(props) {
   return (
     <Layout>
       <Row>
-        <Col className="col-6">
+        <Col className="col-7">
           <Row>
             <Col className="col-6">
               <ToggleButtonGroup
@@ -156,7 +152,8 @@ function SalespersonAnalytics(props) {
             </Col>
           </Row>
         </Col>
-        <Col className="col-6">
+
+        <Col className="col-4 m-5 pt-3">
           <Row>
             <Col>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -179,7 +176,13 @@ function SalespersonAnalytics(props) {
           <Row>
             <Col>
               {salespersonProducts.map((product) => (
-                <ProductCard />
+                <ProductCard
+                  name={product.name}
+                  unitPrice={product.unitPrice}
+                  photo={product.photo}
+                  quantity={product.quantity}
+                  sales={product.sales}
+                />
               ))}
             </Col>
           </Row>
