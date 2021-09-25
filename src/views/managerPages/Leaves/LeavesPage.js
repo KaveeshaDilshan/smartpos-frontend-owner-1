@@ -83,7 +83,7 @@ function LeavesPage() {
               </tr>
             </thead>
 
-            {!loading ? (
+            {!loading && (
               <tbody>
                 {allLeaves.map((leave, index) => (
                   <tr key={leave._id}>
@@ -131,14 +131,15 @@ function LeavesPage() {
                   </tr>
                 ))}
               </tbody>
-            ) : (
-              <>
-                <div style={{ textAlign: 'center', marginTop: 50 }}>
-                  <CircularProgress style={{ color: 'red' }} />
-                </div>
-              </>
             )}
           </Table>
+          {loading && (
+            <>
+              <div style={{ textAlign: 'center', marginTop: 50 }}>
+                <CircularProgress style={{ color: 'red' }} />
+              </div>
+            </>
+          )}
           <LeaveDetailsBox
             open={clickView}
             handleClose={setClickView}

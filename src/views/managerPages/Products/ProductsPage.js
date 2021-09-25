@@ -21,7 +21,7 @@ import { getAllCategories } from '../Category/redux/categoryActions';
 function ProductsPage() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
-  const [categorySelect, setCategorySelect] = useState('');
+  const [categorySelect, setCategorySelect] = useState({});
   // const history = useHistory();
   const allProducts = useSelector((state) => state.productReducer.allProducts);
   const loading = useSelector((state) => state.productReducer.loading);
@@ -29,13 +29,13 @@ function ProductsPage() {
   const allCategories = useSelector(
     (state) => state.categoryReducer.allCategories
   );
-  const category = allCategories.map((m) => m.name);
+  // const category = allCategories.map((m) => m.name);
 
   React.useEffect(() => {
-    dispatch(getAllProducts(search));
+    dispatch(getAllProducts({ search, category: categorySelect._id }));
     dispatch(getAllCategories(''));
-  }, [search]);
-  console.log(categorySelect);
+  }, [search, categorySelect]);
+  // console.log(categorySelect);
 
   return (
     <>
@@ -46,8 +46,9 @@ function ProductsPage() {
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={category}
-                onChange={(e, value) => setCategorySelect(value)}
+                options={allCategories}
+                getOptionLabel={(option) => option.name}
+                onChange={(e, value) => setCategorySelect({ ...value })}
                 style={{ width: 300 }}
                 size="small"
                 renderInput={(params) => (

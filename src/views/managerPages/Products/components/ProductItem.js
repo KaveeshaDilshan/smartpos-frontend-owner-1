@@ -34,13 +34,9 @@ const useStyles = makeStyles({
   categoryName: {
     fontSize: 14,
   },
-  // media: {
-  //   transform: 'scale(0.7)',
-  //   marginLeft: 1,
-  //   marginRight: 1,
-  //   marginTop: -45,
-  //   marginBottom: -40,
-  // },
+  media: {
+    maxHeight: 150,
+  },
   // price: {
   //   marginTop: -30,
   // },

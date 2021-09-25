@@ -54,7 +54,7 @@ const DailyProducts = ({ id }) => {
     dispatch(
       getSalespersonDailyProducts({
         id,
-        date: Moment(selectedDate).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'),
+        date: Moment.utc(selectedDate),
       })
     );
   }, [selectedDate, id]);
@@ -91,10 +91,10 @@ const DailyProducts = ({ id }) => {
   const handleSaveClick = () => {
     dispatch(
       addDailyProduct({
-        salespersonId: id,
+        warehouseId: warehouseID,
         details: {
           salesperson: id,
-          createdAt: Moment(selectedDate),
+          createdAt: Moment.utc(selectedDate),
           dailyProducts: addedDailyProducts,
         },
       })
@@ -237,20 +237,20 @@ const DailyProducts = ({ id }) => {
             </div>
           </Row>
           <Divider style={{ height: 2, marginTop: 10 }} />
-          <Row className="mt-3" style={{ textAlign: 'end' }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <h5>Remains Add to Warehouse:</h5>
-              <Button variant="contained" size="small">
-                Add
-              </Button>
-            </div>
-          </Row>
+          {/*<Row className="mt-3" style={{ textAlign: 'end' }}>*/}
+          {/*  <div*/}
+          {/*    style={{*/}
+          {/*      display: 'flex',*/}
+          {/*      alignItems: 'center',*/}
+          {/*      justifyContent: 'space-between',*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <h5>Remains Add to Warehouse:</h5>*/}
+          {/*    <Button variant="contained" size="small">*/}
+          {/*      Add*/}
+          {/*    </Button>*/}
+          {/*  </div>*/}
+          {/*</Row>*/}
         </Paper>
       </Col>
     </>
