@@ -20,6 +20,7 @@ import Salesperson from './views/adminPages/Salespersons/SalespersonPage';
 import AddManager from './views/adminPages/Managers/AddManager';
 import ManagerPage from './views/adminPages/Managers/ManagerPage';
 import SalespersonAnalytics from './views/adminPages/Salespersons/components/SalespersonAnalytics';
+import LoginForm from './views/LoginForm';
 
 const routes = [
   {
@@ -42,7 +43,7 @@ const routes = [
     layout: BASE_ADMIN_ROUTE,
   },
   {
-    path: '',
+    path: 'dashboard',
     render: Dashboard,
     layout: BASE_MANAGER_ROUTE,
   },
@@ -95,6 +96,11 @@ const routes = [
   },
   { path: 'category', render: CategoryPage, layout: BASE_MANAGER_ROUTE },
   { path: 'leaves', render: LeavesPage, layout: BASE_MANAGER_ROUTE },
+  {
+    path: 'login',
+    render: LoginForm,
+    layout: '/',
+  },
 ];
 
 export default routes;

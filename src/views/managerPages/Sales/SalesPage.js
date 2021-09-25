@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import Moment from 'moment';
@@ -8,13 +8,15 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
 import ManagerLayout from '../../ManagerLayout';
 import styles from './SalesPage.module.css';
 import { getSalespersonsSalesByDateRange } from './redux/salesActions';
 
 function SalesPage() {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(Moment());
+  const [startDate, setStartDate] = useState(Moment().subtract(7, 'days'));
   const [endDate, setEndDate] = useState(Moment());
 
   const loading = useSelector((state) => state.salesReducer.loading);
@@ -26,8 +28,8 @@ function SalesPage() {
     dispatch(
       getSalespersonsSalesByDateRange({
         warehouseId,
-        startDate: Moment(),
-        endDate: Moment(),
+        startDate,
+        endDate,
       })
     );
   }, []);
@@ -45,6 +47,15 @@ function SalesPage() {
     <>
       <ManagerLayout>
         <div className={styles.salespage}>
+          <Typography
+            component="h2"
+            variant="h4"
+            color="primary"
+            gutterBottom
+            style={{ marginBottom: 20, marginTop: 10 }}
+          >
+            SALESPERSONS LEADERBOARD
+          </Typography>
           <div style={{ marginBottom: 20, marginTop: 10 }}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -74,7 +85,12 @@ function SalesPage() {
               />
             </MuiPickersUtilsProvider>
             <Button
-              style={{ marginLeft: 50, color: 'aqua' }}
+              style={{
+                marginLeft: 50,
+                backgroundImage: 'linear-gradient(#0dccea, #0d70ea',
+                color: 'white',
+              }}
+              variant="contained"
               type="button"
               onClick={handleBtnClick}
             >

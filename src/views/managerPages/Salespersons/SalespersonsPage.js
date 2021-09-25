@@ -27,7 +27,7 @@ function SalespersonsPage() {
   }, [search, page]);
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.salespersonspage}>
           <div className={styles.page__top}>
             <Button

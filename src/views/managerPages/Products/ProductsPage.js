@@ -39,7 +39,7 @@ function ProductsPage() {
 
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.productspage}>
           <div className={styles.top}>
             <div>
@@ -73,7 +73,7 @@ function ProductsPage() {
               <>
                 <Typography
                   component="h2"
-                  variant="h6"
+                  variant="h4"
                   color="primary"
                   gutterBottom
                 >

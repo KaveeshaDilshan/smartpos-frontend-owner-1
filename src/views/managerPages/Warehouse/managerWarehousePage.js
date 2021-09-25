@@ -38,7 +38,7 @@ function managerWarehousePage() {
   // console.log(categorySelect);
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.warehousepage}>
           <div className={styles.page_top}>
             <div className={styles.top}>
@@ -71,7 +71,7 @@ function managerWarehousePage() {
           <div className={styles.page_bottom}>
             <Typography
               component="h2"
-              variant="h6"
+              variant="h4"
               color="primary"
               gutterBottom
             >

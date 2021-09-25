@@ -107,7 +107,7 @@ const DailyProducts = ({ id }) => {
     <>
       <Col className="col-6">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             DAILY PRODUCTS
           </Typography>
         </div>
@@ -120,6 +120,7 @@ const DailyProducts = ({ id }) => {
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Sold</th>
+                    <th>Remains</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,6 +163,19 @@ const DailyProducts = ({ id }) => {
                           size="small"
                         />
                       </td>
+                      <td>
+                        <TextField
+                          style={{
+                            width: 100,
+                          }}
+                          disabled
+                          type="number"
+                          id="outlined-size-small"
+                          defaultValue={product.quantity - product.sales}
+                          variant="outlined"
+                          size="small"
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -175,7 +189,7 @@ const DailyProducts = ({ id }) => {
           <div>
             <Typography
               component="h2"
-              variant="h6"
+              variant="h4"
               color="primary"
               gutterBottom
             >

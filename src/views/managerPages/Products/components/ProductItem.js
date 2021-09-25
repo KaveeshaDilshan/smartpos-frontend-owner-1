@@ -48,7 +48,9 @@ const useStyles = makeStyles({
   },
   button: {
     marginTop: -30,
-    backgroundColor: 'rgb(240, 236, 236)',
+    backgroundColor: '#0dccea',
+    // backgroundImage: 'linear-gradient(#0dccea, #0d70ea)',
+    color: 'white',
     fontSize: 10,
     '&:hover': {
       backgroundColor: 'rgb(161, 161, 161)',
@@ -166,7 +168,7 @@ export default function ProductItem({
       />
       <Dialog open={detailsBoxOn} onClose={() => setDetailsBoxOn(false)}>
         <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             Products Details
           </Typography>
         </DialogTitle>

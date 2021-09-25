@@ -64,9 +64,9 @@ function LeavesPage() {
   };
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.leavespage}>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             Leave Requests
           </Typography>
           <br />
