@@ -20,6 +20,9 @@ function SideBar() {
             background: window.location.pathname.includes(currentSelect)
               ? '#4B76D1'
               : '',
+            color: window.location.pathname.includes(currentSelect)
+              ? '#FFF'
+              : '',
           }}
         >
           <div className="d-flex align-content-center ">

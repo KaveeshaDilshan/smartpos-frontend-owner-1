@@ -1,0 +1,30 @@
+.addnew_product {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 550;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+}
+
+.form {
+    margin-top: 30px;
+    width: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(224, 223, 223);
+}
+
+option {
+    font-weight: 500;
+}
+.input_warning{
+    color: red;
+}

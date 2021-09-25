@@ -9,13 +9,17 @@ import managerWarehousePage from './views/managerPages/Warehouse/managerWarehous
 import SalesPage from './views/managerPages/Sales/SalesPage';
 import CategoryPage from './views/managerPages/Category/CategoryPage';
 import LeavesPage from './views/managerPages/Leaves/LeavesPage';
-import AddNewSalesperson from './views/managerPages/Salespersons/AddNewSalesperson';
-import SalespersonTracking from './views/managerPages/Salespersons/Tracking';
+import AddNewSalesperson from './views/managerPages/Salespersons/components/AddNewSalesperson';
+import SalespersonTracking from './views/managerPages/Salespersons/components/Tracking';
 import AddNewProduct from './views/managerPages/Products/components/AddNewProduct';
 import ProductDetails from './views/managerPages/Products/components/ProductDetails';
+import OneSalesperson from './views/managerPages/Salespersons/components/OneSalesperson';
+import EditSalesperson from './views/managerPages/Salespersons/components/EditSalesperson';
 import AnalyticsPage from './views/adminPages/Analytics/AnalyticsPage';
-import Managers from './views/adminPages/Managers/Managers';
-import Salesperson from './views/adminPages/Salespersons/Salesperson';
+import Salesperson from './views/adminPages/Salespersons/SalespersonPage';
+import AddManager from './views/adminPages/Managers/AddManager';
+import ManagerPage from './views/adminPages/Managers/ManagerPage';
+import SalespersonAnalytics from './views/adminPages/Salespersons/components/SalespersonAnalytics';
 
 const routes = [
   {
@@ -29,13 +33,14 @@ const routes = [
     render: WarehousePage,
     layout: BASE_ADMIN_ROUTE,
   },
-  {
-    path: 'managers',
-    render: Managers,
-    layout: BASE_ADMIN_ROUTE,
-  },
   { path: 'salespersons', render: Salesperson, layout: BASE_ADMIN_ROUTE },
   { path: 'analytics', render: AnalyticsPage, layout: BASE_ADMIN_ROUTE },
+  { path: 'managers/addManager', render: AddManager, layout: BASE_ADMIN_ROUTE },
+  {
+    path: 'salespersons/analytics/:id',
+    render: SalespersonAnalytics,
+    layout: BASE_ADMIN_ROUTE,
+  },
   {
     path: '',
     render: Dashboard,
@@ -47,6 +52,11 @@ const routes = [
     layout: BASE_MANAGER_ROUTE,
   },
   {
+    path: 'managers',
+    render: ManagerPage,
+    layout: BASE_ADMIN_ROUTE,
+  },
+  {
     path: 'salespersons/addnew',
     render: AddNewSalesperson,
     layout: BASE_MANAGER_ROUTE,
@@ -54,6 +64,16 @@ const routes = [
   {
     path: 'salespersons/tracking/:id',
     render: SalespersonTracking,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/moredetails/:id',
+    render: OneSalesperson,
+    layout: BASE_MANAGER_ROUTE,
+  },
+  {
+    path: 'salespersons/edit/:id',
+    render: EditSalesperson,
     layout: BASE_MANAGER_ROUTE,
   },
   { path: 'salesDetails', render: SalesPage, layout: BASE_MANAGER_ROUTE },

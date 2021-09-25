@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes';
 const initialState = {
   manager: {},
   unassignedManagers: [],
+  managers: [],
 };
 
 const managerReducer = (state = initialState, action) => {

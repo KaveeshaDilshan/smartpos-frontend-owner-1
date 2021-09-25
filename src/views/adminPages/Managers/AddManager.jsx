@@ -1,16 +1,14 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Col, Container, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
-import { Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import Button from '@material-ui/core/Button';
-import ManagerLayout from '../../ManagerLayout';
-import { addSalesperson } from './redux/salespersonsActions';
+import { addManager } from './actions';
+import Layout from '../../Layout';
+//import { passwordRegex } from '../../util/regex';
 
-function AddNewSalesperson() {
+function AddManager() {
   const dispatch = useDispatch();
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
   const validate = (values) => {
     const errors = {};
     if (!values.firstName) {
@@ -47,15 +45,14 @@ function AddNewSalesperson() {
     },
     validate,
     onSubmit: (values) => {
-      values.role = 'salesperson';
-      values.warehouseId = warehouseID;
-      dispatch(addSalesperson(values));
+      values.role = 'manager';
+      dispatch(addManager(values));
     },
   });
 
   return (
     <>
-      <ManagerLayout>
+      <Layout>
         <Container>
           <Form onSubmit={formik.handleSubmit}>
             <Row form>
@@ -171,12 +168,19 @@ function AddNewSalesperson() {
                 </Row>
               </Col>
             </Row>
-            <Button type="submit">ADD SALESPERSON</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="mt-3"
+            >
+              ADD MANAGER
+            </Button>
           </Form>
         </Container>
-      </ManagerLayout>
+      </Layout>
     </>
   );
 }
 
-export default AddNewSalesperson;
+export default AddManager;
