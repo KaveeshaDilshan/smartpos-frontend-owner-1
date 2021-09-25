@@ -9,6 +9,7 @@ const initialState = {
   totalSales: [],
   totalQuantity: [],
   salespersonProducts: [],
+  selectedDate: '',
 };
 
 const adminSalespersonReducer = (state = initialState, action) => {
@@ -34,9 +35,11 @@ const adminSalespersonReducer = (state = initialState, action) => {
         totalQuantity: [...action.payload.totalQuantity],
       };
     case actionTypes.GET_ONE_SALESPERSON_PRODUCTS_ONE_DAY_SUCCESS:
+      console.log(action.payload.oneDate);
       return {
         ...state,
-        salespersonProducts: [...action.payload.products],
+        salespersonProducts: [...action.payload.data.products],
+        selectedDate: action.payload.oneDate,
       };
     default:
       return state;
