@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
-import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
-import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -22,46 +19,55 @@ import {
   Bar,
 } from 'recharts';
 import DateFnsUtils from '@date-io/date-fns';
-import { Switch } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import Layout from '../../../Layout';
 import {
-  getOneSalesperson,
   getOneSalespersonAnalytics,
   getOneSalespersonProducts,
 } from '../actions';
-import ProductCard from './ProductCard';
+// eslint-disable-next-line import/no-cycle
+import Compare from './Compare';
 
-function SalespersonAnalytics(props) {
-  const { id } = props.match.params;
+const useStyles = makeStyles({
+  but: {
+    marginTop: 25,
+    marginLeft: 45,
+    display: 'none',
+  },
+});
+
+function SalespersonAnalytics({ id }) {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const [startDate, setStartDate] = useState(moment().subtract(10, 'day'));
   const [endDate, setEndDate] = useState(moment().subtract(1, 'day'));
-  const [oneDate, setOneDate] = useState(moment().subtract(1, 'day'));
-  const [currentChart, setCurrentChart] = useState('income');
-  const { days, totalIncome, totalSales, totalQuantity, salespersonProducts } =
-    useSelector((state) => state.adminSalespersonReducer);
-  const salesperson = useSelector(
-    (state) => state.adminSalespersonReducer.salesperson
+  const [currentChart, setCurrentChart] = useState('INCOME');
+  const [open, setOpen] = useState(false);
+  const { days, totalIncome, totalSales, totalQuantity } = useSelector(
+    (state) => state.adminSalespersonReducer
   );
-  useEffect(() => dispatch(getOneSalesperson(id)), []);
   useEffect(
     () => dispatch(getOneSalespersonAnalytics({ id, startDate, endDate })),
     [startDate, endDate]
   );
-  useEffect(
-    () => dispatch(getOneSalespersonProducts({ id, oneDate })),
-    [salespersonProducts]
-  );
+
   const chartData = new Map();
-  chartData.set('income', []);
-  chartData.set('sales', []);
-  chartData.set('quantity', []);
+  chartData.set('INCOME', []);
+  chartData.set('SALES', []);
   days.forEach((value, index) => {
-    chartData.get('income').push({ date: value, income: totalIncome[index] });
-    chartData.get('sales').push({ date: value, sales: totalSales[index] });
-    chartData
-      .get('quantity')
-      .push({ date: value, quantity: totalQuantity[index] });
+    chartData.get('INCOME').push({
+      date: value,
+      INCOME: totalIncome[index],
+      QUANTITY: totalQuantity[index],
+    });
+    chartData.get('SALES').push({
+      date: value,
+      SALES: totalSales[index],
+      QUANTITY: totalQuantity[index],
+    });
   });
 
   const handleAlignment = (event, newAlignment) => {
@@ -77,30 +83,42 @@ function SalespersonAnalytics(props) {
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
-
-  const handleOneDate = (date) => {
-    setOneDate(date);
+  useEffect(
+    () =>
+      dispatch(
+        getOneSalespersonProducts({
+          id,
+          oneDate: moment().subtract(1, 'day'),
+        })
+      ),
+    []
+  );
+  const handleClick = (e) => {
+    dispatch(
+      getOneSalespersonProducts({
+        id,
+        oneDate: moment(e.date),
+      })
+    );
   };
+
   return (
-    <Layout>
+    <>
       <Row>
-        <Col className="col-6">
+        <Col>
           <Row>
-            <Col className="col-6">
+            <Col>
               <ToggleButtonGroup
                 value={currentChart}
                 exclusive
                 onChange={handleAlignment}
                 aria-label="text alignment"
               >
-                <ToggleButton value="income" aria-labelledby="incomeButton">
+                <ToggleButton value="INCOME" aria-labelledby="incomeButton">
                   <label id="incomeButton">Income</label>
                 </ToggleButton>
-                <ToggleButton value="sales" aria-labelledby="salesButton">
+                <ToggleButton value="SALES" aria-labelledby="salesButton">
                   <label id="salesButton">Sales</label>
-                </ToggleButton>
-                <ToggleButton value="quantity" aria-labelledby="quantityButton">
-                  <label id="quantityButton">Quantity</label>
                 </ToggleButton>
               </ToggleButtonGroup>
             </Col>
@@ -135,57 +153,56 @@ function SalespersonAnalytics(props) {
                   }}
                 />
               </MuiPickersUtilsProvider>
+              <Button
+                size="large"
+                type="submit"
+                className={clsx(classes.but)}
+                variant="outlined"
+                onClick={() => setOpen(!open)}
+              >
+                Compare
+              </Button>
             </Col>
           </Row>
           <Row>
             <Col>
+              {open && <Compare open={open} setOpen={setOpen} />}
               <ResponsiveContainer width="100%" height={400}>
                 <BarChart
                   width={730}
                   height={250}
                   data={chartData.get(currentChart)}
                 >
-                  <CartesianGrid strokeDasharray="1" />
+                  <CartesianGrid strokeDasharray="1" onClick={handleClick} />
                   <XAxis dataKey="date" />
-                  <YAxis dataKey={currentChart} />
+                  <YAxis dataKey={currentChart} onClick={handleClick} />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey={currentChart} width={20} fill="#8884d8" />
+                  <Bar
+                    dataKey={currentChart}
+                    width={1}
+                    fill="#8884d8"
+                    onClick={handleClick}
+                  />
+                  <Bar
+                    dataKey="QUANTITY"
+                    width={1}
+                    fill="#82ca9d"
+                    onClick={handleClick}
+                  />
                 </BarChart>
               </ResponsiveContainer>
-            </Col>
-          </Row>
-        </Col>
-        <Col className="col-6">
-          <Row>
-            <Col>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="Date picker inline"
-                  value={oneDate}
-                  onChange={handleOneDate}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              {salespersonProducts.map((product) => (
-                <ProductCard />
-              ))}
+              <Typography>
+                Total Income - Rs.
+                {totalIncome.reduce(function (a, b) {
+                  return a + b;
+                }, 0)}
+              </Typography>
             </Col>
           </Row>
         </Col>
       </Row>
-    </Layout>
+    </>
   );
 }
 

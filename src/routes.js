@@ -20,7 +20,8 @@ import Salesperson from './views/adminPages/Salespersons/SalespersonPage';
 import AddManager from './views/adminPages/Managers/AddManager';
 import ManagerPage from './views/adminPages/Managers/ManagerPage';
 import SalespersonAnalytics from './views/adminPages/Salespersons/components/SalespersonAnalytics';
-import LoginForm from './views/LoginForm';
+import LoginForm from './views/login/LoginForm';
+import SalespersonPage from './views/adminPages/Salespersons/components/SalespersonPage';
 
 const routes = [
   {
@@ -39,7 +40,7 @@ const routes = [
   { path: 'managers/addManager', render: AddManager, layout: BASE_ADMIN_ROUTE },
   {
     path: 'salespersons/analytics/:id',
-    render: SalespersonAnalytics,
+    render: SalespersonPage,
     layout: BASE_ADMIN_ROUTE,
   },
   {

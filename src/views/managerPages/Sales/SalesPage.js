@@ -103,7 +103,7 @@ function SalesPage() {
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Total Sales</th>
+                <th>Total Sales(Rs)</th>
               </tr>
             </thead>
             {!loading && (

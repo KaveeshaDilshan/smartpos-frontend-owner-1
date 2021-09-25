@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Container, Row, Col } from 'reactstrap';
 import {
+  Button,
   // Button,
   CircularProgress,
   Divider,
@@ -12,6 +13,8 @@ import {
 // import AddIcon from '@material-ui/icons/Add';
 // import { useHistory } from 'react-router-dom';
 import { Autocomplete } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
@@ -20,6 +23,7 @@ import { getAllCategories } from '../Category/redux/categoryActions';
 
 function ProductsPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [search, setSearch] = useState('');
   const [categorySelect, setCategorySelect] = useState({});
   // const history = useHistory();
@@ -56,14 +60,14 @@ function ProductsPage() {
                 )}
               />
             </div>
-            {/*<Button*/}
-            {/*  className={styles.addNew__button}*/}
-            {/*  variant="contained"*/}
-            {/*  type="button"*/}
-            {/*  onClick={() => history.push('/manager/products/addnew')}*/}
-            {/*>*/}
-            {/*  <AddIcon /> Add New*/}
-            {/*</Button>*/}
+            <Button
+              className={styles.addNew__button}
+              variant="contained"
+              type="button"
+              onClick={() => history.push('/manager/products/addnew')}
+            >
+              <AddIcon /> Add New
+            </Button>
           </div>
           <Divider />
           <Divider />

@@ -2,6 +2,12 @@ import * as actionTypes from './dashboardActionTypes';
 
 const initialState = {
   warehouseID: '61364110017b454634bf0b99',
+  warehouse: {
+    district: 'Colombo',
+    town: 'Colombo',
+    telephone: '0571234567',
+    name: 'Mahela warehouse',
+  },
   loading: false,
   warehouseSales: [],
 };

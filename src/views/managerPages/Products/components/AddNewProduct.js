@@ -13,7 +13,7 @@ function AddNewProduct() {
     (state) => state.categoryReducer.allCategories
   );
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getAllCategories(''));
   }, []);
   const initialValues = {
     product_category: '',
@@ -77,7 +77,7 @@ function AddNewProduct() {
               )}
             </FormGroup>
             <FormGroup>
-              <Label for="unit_price">Unit Price</Label>
+              <Label for="unit_price">Unit Price(Rs)</Label>
               <Input
                 type="number"
                 name="unit_price"

@@ -7,45 +7,42 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 400,
+    marginBottom: 5,
   },
   media: {
     height: 140,
   },
 });
 
-export default function ProductCard({ name, unitPrice, photo, quantity }) {
+export default function ProductCard({
+  name,
+  unitPrice,
+  photo,
+  quantity,
+  sales,
+}) {
   const classes = useStyles();
-
   return (
-    <Card className={classes.root}>
+    <Card className={clsx('shadow', classes.root)} variant="outlined">
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
+        <div className="d-flex align-items-center justify-content-lg-start">
+          <div style={{ marginRight: '40px' }}>
+            <img src={photo} alt="" height={100} width={100} />
+          </div>
+          <div>
+            <Typography>Name - {name}</Typography>
+            <Typography>Unit Price - {unitPrice}</Typography>
+            <Typography>Quantity - {quantity}</Typography>
+            <Typography>Sales - {sales}</Typography>
+            <Typography>Cost - Rs. {sales * unitPrice}</Typography>
+          </div>
+        </div>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
     </Card>
   );
 }

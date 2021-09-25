@@ -16,6 +16,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Divider } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import { useHistory } from 'react-router-dom';
 import ConfirmationBox from '../../common/ConfirmationBox';
 
 const useStyles = makeStyles({
@@ -80,7 +82,7 @@ const useStyles = makeStyles({
 });
 
 export default function ProductItem({
-  // productId,
+  productId,
   name,
   categoryName,
   unitPrice,
@@ -88,7 +90,7 @@ export default function ProductItem({
   description,
 }) {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
 
   const [confirmBoxOn, setconfirmBoxOn] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
@@ -143,13 +145,13 @@ export default function ProductItem({
           >
             Show Details
           </Button>
-          {/*<EditIcon*/}
-          {/*  className={classes.edit}*/}
-          {/*  color="action"*/}
-          {/*  onClick={() =>*/}
-          {/*    history.push(`/manager/products/getOne/${productId}`)*/}
-          {/*  }*/}
-          {/*/>*/}
+          <EditIcon
+            className={classes.edit}
+            color="action"
+            onClick={() =>
+              history.push(`/manager/products/getOne/${productId}`)
+            }
+          />
           {/*<DeleteIcon*/}
           {/*  className={classes.delete}*/}
           {/*  color="action"*/}

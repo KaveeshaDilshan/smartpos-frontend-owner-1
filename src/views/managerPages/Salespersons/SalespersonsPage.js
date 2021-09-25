@@ -16,6 +16,10 @@ function SalespersonsPage() {
   const allSalespersons = useSelector(
     (state) => state.salespersonsReducer.allSalespersons
   );
+
+  const totalSalespersons = useSelector(
+    (state) => state.salespersonsReducer.totalSalespersons
+  );
   // const loading = useSelector((state) => state.categoryReducer.loading);
 
   const warehouseID = useSelector(
@@ -38,7 +42,11 @@ function SalespersonsPage() {
               <AddIcon /> Add New
             </Button>
           </div>
-          <TableComponent data={allSalespersons} setPage={setPage} />
+          <TableComponent
+            data={allSalespersons}
+            setPage={setPage}
+            totalrows={totalSalespersons}
+          />
         </div>
       </ManagerLayout>
     </>
