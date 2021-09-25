@@ -5,16 +5,21 @@ import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
 import { BASE_URL } from '../../../const/config';
 
-const getAllSalespersons = async () => {
-  const result = await axios.get(
-    `${BASE_URL}/admin/salespersons?sortBy=+firstName`
+const getAllSalespersons = async (page, filter, warehouse) => {
+  if (filter === 'all') {
+    return axios.get(
+      `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}`
+    );
+  }
+  return axios.get(
+    `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
-  return result;
 };
 
-export function* handleGetAllSalespersons() {
+export function* handleGetAllSalespersons(action) {
+  const { page, filter, warehouse } = action.payload;
   try {
-    const result = yield call(getAllSalespersons);
+    const result = yield call(getAllSalespersons, page, filter, warehouse);
     yield put({
       type: actionTypes.GET_ALL_SALESPERSONS_SUCCESS,
       payload: result.data,
