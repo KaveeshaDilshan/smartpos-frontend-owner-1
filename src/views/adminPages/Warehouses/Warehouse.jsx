@@ -13,7 +13,7 @@ function Warehouse() {
   const warehouses = useSelector((state) => state.warehouseReducer.warehouses);
   const [page, setPage] = useState(1);
   useEffect(() => {
-    dispatch(getWarehouses(search));
+    dispatch(getWarehouses({ search, page }));
   }, [search, page]);
   return (
     <Layout search={search} setSearch={setSearch}>
@@ -32,16 +32,16 @@ function Warehouse() {
               </Col>
             );
           })}
-          {AddWarehouse()}
-        </Row>
-        <Row>
-          <Col>
-            <Pagination
-              count={10}
-              onChange={(e, p) => setPage(p)}
-              color="primary"
-            />
-          </Col>
+          <Row>
+            <Col className="col-lg-12 d-flex justify-content-center mt-5">
+              <Pagination
+                count={10}
+                onChange={(e, p) => setPage(p)}
+                color="primary"
+              />
+            </Col>
+            <Col> {AddWarehouse()}</Col>
+          </Row>
         </Row>
       </Container>
     </Layout>

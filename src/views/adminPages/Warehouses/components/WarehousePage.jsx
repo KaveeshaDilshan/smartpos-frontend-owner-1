@@ -7,6 +7,7 @@ import styles from './warehouse.module.css';
 import { assignManager, getOneWarehouse } from '../actions';
 import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
+import Loading from '../../../../components/common/Loading';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ function WarehousePage(props) {
   );
 
   useEffect(() => dispatch(getAllUnassignedManagers()), [warehouse]);
+
+  const [open, setOpen] = React.useState(false);
   const managerComponent = (manager) => {
     return (
       <>
@@ -159,14 +162,32 @@ function WarehousePage(props) {
                   <TextField {...params} label="Movie" />
                 )}
               />
-              <Button type="submit">Assign Manager</Button>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                Assign A Manager
+              </Button>
+              <div style={{ marginLeft: 10, marginRight: 10 }}>OR</div>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                Add New Manager
+              </Button>
             </FormGroup>
           </Form>
         </Row>
       </>
     );
   };
-
+  if (!warehouse || Object.keys(warehouse).length === 0) {
+    return <Loading />;
+  }
   return (
     <Layout>
       <Container>
@@ -270,9 +291,59 @@ function WarehousePage(props) {
               </Col>
             </Row>
           </Col>
-          {/*<Col className="col-6">*/}
-          {/*  <img src={image} alt="" />*/}
-          {/*</Col>*/}
+          <Col className="col-6">
+            <Row className={styles.warehouse}>
+              <h4
+                style={{
+                  fontWeight: '700',
+                  fontSize: '22px',
+                }}
+              >
+                PRODUCTS
+              </h4>
+              <Col className="col-6">
+                <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
+              </Col>
+            </Row>
+            <div style={{ maxHeight: 200, overflow: 'auto' }} className="mt-5">
+              {warehouse.products.map((p) => (
+                <div
+                  className="d-flex justify-content-between"
+                  style={{
+                    paddingTop: '5px',
+                    paddingRight: '3px',
+                    paddingBottom: '5px',
+                  }}
+                >
+                  <div className="d-flex justify-content-around">
+                    <div style={{ marginLeft: 20 }}>
+                      <img
+                        src={p.product.photo}
+                        alt=""
+                        width="50px"
+                        height="auto"
+                      />
+                    </div>
+                    <div>
+                      <span>{p.product.name}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <Button
+                      size="small"
+                      type="submit"
+                      color="primary"
+                      variant="outlined"
+                      style={{ marginBottom: 0 }}
+                      onClick={() => setOpen(open)}
+                    >
+                      Show Details
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Col>
         </Row>
         <Row className="mt-5">
           <Col className="col-6">

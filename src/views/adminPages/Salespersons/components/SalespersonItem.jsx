@@ -27,10 +27,10 @@ const useStyles = makeStyles({
   },
 });
 
-function ManagerItem({ firstName, lastName, email, photo, warehouse }) {
+function SalespersonItem({ id, firstName, lastName, email, photo, warehouse }) {
   const history = useHistory();
   const handleClick = () => {
-    history.push(`/admin/warehouses/${warehouse._id}`);
+    history.push(`/admin/salespersons/analytics/${id}`);
   };
   const classes = useStyles();
   const name = `${firstName} ${lastName}`;
@@ -62,20 +62,18 @@ function ManagerItem({ firstName, lastName, email, photo, warehouse }) {
           </span>
         </Typography>
       </CardContent>
-      {warehouse && (
-        <CardActions>
-          <Button
-            size="small"
-            type="submit"
-            className={classes.but}
-            onClick={handleClick}
-          >
-            Show Details Of Warehouse
-          </Button>
-        </CardActions>
-      )}
+      <CardActions>
+        <Button
+          size="small"
+          type="submit"
+          className={classes.but}
+          onClick={handleClick}
+        >
+          Show Details of salesperson
+        </Button>
+      </CardActions>
     </Card>
   );
 }
 
-export default ManagerItem;
+export default SalespersonItem;

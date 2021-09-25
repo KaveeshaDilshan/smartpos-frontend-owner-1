@@ -53,6 +53,7 @@ const getAllManagers = async () => {
 export function* handleGetAllManagers() {
   try {
     const result = yield call(getAllManagers);
+
     yield put({
       type: actionTypes.GET_ALL_MANAGERS_SUCCESS,
       payload: result.data,
@@ -102,13 +103,13 @@ export function* handleGetUnassignedManagers() {
 }
 
 function* watchManagerSagas() {
+  yield takeLatest(actionTypes.GET_ALL_MANAGERS, handleGetAllManagers);
   yield takeLatest(
     actionTypes.GET_ALL_UNASSIGNED_MANAGERS,
     handleGetUnassignedManagers
   );
   yield takeLatest(actionTypes.ADD_MANAGER, handleAddManager);
   yield takeLatest(actionTypes.GET_ONE_MANAGER, handleGetOneManager);
-  yield takeLatest(actionTypes.GET_ALL_MANAGERS, handleGetAllManagers);
 }
 
 const managerSagas = [watchManagerSagas];
