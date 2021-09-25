@@ -1,19 +1,25 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
 import { BASE_URL } from '../../../const/config';
 
-const getAllSalespersons = async () => {
-  const result = await axios.get(
-    `${BASE_URL}/admin/salespersons?sortBy=+firstName`
+const getAllSalespersons = async (page, filter, warehouse) => {
+  if (filter === 'all') {
+    return axios.get(
+      `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}`
+    );
+  }
+  return axios.get(
+    `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
-  return result;
 };
 
-export function* handleGetAllSalespersons() {
+export function* handleGetAllSalespersons(action) {
+  const { page, filter, warehouse } = action.payload;
   try {
-    const result = yield call(getAllSalespersons);
+    const result = yield call(getAllSalespersons, page, filter, warehouse);
     yield put({
       type: actionTypes.GET_ALL_SALESPERSONS_SUCCESS,
       payload: result.data,
@@ -80,9 +86,13 @@ export function* handleGetOneSalespersonProducts(data) {
   const { id, oneDate } = data.payload;
   try {
     const result = yield call(getOneSalespersonProducts, id, oneDate);
+
     yield put({
       type: actionTypes.GET_ONE_SALESPERSON_PRODUCTS_ONE_DAY_SUCCESS,
-      payload: result.data,
+      payload: {
+        data: result.data,
+        oneDate: moment(oneDate).format('YYYY-MM-DD'),
+      },
     });
   } catch (error) {
     toast.error(error.response.data.message);

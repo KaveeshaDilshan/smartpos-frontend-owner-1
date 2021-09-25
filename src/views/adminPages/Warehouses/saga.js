@@ -6,6 +6,9 @@ import { BASE_URL } from '../../../const/config';
 import { getOneWarehouseSuccess, getWarehousesSuccess } from './actions';
 
 const getAllWarehouses = async (search, page) => {
+  if (!page) {
+    return axios.get(`${BASE_URL}/admin/warehouse?sortBy=+name&query=`);
+  }
   const result = await axios.get(
     `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}&limit=9&page=${page}`
   );
@@ -16,6 +19,7 @@ export function* handleGetWarehouses(data) {
   const { search, page } = data.payload;
   try {
     const response = yield call(getAllWarehouses, search, page);
+    console.log(response);
     if (response.status !== 201) {
       toast.error(response.data.message);
     } else {
