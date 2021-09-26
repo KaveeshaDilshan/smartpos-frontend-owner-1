@@ -14,7 +14,9 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginTop: '20px',
-    minHeight: 200,
+    minHeight: 220,
+    position: 'relative',
+    borderRadius: 10,
   },
   title: {
     fontSize: 14,
@@ -64,6 +66,12 @@ function WarehouseItem({ id, name, district, telephone, managerName }) {
         <Button
           size="small"
           type="submit"
+          style={{
+            color: '#A25E98',
+            fontWeight: 600,
+            position: 'absolute',
+            bottom: 20,
+          }}
           className={classes.but}
           onClick={() => history.push(`/admin/warehouses/${id}`)}
         >

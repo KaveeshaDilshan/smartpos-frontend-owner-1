@@ -16,8 +16,7 @@ const adminAnalyticsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-
-        salespersonLeaderboard: [...action.payload],
+        salespersonLeaderboard: [...action.payload.incomes],
       };
     default:
       return state;

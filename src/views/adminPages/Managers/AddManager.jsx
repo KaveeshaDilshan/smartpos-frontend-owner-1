@@ -26,6 +26,8 @@ function AddManager() {
     }
     if (!values.password) {
       errors.password = 'Password is required';
+    } else if (values.password.length <= 6) {
+      errors.password = 'Password should have more than 6 charactors';
     }
     if (!values.rePassword) {
       errors.rePassword = 'Re-password is required';
@@ -166,16 +168,16 @@ function AddManager() {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className="mt-3"
+                >
+                  ADD MANAGER
+                </Button>
               </Col>
             </Row>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className="mt-3"
-            >
-              ADD MANAGER
-            </Button>
           </Form>
         </Container>
       </Layout>

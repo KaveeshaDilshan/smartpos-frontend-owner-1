@@ -14,9 +14,15 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import ManagerProfile from '../../views/managerPages/common/managerProfile/ManagerProfile';
+import profileFallback from '../images.png';
 
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    background: '#FFF',
+    color: theme.palette.primary.main,
+  },
   grow: {
     flexGrow: 1,
     position: 'sticky',
@@ -31,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    paddingLeft: 100,
+    fontSize: '2rem',
   },
   search: {
     position: 'relative',
@@ -168,7 +176,7 @@ export default function PrimarySearchAppBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             SMART POS SYSTEM
@@ -192,7 +200,7 @@ export default function PrimarySearchAppBar(props) {
             </div>
           )}
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div className="d-flex align-items-center justify-content-center">
             {/*<IconButton aria-label="show 4 new mails" color="inherit">*/}
             {/*  <Badge badgeContent={4} color="secondary">*/}
             {/*    <MailIcon />*/}
@@ -207,23 +215,16 @@ export default function PrimarySearchAppBar(props) {
               variant="contained"
               size="small"
               style={{
-                marginTop: 10,
                 height: 30,
-                backgroundColor: '#00bcd4',
+                backgroundColor: '#4B76D1',
+                color: '#FFF',
+                marginRight: 20,
               }}
+              className="d-flex align-items-center justify-content-center"
             >
               LOGOUT
             </Button>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={setOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Avatar src={profileFallback} />
           </div>
           {/*<div className={classes.sectionMobile}>*/}
           {/*  <IconButton*/}
