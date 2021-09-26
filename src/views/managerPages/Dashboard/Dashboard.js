@@ -16,8 +16,6 @@ import { loginUser } from '../../login/redux/loginActions';
 
 function Dashboard() {
   const dispatch = useDispatch();
-  useEffect(() => dispatch(loginUser()), []);
-
   const [startDate, setStartDate] = useState(moment().subtract(7, 'day'));
   const [endDate, setEndDate] = useState(moment().subtract(0, 'day'));
   const warehouseID = useSelector(
@@ -53,7 +51,7 @@ function Dashboard() {
           >
             <Typography
               component="h2"
-              variant="h4"
+              variant="h6"
               color="primary"
               gutterBottom
             >

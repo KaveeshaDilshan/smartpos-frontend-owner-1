@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,14 +12,17 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { loginUser } from './redux/loginActions';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       MYK Products
-      {new Date().getFullYear()}
-      {'.'}
+      {new Date().getFullYear()}.
     </Typography>
   );
 }
@@ -45,8 +48,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginForm() {
+  const history = useHistory();
+  const user = useSelector((state) => state.loginReducer.user);
+  React.useEffect(() => {
+    console.log(user);
+    if (user) {
+      if (user.role === 'manager') {
+        history.push('/manager/dashboard');
+      }
+      if (user.role === 'admin') {
+        history.push('/admin');
+      }
+      if (user.role === 'salesperson') {
+        toast.error('Salespersons are not allowed to login');
+      }
+    }
+  }, [user]);
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState();
+  const [password, setPasssword] = useState();
+  const loginThisUser = () => {
+    dispatch(loginUser({ email, password }));
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -57,7 +81,7 @@ export default function LoginForm() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,6 +91,7 @@ export default function LoginForm() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            onChange={(e) => setEmail(e.target.value)}
             autoFocus
           />
           <TextField
@@ -78,6 +103,7 @@ export default function LoginForm() {
             label="Password"
             type="password"
             id="password"
+            onChange={(e) => setPasssword(e.target.value)}
             autoComplete="current-password"
           />
           {/* <FormControlLabel
@@ -85,11 +111,12 @@ export default function LoginForm() {
             label="Remember me"
           /> */}
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={loginThisUser}
           >
             Sign In
           </Button>
