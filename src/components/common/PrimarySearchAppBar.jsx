@@ -20,8 +20,7 @@ import profileFallback from '../images.png';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: '#FFF',
-    color: theme.palette.primary.main,
+    background: theme.palette.primary.main,
   },
   grow: {
     flexGrow: 1,

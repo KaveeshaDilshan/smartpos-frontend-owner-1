@@ -54,10 +54,10 @@ export default function WarehouseForm() {
       </div>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>ADD WAREHOUSE</DialogTitle>
+        <DialogTitle>ADD NEW WAREHOUSE</DialogTitle>
         <DialogContent>
           <Form onSubmit={handleSubmit}>
-            <div>
+            <div className="pt-2 pb-2">
               <TextField
                 onChange={(e) => setName(e.target.value)}
                 label="NAME"
@@ -66,7 +66,7 @@ export default function WarehouseForm() {
                 helperText={!name && 'Name is required'}
               />
             </div>
-            <div>
+            <div className="pt-2 pb-2">
               <TextField
                 onChange={(e) => setTelephone(e.target.value)}
                 defaultValue={telephone}
@@ -76,7 +76,7 @@ export default function WarehouseForm() {
                 helperText={!telephone && 'Telephone is required'}
               />
             </div>
-            <div>
+            <div className="pt-2 pb-2">
               <InputLabel id="demo-simple-select-label">DISTRICT</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -91,18 +91,22 @@ export default function WarehouseForm() {
                 ))}
               </Select>
             </div>
-            <div>
-              <InputLabel id="demo-simple-select-labe 2l">TOWN</InputLabel>
+            <div className="pt-2 pb-2">
+              <InputLabel id="demo-simple-select-label 2l">TOWN</InputLabel>
+
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select-2"
-                value={towns}
+                value={town}
                 label="TOWN"
                 required
+                style={{ width: 200 }}
                 onChange={(e) => setTown(e.target.value)}
               >
                 {towns[0].map((t) => (
-                  <MenuItem value={t}>{t}</MenuItem>
+                  <MenuItem style={{ width: 100 }} value={t}>
+                    {t}
+                  </MenuItem>
                 ))}
               </Select>
             </div>
