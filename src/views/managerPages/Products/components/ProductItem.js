@@ -38,6 +38,7 @@ const useStyles = makeStyles({
   },
   media: {
     maxHeight: 150,
+    minHeight: 150,
   },
   // price: {
   //   marginTop: -30,

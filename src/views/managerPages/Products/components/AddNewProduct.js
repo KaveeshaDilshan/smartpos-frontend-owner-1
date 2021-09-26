@@ -2,14 +2,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import {
-  Avatar,
-  Box,
-  CircularProgress,
-  Grid,
-  Typography,
-} from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { storage } from '../../../../const/firebase.config';
 import styles from './AddNewProduct.module.css';
