@@ -13,9 +13,12 @@ import styles from './Dashboard.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import SalesChart from './components/SalesChart';
 import { getWarehouseSales } from './redux/dashboardActions';
+import { loginUser } from '../../login/redux/loginActions';
 
 function Dashboard() {
   const dispatch = useDispatch();
+  useEffect(() => dispatch(loginUser()), []);
+
   const [startDate, setStartDate] = useState(moment().subtract(10, 'day'));
   const [endDate, setEndDate] = useState(moment().subtract(1, 'day'));
   // const history = useHistory();

@@ -9,6 +9,7 @@ import salespersonSagas from '../views/adminPages/Salespersons/saga';
 import managerWarehouseSagas from '../views/managerPages/Warehouse/redux/warehouseSaga';
 import managerSalesSagas from '../views/managerPages/Sales/redux/salesSaga';
 import managerDashboardSagas from '../views/managerPages/Dashboard/redux/dashboardSaga';
+import userSagas from '../views/login/redux/loginSaga';
 
 export default function* rootSaga() {
   // yield all(appSagas.map((s) => fork(s)));
@@ -22,4 +23,5 @@ export default function* rootSaga() {
   yield all(managerWarehouseSagas.map((s) => fork(s)));
   yield all(managerSalesSagas.map((s) => fork(s)));
   yield all(managerDashboardSagas.map((s) => fork(s)));
+  yield all(userSagas.map((s) => fork(s)));
 }
