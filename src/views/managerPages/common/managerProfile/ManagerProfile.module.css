@@ -40,16 +40,13 @@
 .leftpart {
   background-color: rgb(9, 58, 80);
   color: white;
-  min-height: 500px;
+  min-height: 300px;
   padding: 6px 30px;
   font-size: 15px;
   text-align: center;
 }
 .avatar__box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px;
+  padding-top: 5px;
   padding-bottom: 10px;
 }
 .avatar {
@@ -60,6 +57,7 @@
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 10px;
+  margin-top: 50px;
 }
 .leftpart__bottom {
   margin-top: 50px;

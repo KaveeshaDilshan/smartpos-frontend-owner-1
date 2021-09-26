@@ -33,27 +33,27 @@ const SalespersonDetails = ({ id }) => {
           <div>
             <Typography
               component="h2"
-              variant="h6"
+              variant="h4"
               color="primary"
               gutterBottom
             >
               SALESPERSON DETAILS
             </Typography>
-            <Button
-              variant="contained"
-              size="small"
-              onClick={() => history.push(`/manager/salespersons/edit/${id}`)}
-            >
-              Edit
-            </Button>
+            {/*<Button*/}
+            {/*  variant="contained"*/}
+            {/*  size="small"*/}
+            {/*  onClick={() => history.push(`/manager/salespersons/edit/${id}`)}*/}
+            {/*>*/}
+            {/*  Edit*/}
+            {/*</Button>*/}
           </div>
         </Row>
         <Paper className={classes.paper}>
           <Row className="mt-3">
             <Col className="col-6">
-              <div>
-                <Avatar />
-              </div>
+              {/*<div>*/}
+              {/*  <Avatar />*/}
+              {/*</div>*/}
             </Col>
           </Row>
           <Row className="mt-5">

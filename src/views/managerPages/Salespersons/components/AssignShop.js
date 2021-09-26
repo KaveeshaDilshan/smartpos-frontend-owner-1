@@ -89,7 +89,7 @@ const AssignShop = ({ id }) => {
   return (
     <>
       <Col className="col-6">
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        <Typography component="h2" variant="h4" color="primary" gutterBottom>
           ASSIGNED SHOPS
         </Typography>
         <Row className="mt-3">
@@ -112,7 +112,7 @@ const AssignShop = ({ id }) => {
         </Row>
       </Col>
       <Col className="col-6">
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        <Typography component="h2" variant="h4" color="primary" gutterBottom>
           ASSIGN NEW SHOPS
         </Typography>
         <Paper className={classes.paper2}>

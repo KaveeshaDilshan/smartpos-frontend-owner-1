@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './SalespersonsPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getAllSalespersons } from './redux/salespersonsActions';
 import TableComponent from './components/TableComponent';
+import Loading from '../../../components/common/Loading';
 
 function SalespersonsPage() {
   const history = useHistory();
@@ -16,7 +17,11 @@ function SalespersonsPage() {
   const allSalespersons = useSelector(
     (state) => state.salespersonsReducer.allSalespersons
   );
-  // const loading = useSelector((state) => state.categoryReducer.loading);
+
+  const totalSalespersons = useSelector(
+    (state) => state.salespersonsReducer.totalSalespersons
+  );
+  const loading = useSelector((state) => state.salespersonsReducer.loading);
 
   const warehouseID = useSelector(
     (state) => state.dashboardReducer.warehouseID
@@ -27,7 +32,7 @@ function SalespersonsPage() {
   }, [search, page]);
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.salespersonspage}>
           <div className={styles.page__top}>
             <Button
@@ -38,7 +43,18 @@ function SalespersonsPage() {
               <AddIcon /> Add New
             </Button>
           </div>
-          <TableComponent data={allSalespersons} setPage={setPage} />
+          <TableComponent
+            data={allSalespersons}
+            setPage={setPage}
+            totalrows={totalSalespersons}
+          />
+          {loading && (
+            <>
+              <div style={{ textAlign: 'center', marginTop: 50 }}>
+                <CircularProgress style={{ color: 'red' }} />
+              </div>
+            </>
+          )}
         </div>
       </ManagerLayout>
     </>

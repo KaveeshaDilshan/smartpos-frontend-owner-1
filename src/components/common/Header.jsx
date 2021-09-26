@@ -5,7 +5,11 @@ import PrimarySearchAppBar from './PrimarySearchAppBar';
 function Header(props) {
   return (
     <>
-      <PrimarySearchAppBar search={props.search} setSearch={props.setSearch} />
+      <PrimarySearchAppBar
+        search={props.search}
+        setSearch={props.setSearch}
+        isShow={props.isShow}
+      />
     </>
   );
 }

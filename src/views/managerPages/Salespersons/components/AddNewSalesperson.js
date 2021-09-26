@@ -171,7 +171,26 @@ function AddNewSalesperson() {
                 </Row>
               </Col>
             </Row>
-            <Button type="submit">ADD SALESPERSON</Button>
+            <Button
+              variant="contained"
+              color="#1976d2"
+              type="submit"
+              style={{
+                marginTop: 10,
+                backgroundImage: 'linear-gradient(#0dccea, #0d70ea)',
+                borderRadius: 4,
+                // boxShadow: 'rgba(0, 0, 0, .3) 0 5px 15px',
+                boxSizing: 'border-box',
+                color: '#fff',
+                cursor: 'pointer',
+                fontFamily: 'Montserrat,sans-serif',
+                fontSize: '.9em',
+                // padding: '10px 15px',
+                textAlign: 'center',
+              }}
+            >
+              ADD SALESPERSON
+            </Button>
           </Form>
         </Container>
       </ManagerLayout>
