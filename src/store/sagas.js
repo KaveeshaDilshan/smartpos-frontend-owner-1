@@ -10,6 +10,7 @@ import managerWarehouseSagas from '../views/managerPages/Warehouse/redux/warehou
 import managerSalesSagas from '../views/managerPages/Sales/redux/salesSaga';
 import managerDashboardSagas from '../views/managerPages/Dashboard/redux/dashboardSaga';
 import userSagas from '../views/login/redux/loginSaga';
+import analyticsSagas from '../views/adminPages/Analytics/saga';
 
 export default function* rootSaga() {
   // yield all(appSagas.map((s) => fork(s)));
@@ -24,4 +25,5 @@ export default function* rootSaga() {
   yield all(managerSalesSagas.map((s) => fork(s)));
   yield all(managerDashboardSagas.map((s) => fork(s)));
   yield all(userSagas.map((s) => fork(s)));
+  yield all(analyticsSagas.map((s) => fork(s)));
 }

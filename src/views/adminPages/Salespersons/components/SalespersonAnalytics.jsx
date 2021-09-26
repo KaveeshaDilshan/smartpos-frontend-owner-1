@@ -88,10 +88,10 @@ function SalespersonAnalytics({ id }) {
       dispatch(
         getOneSalespersonProducts({
           id,
-          oneDate: moment().subtract(1, 'day'),
+          oneDate: moment().add(1, 'day'),
         })
       ),
-    []
+    [startDate, endDate]
   );
   const handleClick = (e) => {
     dispatch(
@@ -193,7 +193,7 @@ function SalespersonAnalytics({ id }) {
                 </BarChart>
               </ResponsiveContainer>
               <Typography>
-                Total Income - Rs.
+                Total Income Over the Time Period - Rs.
                 {totalIncome.reduce(function (a, b) {
                   return a + b;
                 }, 0)}

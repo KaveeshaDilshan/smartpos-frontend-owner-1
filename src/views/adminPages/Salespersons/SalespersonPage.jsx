@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 import { Pagination } from '@material-ui/lab';
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@material-ui/core';
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Layout from '../../Layout';
 import { getAllSalesperson } from './actions';
 import SalespersonItem from './components/SalespersonItem';
@@ -27,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 function SalespersonPage() {
   const dispatch = useDispatch();
-  const salespersons = useSelector(
-    (state) => state.adminSalespersonReducer.salespersons
+  const { salespersons, totalSalespersons } = useSelector(
+    (state) => state.adminSalespersonReducer
   );
   const [page, setPage] = useState(1);
   const [filter, setFilter] = React.useState('all');
@@ -46,12 +41,13 @@ function SalespersonPage() {
   };
   const warehouses = useSelector((state) => state.warehouseReducer.warehouses);
   useEffect(() => dispatch(getWarehouses({ search: '' })), []);
+  const number = Math.ceil(totalSalespersons / 9);
   return (
     <>
       <Layout>
         <Container>
           <Row>
-            <Col className="col-2">
+            <Col className="col-4 d-flex align-items-center justify-content-center">
               <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
                 <Select
@@ -66,10 +62,10 @@ function SalespersonPage() {
               </FormControl>
             </Col>
             {filter === 'warehouse' && (
-              <Col className="col-2">
+              <Col className="col-2 d-flex align-items-center justify-content-center">
                 <FormControl className={classes.formControl}>
                   <InputLabel id="demo-simple-select-label">
-                    Filter By
+                    Select Warehouse
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -88,6 +84,23 @@ function SalespersonPage() {
                 </FormControl>
               </Col>
             )}
+            <Col className="col-lg-4 d-flex justify-content-center align-items-center">
+              <Pagination
+                count={number}
+                onChange={(e, p) => setPage(p)}
+                color="primary"
+              />
+            </Col>
+            <Col className="d-flex align-items-center justify-content-center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                VIEW LEADERBOARD
+              </Button>
+            </Col>
           </Row>
           <Row>
             {salespersons.map((salesperson) => {
@@ -107,15 +120,7 @@ function SalespersonPage() {
                 </Col>
               );
             })}
-            <Row>
-              <Col className="col-lg-12 d-flex justify-content-center mt-5">
-                <Pagination
-                  count={10}
-                  onChange={(e, p) => setPage(p)}
-                  color="primary"
-                />
-              </Col>
-            </Row>
+            <Row />
           </Row>
         </Container>
       </Layout>

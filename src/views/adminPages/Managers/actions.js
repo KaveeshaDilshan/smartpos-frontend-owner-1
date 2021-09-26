@@ -7,9 +7,10 @@ export const getOneManager = (data) => {
   };
 };
 
-export const getAllManagers = () => {
+export const getAllManagers = (data) => {
   return {
     type: actionTypes.GET_ALL_MANAGERS,
+    payload: data,
   };
 };
 

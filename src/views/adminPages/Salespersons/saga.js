@@ -8,11 +8,11 @@ import { BASE_URL } from '../../../const/config';
 const getAllSalespersons = async (page, filter, warehouse) => {
   if (filter === 'all') {
     return axios.get(
-      `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}`
+      `${BASE_URL}/admin/salespersons?limit=9&sortBy=+firstName&page=${page}`
     );
   }
   return axios.get(
-    `${BASE_URL}/admin/salespersons?sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
+    `${BASE_URL}/admin/salespersons?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
 };
 
