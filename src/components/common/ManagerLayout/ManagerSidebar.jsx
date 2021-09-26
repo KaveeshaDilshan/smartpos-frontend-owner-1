@@ -5,13 +5,13 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import BorderAllIcon from '@material-ui/icons/BorderAll';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import { useHistory } from 'react-router-dom';
 import styles from './sidebar.module.css';
 
 function ManagerSideBar() {
   const history = useHistory();
   const Component = ({ name, route, currentSelect, Icon }) => {
-    console.log(route);
     return (
       <>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
@@ -40,6 +40,12 @@ function ManagerSideBar() {
   return (
     <div className={styles.main}>
       {/*<Component name="Dashboard" route="dashboard" currentSelect="Dashboard" />*/}
+      <Component
+        name="Dashboard"
+        route="/manager/dashboard"
+        currentSelect="manager/dashboard"
+        Icon={DashboardIcon}
+      />
       <Component
         name="Salespersons"
         route="/manager/salespersons"

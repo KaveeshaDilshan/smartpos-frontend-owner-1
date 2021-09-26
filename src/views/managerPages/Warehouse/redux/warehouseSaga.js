@@ -30,7 +30,7 @@ export function* addProductToWarehouse(action) {
     yield axios.post(`${BASE_URL}/manager/warehouse/${warehouseID}`, details);
     toast.success('New Product is added to Warehouse');
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(error.response.data.description);
   }
 }
 

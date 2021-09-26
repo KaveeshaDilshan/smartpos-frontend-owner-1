@@ -93,14 +93,14 @@ export default function LoginForm() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-          </Grid>
+          {/*<Grid container>*/}
+          {/*  <Grid item xs>*/}
+          {/*    /!* eslint-disable-next-line jsx-a11y/anchor-is-valid *!/*/}
+          {/*    <Link href="#" variant="body2">*/}
+          {/*      Forgot password?*/}
+          {/*    </Link>*/}
+          {/*  </Grid>*/}
+          {/*</Grid>*/}
         </form>
       </div>
       <Box mt={8}>

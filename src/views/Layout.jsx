@@ -7,6 +7,7 @@ function Layout(props) {
   return (
     <>
       {/*<Header search={props.search} setSearch={props.setSearch} />*/}
+      {/*<Header search={props.search} setSearch={props.setSearch} isShow={props.isShow}/>*/}
       <div className="container-fluid">
         <Row>
           <Col className="col-2">

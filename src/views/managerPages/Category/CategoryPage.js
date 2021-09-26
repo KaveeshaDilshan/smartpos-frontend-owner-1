@@ -40,12 +40,12 @@ function CategoryPage() {
 
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.categorypage}>
           <div className={styles.top}>
             <Typography
               component="h2"
-              variant="h6"
+              variant="h4"
               color="primary"
               gutterBottom
             >
@@ -89,7 +89,14 @@ function CategoryPage() {
                   </Grid>
                 </Grid>
                 <br />
-                <Button type="submit" variant="contained">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{
+                    backgroundImage: 'linear-gradient(#0dccea, #0d70ea)',
+                    color: 'white',
+                  }}
+                >
                   Add
                 </Button>
               </Form>
@@ -102,7 +109,7 @@ function CategoryPage() {
                 <div className={styles.bottom_title}>
                   <Typography
                     component="h2"
-                    variant="h6"
+                    variant="h4"
                     color="primary"
                     gutterBottom
                   >
