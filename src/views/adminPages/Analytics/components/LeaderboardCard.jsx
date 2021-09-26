@@ -14,10 +14,14 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginTop: '20px',
-    minHeight: 200,
+    minHeight: 170,
+    '&:hover': {
+      boxShadow: '0px 0px 5px 0px black',
+      background: '#f8f7f7',
+    },
   },
   title: {
-    fontSize: 14,
+    fontSize: 15,
   },
   pos: {
     marginBottom: 12,
@@ -44,43 +48,71 @@ function LeaderboardCard({
   const name = `${firstName} ${lastName}`;
   return (
     <Card className={clsx('shadow', classes.root)} variant="outlined">
-      <CardContent>
-        <div className="d-flex align-items-center justify-content-start">
+      <CardContent
+        style={{
+          paddingLeft: 50,
+          paddingRight: 200,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div className="d-flex align-items-center justify-content-start">
+            <div>
+              <Avatar
+                style={{ height: 70, width: 70, marginRight: 80 }}
+                sizes={100}
+                alt="Remy Sharp"
+                src={photo || profileFallback}
+              />
+            </div>
+            <div>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                {name}
+              </Typography>
+            </div>
+          </div>
           <div>
-            <Avatar
-              sizes={100}
-              alt="Remy Sharp"
-              src={photo || profileFallback}
-            />
-          </div>
-          <div variant="h5" component="h5">
-            {name}
+            <Typography
+              style={{ height: '20px' }}
+              className={classes.title}
+              color="primary"
+              gutterBottom
+            >
+              {email}
+            </Typography>
+            <Typography variant="body2" component="p">
+              <span style={{ color: !warehouse && 'red' }}>
+                Warehouse {warehouse ? warehouse.name : 'Not assigned yet'}
+              </span>
+            </Typography>
+            <Typography>
+              <span>Rs {income}</span>
+            </Typography>
           </div>
         </div>
-        <div style={{ height: '20px' }}>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            {email}
-          </Typography>
-        </div>
-        <Typography variant="body2" component="p">
-          <span style={{ color: !warehouse && 'red' }}>
-            Warehouse {warehouse ? warehouse.name : 'Not assigned yet'}
-          </span>
-        </Typography>
-        <Typography>
-          <span>{income}</span>
-        </Typography>
       </CardContent>
       {warehouse && (
-        <CardActions>
+        <CardActions
+          style={{
+            display: 'flex',
+            marginLeft: 20,
+          }}
+        >
           <Button
             size="small"
             type="submit"
             className={classes.but}
+            variant="contained"
             onClick={handleClick}
           >
             Show Analytics Of Salesperson
