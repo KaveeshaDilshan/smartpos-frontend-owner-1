@@ -51,7 +51,7 @@ function Dashboard() {
           >
             <Typography
               component="h2"
-              variant="h4"
+              variant="h6"
               color="primary"
               gutterBottom
             >

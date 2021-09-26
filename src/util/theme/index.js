@@ -13,28 +13,6 @@ const theme = createTheme({
       darkLight: '#FB66AC',
     },
   },
-  props: {
-    // Name of the component ⚛️
-    MuiButtonBase: {
-      // The default props to change
-      disableRipple: true, // No more ripple, on the whole application 💣!
-    },
-  },
-  overrides: {
-    MuiButton: {
-      root: {
-        textTransform: 'capitalize',
-        fontSize: '0.85rem',
-      },
-    },
-    MuiIconButton: {
-      root: {
-        '&:hover': {
-          backgroundColor: '#fff',
-        },
-      },
-    },
-  },
 });
 
 export default theme;

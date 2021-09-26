@@ -48,7 +48,7 @@ function SalesPage() {
         <div className={styles.salespage}>
           <Typography
             component="h2"
-            variant="h4"
+            variant="h6"
             color="primary"
             gutterBottom
             style={{ marginBottom: 20, marginTop: 10 }}
@@ -89,6 +89,7 @@ function SalesPage() {
                 backgroundImage: 'linear-gradient(#0dccea, #0d70ea',
                 color: 'white',
               }}
+              size="small"
               variant="contained"
               type="button"
               onClick={handleBtnClick}

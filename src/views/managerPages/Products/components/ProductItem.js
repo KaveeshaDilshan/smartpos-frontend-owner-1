@@ -171,7 +171,7 @@ export default function ProductItem({
       />
       <Dialog open={detailsBoxOn} onClose={() => setDetailsBoxOn(false)}>
         <DialogTitle>
-          <Typography component="h2" variant="h4" color="primary" gutterBottom>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
             Products Details
           </Typography>
         </DialogTitle>
