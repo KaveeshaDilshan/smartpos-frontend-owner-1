@@ -102,10 +102,9 @@ export function* handleGetOneWarehouseAnalytics(action) {
   try {
     const result = yield call(getOneWarehouseAnalytics, id, period);
     yield put({
-      type: actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS,
+      type: actionTypes.RANDOM,
       payload: result.data,
     });
-    console.log(result);
   } catch (error) {
     toast.error(error.response.data.message);
   }

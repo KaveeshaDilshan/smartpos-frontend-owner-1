@@ -16,15 +16,17 @@ function WarehousePage(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = props.match.params;
-
-  const { warehouse, loading } = useSelector((state) => state.warehouseReducer);
-  useEffect(() => dispatch(getOneWarehouse(id)), []);
-
   const managers = useSelector(
     (state) => state.managerReducer.unassignedManagers
   );
-
-  useEffect(() => dispatch(getAllUnassignedManagers()), [warehouse]);
+  const { warehouse, loading } = useSelector((state) => state.warehouseReducer);
+  useEffect(() => dispatch(getOneWarehouse(id)), []);
+  useEffect(() => {
+    dispatch(getAllUnassignedManagers());
+    if (managers.length === 0) {
+      console.log('managers');
+    }
+  }, [warehouse]);
   const [selectedManager, setSelectedManager] = useState('');
   const [open, setOpen] = React.useState(false);
   const managerComponent = (manager) => {

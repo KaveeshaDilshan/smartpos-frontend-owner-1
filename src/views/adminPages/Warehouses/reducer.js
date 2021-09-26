@@ -21,11 +21,16 @@ const warehouseReducer = (state = initialState, action) => {
       };
     case actionTypes.GET_ONE_WAREHOUSE_SUCCESS:
       return { ...state, warehouse: action.payload, loading: false };
-    case actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS:
+    case actionTypes.RANDOM:
       return {
         ...state,
-        warehouseAnalytics: { ...action.payload },
+        warehouseAnalytics: [],
       };
+    // case actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     warehouseAnalytics: { ...action.payload },
+    //   };
     default:
       return state;
   }
