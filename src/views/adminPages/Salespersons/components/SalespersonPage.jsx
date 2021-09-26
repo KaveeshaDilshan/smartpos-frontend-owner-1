@@ -46,6 +46,7 @@ function SalespersonPage(props) {
       ),
     [oneDate]
   );
+  console.log(salespersonProducts);
   return (
     <Layout>
       <Row>
@@ -75,7 +76,7 @@ function SalespersonPage(props) {
           <Row>
             <Col>
               {salespersonProducts.length > 0 && (
-                <h3>Prodcuts that are assigned on {selectedDate}</h3>
+                <h3>Products that are assigned on {selectedDate}</h3>
               )}
 
               {salespersonProducts.length > 0 ? (

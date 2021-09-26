@@ -20,7 +20,7 @@ export function* handleGetOneManager(action) {
   }
 }
 
-const getAllManagers = async () => {
+const getAllManagers = async (page, filter, warehouse) => {
   // auth
   //   .createUserWithEmailAndPassword('mahela@gmail.com', 'mahela')
   //   .then((userCredential) => {
@@ -44,19 +44,23 @@ const getAllManagers = async () => {
   //     console.log(error);
   //   });
 
-  const result = await axios.get(
-    `${BASE_URL}/admin/managers/?sortBy=+createdAt`
+  if (filter === 'all') {
+    return axios.get(
+      `${BASE_URL}/admin/managers?sortBy=+firstName&page=${page}&limit=9`
+    );
+  }
+  return axios.get(
+    `${BASE_URL}/admin/managers?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
-  return result;
 };
 
-export function* handleGetAllManagers() {
+export function* handleGetAllManagers(data) {
+  const { page, filter, warehouse } = data.payload;
   try {
-    const result = yield call(getAllManagers);
-
+    const result = yield call(getAllManagers, page, filter, warehouse);
     yield put({
       type: actionTypes.GET_ALL_MANAGERS_SUCCESS,
-      payload: result.data,
+      payload: result,
     });
   } catch (error) {
     toast.error(error.response.data.message);

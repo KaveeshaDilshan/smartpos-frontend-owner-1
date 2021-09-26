@@ -41,3 +41,10 @@ export const assignManager = (data) => {
     payload: data,
   };
 };
+
+export const getOneWarehouseAnalytics = (data) => {
+  return {
+    type: actionTypes.GET_ONE_WAREHOUSE_ANALYTICS,
+    payload: data,
+  };
+};

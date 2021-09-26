@@ -1,5 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
 import { BASE_URL } from '../../../const/config';
@@ -7,33 +8,29 @@ import { getOneWarehouseSuccess, getWarehousesSuccess } from './actions';
 
 const getAllWarehouses = async (search, page) => {
   if (!page) {
-    return axios.get(`${BASE_URL}/admin/warehouse?sortBy=+name&query=`);
+    return axios.get(`${BASE_URL}/admin/warehouse?limit=9&sortBy=+name&query=`);
   }
-  const result = await axios.get(
+  return axios.get(
     `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}&limit=9&page=${page}`
   );
-  return result;
 };
 
 export function* handleGetWarehouses(data) {
   const { search, page } = data.payload;
   try {
     const response = yield call(getAllWarehouses, search, page);
-    console.log(response);
     if (response.status !== 201) {
       toast.error(response.data.message);
     } else {
-      yield put(getWarehousesSuccess(response.data.items));
+      yield put(getWarehousesSuccess(response.data));
     }
   } catch (error) {
-    console.log(error);
     toast.error(error.response.data.message);
   }
 }
 
 const getOneWarehouse = async (id) => {
-  const result = await axios.get(`${BASE_URL}/admin/warehouse/${id}`);
-  return result;
+  return axios.get(`${BASE_URL}/admin/warehouse/${id}`);
 };
 
 export function* handleGetOneWarehouse(action) {
@@ -42,7 +39,6 @@ export function* handleGetOneWarehouse(action) {
     const result = yield call(getOneWarehouse, id);
     yield put(getOneWarehouseSuccess(result));
   } catch (error) {
-    console.log(error);
     toast.error(error);
   }
 }
@@ -94,11 +90,36 @@ export function* handleAssignManager(action) {
   }
 }
 
+const getOneWarehouseAnalytics = (id, period) => {
+  const day = moment().subtract(period, 'day');
+  return axios.get(
+    `${BASE_URL}/admin/warehouse/${id}/analytics?startDate=${day}`
+  );
+};
+
+export function* handleGetOneWarehouseAnalytics(action) {
+  const { id, period } = action.payload;
+  try {
+    const result = yield call(getOneWarehouseAnalytics, id, period);
+    yield put({
+      type: actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS,
+      payload: result.data,
+    });
+    console.log(result);
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}
+
 function* watchWarehouseSagas() {
   yield takeLatest(actionTypes.ASSIGN_MANAGER, handleAssignManager);
   yield takeLatest(actionTypes.ADD_WAREHOUSE, handleAddWarehouse);
   yield takeLatest(actionTypes.GET_WAREHOUSES, handleGetWarehouses);
   yield takeLatest(actionTypes.GET_ONE_WAREHOUSE, handleGetOneWarehouse);
+  yield takeLatest(
+    actionTypes.GET_ONE_WAREHOUSE_ANALYTICS,
+    handleGetOneWarehouseAnalytics
+  );
 }
 
 const warehouseSagas = [watchWarehouseSagas];
