@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
 import { Col } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 import WarehouseForm from './WarehouseForm';
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-    marginTop: 65,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
 
 function AddWarehouse() {
   const [open, setOpen] = useState(false);
-  const classes = useStyles();
   return (
     <>
-      <Col className="col-md-6 col-sm-12 col-lg-4">
-        <div className={classes.root} variant="outlined">
+      <Col className="col-md-6 col-sm-12 col-lg-4 d-flex align-items-center justify-content-center">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="mt-3"
+        >
           <WarehouseForm open={open} setOpen={setOpen} />
-        </div>
+        </Button>
       </Col>
     </>
   );

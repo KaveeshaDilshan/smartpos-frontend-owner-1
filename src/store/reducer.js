@@ -9,6 +9,7 @@ import dashboardReducer from '../views/managerPages/Dashboard/redux/dashboardRed
 import adminSalespersonReducer from '../views/adminPages/Salespersons/reducer';
 import managerWarehouseReducer from '../views/managerPages/Warehouse/redux/warehouseReducer';
 import salesReducer from '../views/managerPages/Sales/redux/salesReducer';
+import adminAnalyticsReducer from '../views/adminPages/Analytics/reducer';
 
 const rootReducer = combineReducers({
   // appReducer: appReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   dashboardReducer,
   managerWarehouseReducer,
   salesReducer,
+  adminAnalyticsReducer,
 });
 
 export default rootReducer;

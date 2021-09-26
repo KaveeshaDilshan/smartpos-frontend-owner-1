@@ -9,7 +9,6 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { toast } from 'react-toastify';
 import { storage } from '../../../../const/firebase.config';
 import styles from './AddNewProduct.module.css';

@@ -23,9 +23,7 @@ export default function WarehouseForm() {
     setOpen(true);
   };
   const handleClose = () => {
-    if (telephone && name && town && district) {
-      setOpen(false);
-    }
+    setOpen(false);
   };
   const handleSubmit = () => {
     dispatch(addWarehouse({ name, district, town, telephone }));
@@ -42,16 +40,14 @@ export default function WarehouseForm() {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
+          height: 28,
         }}
       >
-        <AddCircleIcon
-          style={{ transform: 'scale(3)', marginTop: '20px', display: 'block' }}
-        />
         <Button
           size="small"
           type="submit"
-          style={{ marginTop: '20px' }}
           onClick={handleClickOpen}
+          style={{ color: '#FFF' }}
         >
           Add Warehouse
         </Button>
