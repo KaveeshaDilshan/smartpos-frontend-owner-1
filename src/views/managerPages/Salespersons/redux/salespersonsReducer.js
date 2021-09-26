@@ -7,6 +7,7 @@ const initialState = {
   warehouseShops: [],
   oneSalespersonDailyProducts: [],
   oneSalespersonAssignedShops: [],
+  totalSalespersons: 0,
 };
 
 function reducer(state = initialState, action) {
@@ -21,6 +22,7 @@ function reducer(state = initialState, action) {
         ...state,
         allSalespersons: [...action.data.items],
         loading: false,
+        totalSalespersons: action.data.totalItems,
       };
     case actionTypes.GET_ALL_SALESPERSONS_ERROR:
       return {

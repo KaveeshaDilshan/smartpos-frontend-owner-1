@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableComponent({ data, setPage }) {
+export default function TableComponent({ data, setPage, totalrows }) {
   const rows = data.map((d, i) => ({
     ...d,
     name: `${d.firstName} ${d.lastName}`,
@@ -137,7 +137,7 @@ export default function TableComponent({ data, setPage }) {
       >
         <div>
           <Pagination
-            count={10}
+            count={Math.ceil(totalrows / 10)}
             onChange={(e, p) => setPage(p)}
             color="primary"
           />

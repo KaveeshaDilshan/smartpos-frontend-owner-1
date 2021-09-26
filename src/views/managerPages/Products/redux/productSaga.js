@@ -5,10 +5,14 @@ import * as actionTypes from './productActionTypes';
 import { BASE_URL } from '../../../../const/config';
 
 export function* getAllProducts(action) {
-  const search = action.data;
+  const { search, category } = action.data;
+  let filter = '';
+  if (category) {
+    filter = `categoryId eq ${category}`;
+  }
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/product?sortBy=+name&query=${search}`
+      `${BASE_URL}/manager/product?sortBy=+name&query=${search}&filter=${filter}`
     );
     yield put({
       type: actionTypes.GET_ALL_PRODUCTS_SUCCESS,

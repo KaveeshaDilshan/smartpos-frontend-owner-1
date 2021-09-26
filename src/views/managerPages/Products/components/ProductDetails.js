@@ -1,17 +1,53 @@
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
+import { toast } from 'react-toastify';
 import styles from './ProductDetails.module.css';
 import { getOneProduct, updateProduct } from '../redux/productActions';
 import ManagerLayout from '../../../ManagerLayout';
+import { storage } from '../../../../const/firebase.config';
+
+function CircularProgressWithLabel(props) {
+  return (
+    <Box position="relative" display="inline-flex">
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
+        position="absolute"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Typography
+          variant="caption"
+          component="div"
+          color="textSecondary"
+        >{`${Math.round(
+          // eslint-disable-next-line react/destructuring-assignment
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 function ProductDetails(props) {
   const dispatch = useDispatch();
   const { id } = props.match.params;
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const product = useSelector((state) => state.productReducer.oneProduct);
+  const [url, setUrl] = useState(product.photo);
   let category = {};
 
+  useEffect(() => {
+    setUrl(product.photo);
+  }, [product]);
   useEffect(() => {
     dispatch(getOneProduct(id));
   }, []);
@@ -25,7 +61,6 @@ function ProductDetails(props) {
     product_name: product.name,
     unit_price: product.unitPrice,
     description: product.description,
-    photo: '',
   };
 
   const onSubmit = (values) => {
@@ -57,7 +92,40 @@ function ProductDetails(props) {
     onSubmit,
     enableReinitialize: true,
   });
+  const handleUpload = () => {
+    if (image) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progresss = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progresss);
+        },
+        (error) => {
+          toast.error(error);
+        },
+        () => {
+          storage
+            .ref('images')
+            .child(image.name)
+            .getDownloadURL()
+            .then((URL) => {
+              setUrl(URL);
+            });
+        }
+      );
+    } else {
+      toast.error('Choose a photo');
+    }
+  };
 
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
   return (
     <>
       <ManagerLayout>
@@ -120,14 +188,22 @@ function ProductDetails(props) {
             </FormGroup>
             <FormGroup>
               <Label for="photo">Photo</Label>
-              <Input
-                type="file"
-                name="photo"
-                id="photo"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.photo}
-              />
+              <div style={{ display: 'flex' }}>
+                <input type="file" onChange={handleChange} />
+                <Button type="button" onClick={handleUpload}>
+                  Upload
+                </Button>
+                <div style={{ display: 'flex' }}>
+                  <img
+                    style={{ height: 100, width: 100, marginRight: 10 }}
+                    src={url || 'http://via.placeholder.com/300'}
+                    alt="product-poto"
+                  />
+                  <div>
+                    <CircularProgressWithLabel value={progress} />
+                  </div>
+                </div>
+              </div>
             </FormGroup>
             <Button type="submit">Save</Button>
           </Form>

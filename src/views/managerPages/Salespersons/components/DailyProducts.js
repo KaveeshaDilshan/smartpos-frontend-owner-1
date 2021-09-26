@@ -54,7 +54,7 @@ const DailyProducts = ({ id }) => {
     dispatch(
       getSalespersonDailyProducts({
         id,
-        date: Moment(selectedDate).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'),
+        date: Moment.utc(selectedDate),
       })
     );
   }, [selectedDate, id]);
@@ -82,7 +82,6 @@ const DailyProducts = ({ id }) => {
           sales: 0,
         });
         setAddedDailyProducts([...addedDailyProducts]);
-        console.log(addedDailyProducts);
       }
     } else {
       toast.error('Select a Product');
@@ -91,10 +90,10 @@ const DailyProducts = ({ id }) => {
   const handleSaveClick = () => {
     dispatch(
       addDailyProduct({
-        salespersonId: id,
+        warehouseId: warehouseID,
         details: {
           salesperson: id,
-          createdAt: Moment(selectedDate),
+          createdAt: Moment.utc(selectedDate),
           dailyProducts: addedDailyProducts,
         },
       })
@@ -107,7 +106,7 @@ const DailyProducts = ({ id }) => {
     <>
       <Col className="col-6">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             DAILY PRODUCTS
           </Typography>
         </div>
@@ -120,6 +119,7 @@ const DailyProducts = ({ id }) => {
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Sold</th>
+                    <th>Remains</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,6 +162,19 @@ const DailyProducts = ({ id }) => {
                           size="small"
                         />
                       </td>
+                      <td>
+                        <TextField
+                          style={{
+                            width: 100,
+                          }}
+                          disabled
+                          type="number"
+                          id="outlined-size-small"
+                          defaultValue={product.quantity - product.sales}
+                          variant="outlined"
+                          size="small"
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -175,7 +188,7 @@ const DailyProducts = ({ id }) => {
           <div>
             <Typography
               component="h2"
-              variant="h6"
+              variant="h4"
               color="primary"
               gutterBottom
             >
@@ -237,20 +250,20 @@ const DailyProducts = ({ id }) => {
             </div>
           </Row>
           <Divider style={{ height: 2, marginTop: 10 }} />
-          <Row className="mt-3" style={{ textAlign: 'end' }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <h5>Remains Add to Warehouse:</h5>
-              <Button variant="contained" size="small">
-                Add
-              </Button>
-            </div>
-          </Row>
+          {/*<Row className="mt-3" style={{ textAlign: 'end' }}>*/}
+          {/*  <div*/}
+          {/*    style={{*/}
+          {/*      display: 'flex',*/}
+          {/*      alignItems: 'center',*/}
+          {/*      justifyContent: 'space-between',*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <h5>Remains Add to Warehouse:</h5>*/}
+          {/*    <Button variant="contained" size="small">*/}
+          {/*      Add*/}
+          {/*    </Button>*/}
+          {/*  </div>*/}
+          {/*</Row>*/}
         </Paper>
       </Col>
     </>

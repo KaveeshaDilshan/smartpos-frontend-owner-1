@@ -16,6 +16,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Divider } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import { useHistory } from 'react-router-dom';
 import ConfirmationBox from '../../common/ConfirmationBox';
 
 const useStyles = makeStyles({
@@ -34,13 +36,9 @@ const useStyles = makeStyles({
   categoryName: {
     fontSize: 14,
   },
-  // media: {
-  //   transform: 'scale(0.7)',
-  //   marginLeft: 1,
-  //   marginRight: 1,
-  //   marginTop: -45,
-  //   marginBottom: -40,
-  // },
+  media: {
+    maxHeight: 150,
+  },
   // price: {
   //   marginTop: -30,
   // },
@@ -52,7 +50,9 @@ const useStyles = makeStyles({
   },
   button: {
     marginTop: -30,
-    backgroundColor: 'rgb(240, 236, 236)',
+    backgroundColor: '#0dccea',
+    // backgroundImage: 'linear-gradient(#0dccea, #0d70ea)',
+    color: 'white',
     fontSize: 10,
     '&:hover': {
       backgroundColor: 'rgb(161, 161, 161)',
@@ -82,7 +82,7 @@ const useStyles = makeStyles({
 });
 
 export default function ProductItem({
-  // productId,
+  productId,
   name,
   categoryName,
   unitPrice,
@@ -90,7 +90,7 @@ export default function ProductItem({
   description,
 }) {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
 
   const [confirmBoxOn, setconfirmBoxOn] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
@@ -145,13 +145,13 @@ export default function ProductItem({
           >
             Show Details
           </Button>
-          {/*<EditIcon*/}
-          {/*  className={classes.edit}*/}
-          {/*  color="action"*/}
-          {/*  onClick={() =>*/}
-          {/*    history.push(`/manager/products/getOne/${productId}`)*/}
-          {/*  }*/}
-          {/*/>*/}
+          <EditIcon
+            className={classes.edit}
+            color="action"
+            onClick={() =>
+              history.push(`/manager/products/getOne/${productId}`)
+            }
+          />
           {/*<DeleteIcon*/}
           {/*  className={classes.delete}*/}
           {/*  color="action"*/}
@@ -170,7 +170,7 @@ export default function ProductItem({
       />
       <Dialog open={detailsBoxOn} onClose={() => setDetailsBoxOn(false)}>
         <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             Products Details
           </Typography>
         </DialogTitle>

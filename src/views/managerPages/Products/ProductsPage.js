@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Container, Row, Col } from 'reactstrap';
 import {
+  Button,
   // Button,
   CircularProgress,
   Divider,
@@ -12,6 +13,8 @@ import {
 // import AddIcon from '@material-ui/icons/Add';
 // import { useHistory } from 'react-router-dom';
 import { Autocomplete } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
@@ -20,8 +23,9 @@ import { getAllCategories } from '../Category/redux/categoryActions';
 
 function ProductsPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [search, setSearch] = useState('');
-  const [categorySelect, setCategorySelect] = useState('');
+  const [categorySelect, setCategorySelect] = useState({});
   // const history = useHistory();
   const allProducts = useSelector((state) => state.productReducer.allProducts);
   const loading = useSelector((state) => state.productReducer.loading);
@@ -29,25 +33,38 @@ function ProductsPage() {
   const allCategories = useSelector(
     (state) => state.categoryReducer.allCategories
   );
-  const category = allCategories.map((m) => m.name);
+  // const category = allCategories.map((m) => m.name);
 
   React.useEffect(() => {
-    dispatch(getAllProducts(search));
+    dispatch(getAllProducts({ search, category: categorySelect._id }));
     dispatch(getAllCategories(''));
-  }, [search]);
-  console.log(categorySelect);
+  }, [search, categorySelect]);
+  // console.log(categorySelect);
 
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch}>
+      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.productspage}>
           <div className={styles.top}>
+            <Typography
+              style={{
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}
+              component="h2"
+              variant="h4"
+              color="primary"
+              gutterBottom
+            >
+              Products List
+            </Typography>
             <div>
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={category}
-                onChange={(e, value) => setCategorySelect(value)}
+                options={allCategories}
+                getOptionLabel={(option) => option.name}
+                onChange={(e, value) => setCategorySelect({ ...value })}
                 style={{ width: 300 }}
                 size="small"
                 renderInput={(params) => (
@@ -55,14 +72,14 @@ function ProductsPage() {
                 )}
               />
             </div>
-            {/*<Button*/}
-            {/*  className={styles.addNew__button}*/}
-            {/*  variant="contained"*/}
-            {/*  type="button"*/}
-            {/*  onClick={() => history.push('/manager/products/addnew')}*/}
-            {/*>*/}
-            {/*  <AddIcon /> Add New*/}
-            {/*</Button>*/}
+            <Button
+              className={styles.addNew__button}
+              variant="contained"
+              type="button"
+              onClick={() => history.push('/manager/products/addnew')}
+            >
+              <AddIcon /> Add New
+            </Button>
           </div>
           <Divider />
           <Divider />
@@ -70,14 +87,6 @@ function ProductsPage() {
           <div className={styles.bottom}>
             {!loading ? (
               <>
-                <Typography
-                  component="h2"
-                  variant="h6"
-                  color="primary"
-                  gutterBottom
-                >
-                  Products List
-                </Typography>
                 <Grid container direction="row" spacing={2}>
                   {allProducts.map((product) => (
                     <Grid

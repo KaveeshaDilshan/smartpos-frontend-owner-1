@@ -52,7 +52,6 @@ export function* addSalesperson(action) {
 }
 
 export function* editSalesperson(action) {
-  console.log(action.data);
   const { id, details } = action.data;
   try {
     yield axios.patch(`${BASE_URL}/manager/salespersons/${id}`, details);
@@ -64,44 +63,10 @@ export function* editSalesperson(action) {
 
 export function* getWarehouseShops(action) {
   const warehouseId = action.data;
-  console.log(warehouseId);
   try {
-    // const { data } = yield axios.get(
-    //   `${BASE_URL}/manager/shops/warehouse/${warehouseId}?sortBy=+name`
-    // );
-    const data = {
-      shops: [
-        {
-          balance: 0,
-          archived: false,
-          _id: '6139fe5859c215002ae0500d',
-          name: 'shop1',
-          email: 'yasindu563@gmail.com',
-          telephone: '0779667959',
-          location: 'Gampaha',
-          longitude: '7.409',
-          latitude: '80.098',
-          ownerName: 'testnn',
-          address: '248/6, Batapotha ',
-          __v: 0,
-        },
-        {
-          balance: 0,
-          archived: false,
-          _id: '6139fe1059c215002ae05007',
-          name: 'shop3',
-          email: 'yasindu56@gmail.com',
-          telephone: '0779667954',
-          location: 'Gampaha',
-          longitude: '7.409',
-          latitude: '80.098',
-          ownerName: 'testn',
-          address: '248/5, Batapotha ',
-          __v: 0,
-        },
-      ],
-    };
-
+    const { data } = yield axios.get(
+      `${BASE_URL}/manager/shops/warehouse/${warehouseId}?sortBy=+name`
+    );
     yield put({
       type: actionTypes.GET_WAREHOUSE_SHOPS_SUCCESS,
       data,
@@ -117,24 +82,6 @@ export function* getSalespersonShops(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/shops/${salespersonId}`
     );
-    // const data = {
-    //   shops: [
-    //     {
-    //       balance: 0,
-    //       archived: false,
-    //       _id: '6139fe1059c215002ae05004',
-    //       name: 'shop2',
-    //       email: 'yasindu56@gmail.com',
-    //       telephone: '0779667954',
-    //       location: 'Gampaha',
-    //       longitude: '7.409',
-    //       latitude: '80.098',
-    //       ownerName: 'testn',
-    //       address: '248/5, Batapotha ',
-    //       __v: 0,
-    //     },
-    //   ],
-    // };
     yield put({
       type: actionTypes.GET_SALESPERSON_SHOPS_SUCCESS,
       data,
@@ -156,7 +103,6 @@ export function* addShopsToSalesperson(action) {
 
 export function* getSalespersonDailyProducts(action) {
   const { id, date } = action.data;
-  console.log(date);
   try {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/dailyproducts/${id}?date=${date}`
@@ -171,31 +117,17 @@ export function* getSalespersonDailyProducts(action) {
 }
 
 export function* addDailyProduct(action) {
-  console.log(action.data);
-  const { salespersonId, details } = action.data;
+  const { warehouseId, details } = action.data;
   try {
     yield axios.post(
-      `${BASE_URL}/manager/dailyProducts/${salespersonId}`,
+      `${BASE_URL}/manager/dailyProducts/${warehouseId}`,
       details
     );
     toast.success('Daily Products are updated successfully');
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(error.response.data.description);
   }
 }
-
-// export function* changeDailyProductCount(action) {
-//   console.log(action.data);
-//   try {
-//     yield axios.patch(
-//       `${BASE_URL}/manager/dailyProducts/changeCount`,
-//       action.data
-//     );
-//     toast.success('Product count is updated successfully');
-//   } catch (error) {
-//     toast.error(error.response.data.message);
-//   }
-// }
 
 function* ManagerSalespersonsSagas() {
   yield takeLatest(actionTypes.GET_ALL_SALESPERSONS, getAllSalespersons);

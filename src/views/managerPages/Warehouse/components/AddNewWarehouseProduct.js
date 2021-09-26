@@ -9,7 +9,10 @@ import { TextField, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../Products/redux/productActions';
-import { addProductToWarehouse } from '../redux/warehouseActions';
+import {
+  addProductToWarehouse,
+  getAllWarehouseProducts,
+} from '../redux/warehouseActions';
 
 export default function AddNewWarehouseProduct({ open, handleClose }) {
   const dispatch = useDispatch();
@@ -19,7 +22,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
     (state) => state.dashboardReducer.warehouseID
   );
   React.useEffect(() => {
-    dispatch(getAllProducts(''));
+    dispatch(getAllProducts({ search: '', category: '' }));
   }, []);
   const handleAddbutton = () => {
     dispatch(
@@ -31,6 +34,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         },
       })
     );
+    dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
   };
 
   const clickCancel = () => {
@@ -49,7 +53,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         }}
       >
         <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          <Typography component="h2" variant="h4" color="primary" gutterBottom>
             Add Product To Warehouse
           </Typography>
         </DialogTitle>
