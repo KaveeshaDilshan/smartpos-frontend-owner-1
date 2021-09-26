@@ -9,7 +9,10 @@ import { TextField, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../Products/redux/productActions';
-import { addProductToWarehouse } from '../redux/warehouseActions';
+import {
+  addProductToWarehouse,
+  getAllWarehouseProducts,
+} from '../redux/warehouseActions';
 
 export default function AddNewWarehouseProduct({ open, handleClose }) {
   const dispatch = useDispatch();
@@ -31,6 +34,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         },
       })
     );
+    dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
   };
 
   const clickCancel = () => {

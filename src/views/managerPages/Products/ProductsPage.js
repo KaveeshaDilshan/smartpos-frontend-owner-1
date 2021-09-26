@@ -46,6 +46,18 @@ function ProductsPage() {
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
         <div className={styles.productspage}>
           <div className={styles.top}>
+            <Typography
+              style={{
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}
+              component="h2"
+              variant="h4"
+              color="primary"
+              gutterBottom
+            >
+              Products List
+            </Typography>
             <div>
               <Autocomplete
                 disablePortal
@@ -75,14 +87,6 @@ function ProductsPage() {
           <div className={styles.bottom}>
             {!loading ? (
               <>
-                <Typography
-                  component="h2"
-                  variant="h4"
-                  color="primary"
-                  gutterBottom
-                >
-                  Products List
-                </Typography>
                 <Grid container direction="row" spacing={2}>
                   {allProducts.map((product) => (
                     <Grid

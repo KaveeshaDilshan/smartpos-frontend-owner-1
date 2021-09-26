@@ -42,20 +42,14 @@ function managerWarehousePage() {
         <div className={styles.warehousepage}>
           <div className={styles.page_top}>
             <div className={styles.top}>
-              {/*<div>*/}
-              {/*  <Autocomplete*/}
-              {/*    disablePortal*/}
-              {/*    id="combo-box-demo"*/}
-              {/*    options={top100Films}*/}
-              {/*    onChange={(e, value) => setCategorySelect(value)}*/}
-              {/*    style={{ width: 300 }}*/}
-              {/*    size="small"*/}
-              {/*    renderInput={(params) => (*/}
-              {/*      <TextField {...params} label="Category" />*/}
-              {/*    )}*/}
-              {/*  />*/}
-              {/*</div>*/}
-
+              <Typography
+                component="h2"
+                variant="h4"
+                color="primary"
+                gutterBottom
+              >
+                Warehouse Inventory
+              </Typography>
               <Button
                 className={styles.addNew__button}
                 variant="contained"
@@ -69,15 +63,6 @@ function managerWarehousePage() {
             <Divider />
           </div>
           <div className={styles.page_bottom}>
-            <Typography
-              component="h2"
-              variant="h4"
-              color="primary"
-              gutterBottom
-            >
-              Warehouse Inventory
-            </Typography>
-            <br />
             <div className={styles.warehouse_inventory}>
               {!loading ? (
                 <>
@@ -93,6 +78,9 @@ function managerWarehousePage() {
                           count={item.quantity}
                         />
                       )
+                  )}
+                  {allWarehouseProducts.length === 0 && (
+                    <h6>No Any Products In The Warehouse</h6>
                   )}
                 </>
               ) : (
