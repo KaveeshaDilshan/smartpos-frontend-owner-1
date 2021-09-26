@@ -10,7 +10,6 @@ export function* getAllProducts(action) {
   if (category) {
     filter = `categoryId eq ${category}`;
   }
-  console.log(category);
   try {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/product?sortBy=+name&query=${search}&filter=${filter}`

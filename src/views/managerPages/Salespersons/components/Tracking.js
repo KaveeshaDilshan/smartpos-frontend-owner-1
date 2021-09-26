@@ -32,7 +32,6 @@ function SalespersonTracking() {
   useEffect(() => {
     dispatch(getOneSalesperson(id));
   }, []);
-  console.log(salesperson);
   return (
     <>
       <ManagerLayout>

@@ -45,7 +45,6 @@ function CircularProgressWithLabel(props) {
 }
 
 function AddNewProduct() {
-  console.log(storage);
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
@@ -106,7 +105,7 @@ function AddNewProduct() {
           setProgress(progresss);
         },
         (error) => {
-          console.log(error);
+          toast.error(error);
         },
         () => {
           storage

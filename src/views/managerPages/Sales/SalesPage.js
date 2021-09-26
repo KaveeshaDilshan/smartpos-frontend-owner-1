@@ -42,7 +42,6 @@ function SalesPage() {
       })
     );
   };
-  console.log(sales);
   return (
     <>
       <ManagerLayout>

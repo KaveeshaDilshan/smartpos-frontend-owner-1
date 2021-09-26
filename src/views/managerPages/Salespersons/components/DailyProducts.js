@@ -82,7 +82,6 @@ const DailyProducts = ({ id }) => {
           sales: 0,
         });
         setAddedDailyProducts([...addedDailyProducts]);
-        console.log(addedDailyProducts);
       }
     } else {
       toast.error('Select a Product');

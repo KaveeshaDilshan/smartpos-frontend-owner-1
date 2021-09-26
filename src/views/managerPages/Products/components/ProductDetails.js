@@ -104,7 +104,7 @@ function ProductDetails(props) {
           setProgress(progresss);
         },
         (error) => {
-          console.log(error);
+          toast.error(error);
         },
         () => {
           storage

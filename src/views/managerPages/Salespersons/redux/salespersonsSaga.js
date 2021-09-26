@@ -52,7 +52,6 @@ export function* addSalesperson(action) {
 }
 
 export function* editSalesperson(action) {
-  console.log(action.data);
   const { id, details } = action.data;
   try {
     yield axios.patch(`${BASE_URL}/manager/salespersons/${id}`, details);
@@ -64,7 +63,6 @@ export function* editSalesperson(action) {
 
 export function* getWarehouseShops(action) {
   const warehouseId = action.data;
-  console.log(warehouseId);
   try {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/shops/warehouse/${warehouseId}?sortBy=+name`
@@ -105,7 +103,6 @@ export function* addShopsToSalesperson(action) {
 
 export function* getSalespersonDailyProducts(action) {
   const { id, date } = action.data;
-  console.log(date);
   try {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/dailyproducts/${id}?date=${date}`
@@ -131,19 +128,6 @@ export function* addDailyProduct(action) {
     toast.error(error.response.data.description);
   }
 }
-
-// export function* changeDailyProductCount(action) {
-//   console.log(action.data);
-//   try {
-//     yield axios.patch(
-//       `${BASE_URL}/manager/dailyProducts/changeCount`,
-//       action.data
-//     );
-//     toast.success('Product count is updated successfully');
-//   } catch (error) {
-//     toast.error(error.response.data.message);
-//   }
-// }
 
 function* ManagerSalespersonsSagas() {
   yield takeLatest(actionTypes.GET_ALL_SALESPERSONS, getAllSalespersons);

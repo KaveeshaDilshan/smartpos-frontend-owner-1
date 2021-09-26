@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
@@ -19,17 +18,8 @@ function Dashboard() {
   const dispatch = useDispatch();
   useEffect(() => dispatch(loginUser()), []);
 
-  const [startDate, setStartDate] = useState(moment().subtract(10, 'day'));
-  const [endDate, setEndDate] = useState(moment().subtract(1, 'day'));
-  // const history = useHistory();
-  // const isRegistered = useSelector((state) => state.expertReducer.isRegistered);
-  // useEffect(() => {
-  //   if (isRegistered) {
-  //     history.push("/register/expert-details");
-  //   } else {
-  //     history.push("/register/expert");
-  //   }
-  // }, []);
+  const [startDate, setStartDate] = useState(moment().subtract(7, 'day'));
+  const [endDate, setEndDate] = useState(moment().subtract(0, 'day'));
   const warehouseID = useSelector(
     (state) => state.dashboardReducer.warehouseID
   );

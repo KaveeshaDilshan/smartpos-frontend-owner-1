@@ -14,7 +14,6 @@ export function* getWarehouseSales(action) {
       date: key,
       totalSales: data[key].totalIncome,
     }));
-    console.log(sales);
     yield put({
       type: actionTypes.GET_WAREHOUSE_SALES_SUCCESS,
       sales,

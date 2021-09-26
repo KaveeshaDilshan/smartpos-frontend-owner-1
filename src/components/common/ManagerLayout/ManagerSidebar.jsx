@@ -12,7 +12,6 @@ import styles from './sidebar.module.css';
 function ManagerSideBar() {
   const history = useHistory();
   const Component = ({ name, route, currentSelect, Icon }) => {
-    console.log(route);
     return (
       <>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}

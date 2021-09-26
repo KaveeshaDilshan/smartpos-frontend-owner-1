@@ -10,7 +10,6 @@ export function* getSalespersonsSales(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/sales/warehouse/${warehouseId}?startDate=${startDate}&endDate=${endDate}`
     );
-    console.log(data);
     yield put({
       type: actionTypes.GET_SALESPERSONS_SALES_BY_DATE_RANGE_SUCCESS,
       data,
