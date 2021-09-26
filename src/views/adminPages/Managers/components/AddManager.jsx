@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Col, Container, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useFormik } from 'formik';
 import Button from '@material-ui/core/Button';
-import { addManager } from './actions';
-import Layout from '../../Layout';
+import { addManager } from '../actions';
+import Layout from '../../../Layout';
 //import { passwordRegex } from '../../util/regex';
 
 function AddManager() {
@@ -58,7 +58,7 @@ function AddManager() {
         <Container>
           <Form onSubmit={formik.handleSubmit}>
             <Row form>
-              <Col className="col-6">
+              <Col>
                 <Row>
                   <Col className="col-6">
                     <FormGroup>

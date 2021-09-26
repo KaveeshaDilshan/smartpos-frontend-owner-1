@@ -19,16 +19,16 @@ function WarehousePage(props) {
   const managers = useSelector(
     (state) => state.managerReducer.unassignedManagers
   );
+  const { warehouseAnalytics } = useSelector((state) => state.warehouseReducer);
   const { warehouse, loading } = useSelector((state) => state.warehouseReducer);
+
   useEffect(() => dispatch(getOneWarehouse(id)), []);
   useEffect(() => {
     dispatch(getAllUnassignedManagers());
-    if (managers.length === 0) {
-      console.log('managers');
-    }
-  }, [warehouse]);
+  }, [warehouse, warehouseAnalytics]);
   const [selectedManager, setSelectedManager] = useState('');
   const [open, setOpen] = React.useState(false);
+
   const managerComponent = (manager) => {
     return (
       <>
@@ -145,7 +145,7 @@ function WarehousePage(props) {
       <>
         <Row className="mt-5">
           <Form onSubmit={handleSubmit}>
-            {managerArray[0] ? (
+            {managerArray.length > 0 ? (
               <FormGroup>
                 <Label
                   style={{

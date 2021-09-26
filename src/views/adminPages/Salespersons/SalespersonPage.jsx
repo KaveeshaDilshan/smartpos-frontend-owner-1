@@ -5,6 +5,7 @@ import { Pagination } from '@material-ui/lab';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
 import Layout from '../../Layout';
 import { getAllSalesperson } from './actions';
 import SalespersonItem from './components/SalespersonItem';
@@ -25,6 +26,7 @@ function SalespersonPage() {
   const { salespersons, totalSalespersons } = useSelector(
     (state) => state.adminSalespersonReducer
   );
+  const history = useHistory();
   const [page, setPage] = useState(1);
   const [filter, setFilter] = React.useState('all');
   const [warehouse, setWarehouse] = useState('');
@@ -97,6 +99,7 @@ function SalespersonPage() {
                 variant="contained"
                 color="primary"
                 className="mt-3"
+                onClick={() => history.push('/admin/analytics')}
               >
                 VIEW LEADERBOARD
               </Button>

@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import * as actionTypes from './actionTypes';
@@ -102,7 +102,7 @@ export function* handleGetOneWarehouseAnalytics(action) {
   try {
     const result = yield call(getOneWarehouseAnalytics, id, period);
     yield put({
-      type: actionTypes.RANDOM,
+      type: actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS,
       payload: result.data,
     });
   } catch (error) {
