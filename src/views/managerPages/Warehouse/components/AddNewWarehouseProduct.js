@@ -53,7 +53,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         }}
       >
         <DialogTitle>
-          <Typography component="h2" variant="h4" color="primary" gutterBottom>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
             Add Product To Warehouse
           </Typography>
         </DialogTitle>

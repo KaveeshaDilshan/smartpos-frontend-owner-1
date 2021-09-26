@@ -56,7 +56,7 @@ function ManagerProfile({ open, handleClose }) {
                 width: 'fit-content',
               }}
               component="h2"
-              variant="h2"
+              variant="h4"
               color="primary"
               gutterBottom
             >

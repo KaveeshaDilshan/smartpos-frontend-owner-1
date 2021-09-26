@@ -106,7 +106,7 @@ const DailyProducts = ({ id }) => {
     <>
       <Col className="col-6">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography component="h2" variant="h4" color="primary" gutterBottom>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
             DAILY PRODUCTS
           </Typography>
         </div>
@@ -188,7 +188,7 @@ const DailyProducts = ({ id }) => {
           <div>
             <Typography
               component="h2"
-              variant="h4"
+              variant="h6"
               color="primary"
               gutterBottom
             >
