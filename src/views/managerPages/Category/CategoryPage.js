@@ -45,7 +45,7 @@ function CategoryPage() {
           <div className={styles.top}>
             <Typography
               component="h2"
-              variant="h4"
+              variant="h6"
               color="primary"
               gutterBottom
             >
@@ -109,7 +109,7 @@ function CategoryPage() {
                 <div className={styles.bottom_title}>
                   <Typography
                     component="h2"
-                    variant="h4"
+                    variant="h6"
                     color="primary"
                     gutterBottom
                   >

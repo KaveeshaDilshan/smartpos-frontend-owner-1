@@ -26,7 +26,7 @@ export default function LeaveDetailsBox({ open, handleClose, description }) {
         // }}
       >
         <DialogTitle>
-          <Typography component="h2" variant="h4" color="primary" gutterBottom>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>
             Reason For Leave
           </Typography>
         </DialogTitle>

@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as actionTypes from './salespersonsActionTypes';
 import { BASE_URL } from '../../../../const/config';
+import { auth } from '../../../../const/firebase.config';
 
 export function* getAllSalespersons(action) {
   const { search, warehouseID, page } = action.data;
@@ -42,12 +43,27 @@ export function* getOneSalesperson(action) {
   }
 }
 
+const addSalespersonCall = async (data) => {
+  const { user } = await auth.createUserWithEmailAndPassword(
+    data.email,
+    data.password
+  );
+  data.uid = user.uid;
+
+  const result = await axios.post(`${BASE_URL}/manager/salespersons`, data);
+  console.log('aerfghbnjkm,l');
+  return result;
+};
+
 export function* addSalesperson(action) {
   try {
-    yield axios.post(`${BASE_URL}/manager/salespersons`, action.data);
+    yield call(addSalespersonCall, action.data);
     toast.success('New Salesperson is added successfully');
   } catch (error) {
-    toast.error(error.response.data.message);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    }
+    toast.error(error.message);
   }
 }
 

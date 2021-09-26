@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
     paddingLeft: 100,
-    fontSize: '2rem',
   },
   search: {
     position: 'relative',
@@ -87,6 +86,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  profile: {
+    cursor: 'pointer',
   },
 }));
 
@@ -223,7 +225,11 @@ export default function PrimarySearchAppBar(props) {
             >
               LOGOUT
             </Button>
-            <Avatar src={profileFallback} />
+            <Avatar
+              src={profileFallback}
+              onClick={setOpen}
+              className={classes.profile}
+            />
           </div>
           {/*<div className={classes.sectionMobile}>*/}
           {/*  <IconButton*/}
