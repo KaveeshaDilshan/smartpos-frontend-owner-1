@@ -24,14 +24,14 @@ function AddManager() {
     ) {
       errors.email = 'Invalid email address';
     }
-    // if (!values.password) {
-    //   errors.password = 'Password is required';
-    // }
-    // if (!values.rePassword) {
-    //   errors.rePassword = 'Re-password is required';
-    // } else if (values.password !== values.rePassword) {
-    //   errors.rePassword = 'Passwords should match';
-    // }
+    if (!values.password) {
+      errors.password = 'Password is required';
+    }
+    if (!values.rePassword) {
+      errors.rePassword = 'Re-password is required';
+    } else if (values.password !== values.rePassword) {
+      errors.rePassword = 'Passwords should match';
+    }
     return errors;
   };
   const formik = useFormik({
@@ -40,8 +40,8 @@ function AddManager() {
       lastName: '',
       email: '',
       telephone: '',
-      // password: '',
-      // rePassword: '',
+      password: '',
+      rePassword: '',
     },
     validate,
     onSubmit: (values) => {
@@ -135,9 +135,9 @@ function AddManager() {
                         name="password"
                         id="password"
                         type="password"
-                        // onChange={formik.handleChange}
-                        // onBlur={formik.handleBlur}
-                        // value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                       />
                       {formik.errors.password && formik.touched.password && (
                         <p className="input-warning">
@@ -153,9 +153,9 @@ function AddManager() {
                         name="rePassword"
                         id="rePassword"
                         type="password"
-                        // onChange={formik.handleChange}
-                        // onBlur={formik.handleBlur}
-                        // value={formik.values.rePassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.rePassword}
                       />
                       {formik.errors.rePassword &&
                         formik.touched.rePassword && (

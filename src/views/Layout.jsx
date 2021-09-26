@@ -6,8 +6,11 @@ import SideBar from '../components/common/AdminLayout/SideBar';
 function Layout(props) {
   return (
     <>
-      {/*<Header search={props.search} setSearch={props.setSearch} />*/}
-      {/*<Header search={props.search} setSearch={props.setSearch} isShow={props.isShow}/>*/}
+      <Header
+        search={props.search}
+        setSearch={props.setSearch}
+        isShow={false}
+      />
       <div className="container-fluid">
         <Row>
           <Col className="col-2">

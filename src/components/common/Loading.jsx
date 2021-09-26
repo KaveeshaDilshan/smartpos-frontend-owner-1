@@ -15,7 +15,7 @@ export default function Loading() {
   const classes = useStyles();
 
   return (
-    <Layout>
+    <>
       <div
         className={classes.root}
         style={{
@@ -29,6 +29,6 @@ export default function Loading() {
           <CircularProgress size={60} />
         </div>
       </div>
-    </Layout>
+    </>
   );
 }

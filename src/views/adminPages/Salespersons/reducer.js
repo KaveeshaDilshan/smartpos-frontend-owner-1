@@ -35,7 +35,6 @@ const adminSalespersonReducer = (state = initialState, action) => {
         totalQuantity: [...action.payload.totalQuantity],
       };
     case actionTypes.GET_ONE_SALESPERSON_PRODUCTS_ONE_DAY_SUCCESS:
-      console.log(action.payload.oneDate);
       return {
         ...state,
         salespersonProducts: [...action.payload.data.products],

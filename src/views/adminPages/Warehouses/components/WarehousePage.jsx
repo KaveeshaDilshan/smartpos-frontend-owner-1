@@ -3,17 +3,21 @@ import { Container, Form, Label, FormGroup, Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styles from './warehouse.module.css';
 import { assignManager, getOneWarehouse } from '../actions';
 import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
+import WarehouseAnalytics from './WarehouseAnalytics';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = props.match.params;
-  const [selectedManager, setSelectedManager] = useState('');
-  const { warehouse } = useSelector((state) => state.warehouseReducer);
+
+  const { warehouse, loading } = useSelector((state) => state.warehouseReducer);
   useEffect(() => dispatch(getOneWarehouse(id)), []);
 
   const managers = useSelector(
@@ -21,7 +25,7 @@ function WarehousePage(props) {
   );
 
   useEffect(() => dispatch(getAllUnassignedManagers()), [warehouse]);
-
+  const [selectedManager, setSelectedManager] = useState('');
   const [open, setOpen] = React.useState(false);
   const managerComponent = (manager) => {
     return (
@@ -124,248 +128,267 @@ function WarehousePage(props) {
   const assignManagerComponent = (managerArray) => {
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(
-        assignManager({
-          managerId: selectedManager,
-          warehouseId: warehouse._id,
-        })
-      );
+      if (selectedManager) {
+        dispatch(
+          assignManager({
+            managerId: selectedManager,
+            warehouseId: warehouse._id,
+          })
+        );
+      } else {
+        toast.error('No Manager Is Selected');
+      }
     };
     return (
       <>
         <Row className="mt-5">
           <Form onSubmit={handleSubmit}>
-            <FormGroup>
-              <Label
-                style={{
-                  fontWeight: '700',
-                  fontSize: '16px',
-                  marginBottom: '10px',
-                }}
-              >
-                SELECT MANAGER
-              </Label>
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={managerArray}
-                onChange={(e, newValue) =>
-                  setSelectedManager(newValue._id ? newValue._id : null)
-                }
-                value={`${selectedManager.firstName} ${selectedManager.lastName}`}
-                getOptionLabel={(option) =>
-                  `${option.firstName} ${option.lastName}`
-                }
-                defaultValue={`${selectedManager.firstName} ${selectedManager.lastName}`}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Movie" />
-                )}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className="mt-3"
-              >
-                Assign A Manager
-              </Button>
-              <div style={{ marginLeft: 10, marginRight: 10 }}>OR</div>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className="mt-3"
-              >
-                Add New Manager
-              </Button>
-            </FormGroup>
+            {managerArray[0] ? (
+              <FormGroup>
+                <Label
+                  style={{
+                    fontWeight: '700',
+                    fontSize: '16px',
+                    marginBottom: '10px',
+                  }}
+                >
+                  SELECT MANAGER
+                </Label>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={managerArray}
+                  onChange={(e, newValue) =>
+                    setSelectedManager(newValue._id ? newValue._id : null)
+                  }
+                  getOptionLabel={(option) => {
+                    return `${option.firstName} ${option.lastName}`;
+                  }}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="MANAGER NAME" />
+                  )}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className="mt-3"
+                >
+                  Assign A Manager
+                </Button>
+              </FormGroup>
+            ) : (
+              <>
+                <p>
+                  No Unassigned Managers Available. PLEASE ADD NEW MANAGER FIRST
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className="mt-3"
+                    onClick={() => history.push('/admin/managers/addManager')}
+                  >
+                    Add New Manager
+                  </Button>
+                </p>
+              </>
+            )}
           </Form>
         </Row>
       </>
     );
   };
-  if (!warehouse || Object.keys(warehouse).length === 0) {
-    return <Loading />;
-  }
+
   return (
     <Layout>
-      <Container>
-        <Row>
-          <Col className="col-6">
-            <Row className={styles.warehouse}>
-              <h4
-                style={{
-                  fontWeight: '700',
-                  fontSize: '22px',
-                }}
-              >
-                WAREHOUSE DETAILS
-              </h4>
-              <Col className="col-6">
-                <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col className="col-6">
-                <div>
-                  <h4
-                    style={{
-                      fontWeight: '700',
-                      fontSize: '16px',
-                    }}
-                  >
-                    {warehouse.name}
-                  </h4>
-                  <h4
-                    style={{
-                      fontWeight: '400',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Warehouse Name
-                  </h4>
-                </div>
-              </Col>
-              <Col className="col-6">
-                <div>
-                  <h4
-                    style={{
-                      fontWeight: '700',
-                      fontSize: '16px',
-                    }}
-                  >
-                    {warehouse._id}
-                  </h4>
-                  <h4
-                    style={{
-                      fontWeight: '400',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Warehouse ID
-                  </h4>
-                </div>
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col className="col-6">
-                <div>
-                  <h4
-                    style={{
-                      fontWeight: '700',
-                      fontSize: '16px',
-                    }}
-                  >
-                    {warehouse.telephone}
-                  </h4>
-                  <h4
-                    style={{
-                      fontWeight: '400',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Warehouse Telephone
-                  </h4>
-                </div>
-              </Col>
-              <Col className="col-6">
-                <div>
-                  <h4
-                    style={{
-                      fontWeight: '700',
-                      fontSize: '16px',
-                    }}
-                  >
-                    {warehouse.location}
-                  </h4>
-                  <h4
-                    style={{
-                      fontWeight: '400',
-                      fontSize: '14px',
-                    }}
-                  >
-                    Warehouse Location
-                  </h4>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <Col className="col-6">
-            <Row className={styles.warehouse}>
-              <h4
-                style={{
-                  fontWeight: '700',
-                  fontSize: '22px',
-                }}
-              >
-                PRODUCTS
-              </h4>
-              <Col className="col-6">
-                <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
-              </Col>
-            </Row>
-            <div style={{ maxHeight: 200, overflow: 'auto' }} className="mt-5">
-              {warehouse.products.map((p) => (
-                <div
-                  className="d-flex justify-content-between"
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          <Row>
+            <Col className="col-6">
+              <Row className={styles.warehouse}>
+                <h4
                   style={{
-                    paddingTop: '5px',
-                    paddingRight: '3px',
-                    paddingBottom: '5px',
+                    fontWeight: '700',
+                    fontSize: '22px',
                   }}
                 >
-                  <div className="d-flex justify-content-around">
-                    <div style={{ marginLeft: 20 }}>
-                      <img
-                        src={p.product.photo}
-                        alt=""
-                        width="50px"
-                        height="auto"
-                      />
-                    </div>
-                    <div>
-                      <span>{p.product.name}</span>
-                    </div>
-                  </div>
+                  WAREHOUSE DETAILS
+                </h4>
+                <Col className="col-6">
+                  <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
+                </Col>
+              </Row>
+              <Row className="mt-5">
+                <Col className="col-6">
                   <div>
-                    <Button
-                      size="small"
-                      type="submit"
-                      color="primary"
-                      variant="outlined"
-                      style={{ marginBottom: 0 }}
-                      onClick={() => setOpen(open)}
+                    <h4
+                      style={{
+                        fontWeight: '700',
+                        fontSize: '16px',
+                      }}
                     >
-                      Show Details
-                    </Button>
+                      {warehouse.name}
+                    </h4>
+                    <h4
+                      style={{
+                        fontWeight: '400',
+                        fontSize: '14px',
+                      }}
+                    >
+                      Warehouse Name
+                    </h4>
                   </div>
-                </div>
-              ))}
-            </div>
-          </Col>
-        </Row>
-        <Row className="mt-5">
-          <Col className="col-6">
-            <Row className={styles.warehouse}>
-              <h4
-                style={{
-                  fontWeight: '700',
-                  fontSize: '22px',
-                }}
+                </Col>
+                <Col className="col-6">
+                  <div>
+                    <h4
+                      style={{
+                        fontWeight: '700',
+                        fontSize: '16px',
+                      }}
+                    >
+                      {warehouse._id}
+                    </h4>
+                    <h4
+                      style={{
+                        fontWeight: '400',
+                        fontSize: '14px',
+                      }}
+                    >
+                      Warehouse ID
+                    </h4>
+                  </div>
+                </Col>
+              </Row>
+              <Row className="mt-5">
+                <Col className="col-6">
+                  <div>
+                    <h4
+                      style={{
+                        fontWeight: '700',
+                        fontSize: '16px',
+                      }}
+                    >
+                      {warehouse.telephone}
+                    </h4>
+                    <h4
+                      style={{
+                        fontWeight: '400',
+                        fontSize: '14px',
+                      }}
+                    >
+                      Warehouse Telephone
+                    </h4>
+                  </div>
+                </Col>
+                <Col className="col-6">
+                  <div>
+                    <h4
+                      style={{
+                        fontWeight: '700',
+                        fontSize: '16px',
+                      }}
+                    >
+                      {warehouse.location}
+                    </h4>
+                    <h4
+                      style={{
+                        fontWeight: '400',
+                        fontSize: '14px',
+                      }}
+                    >
+                      Warehouse Location
+                    </h4>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <Col className="col-6">
+              <Row className={styles.warehouse}>
+                <h4
+                  style={{
+                    fontWeight: '700',
+                    fontSize: '22px',
+                  }}
+                >
+                  PRODUCTS
+                </h4>
+                <Col className="col-6">
+                  <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
+                </Col>
+              </Row>
+              <div
+                style={{ maxHeight: 200, overflow: 'auto' }}
+                className="mt-5"
               >
-                MANAGER DETAILS
-              </h4>
-              <Col className="col-6">
-                <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
-              </Col>
-            </Row>
-            {warehouse.managerId
-              ? managerComponent(warehouse.managerId)
-              : assignManagerComponent(managers)}
-          </Col>
-        </Row>
-      </Container>
+                {warehouse.products &&
+                  warehouse.products.map((p) => (
+                    <div
+                      className="d-flex justify-content-between"
+                      style={{
+                        paddingTop: '5px',
+                        paddingRight: '3px',
+                        paddingBottom: '5px',
+                      }}
+                    >
+                      <div className="d-flex justify-content-around">
+                        <div style={{ marginLeft: 20 }}>
+                          <img
+                            src={p.product.photo}
+                            alt=""
+                            width="50px"
+                            height="auto"
+                          />
+                        </div>
+                        <div>
+                          <span>{p.product.name}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Button
+                          size="small"
+                          type="submit"
+                          color="primary"
+                          variant="outlined"
+                          style={{ marginBottom: 0 }}
+                          onClick={() => setOpen(open)}
+                        >
+                          Show Details
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </Col>
+          </Row>
+          <Row className="mt-5">
+            <Col className="col-6">
+              <Row className={styles.warehouse}>
+                <h4
+                  style={{
+                    fontWeight: '700',
+                    fontSize: '22px',
+                  }}
+                >
+                  MANAGER DETAILS
+                </h4>
+                <Col className="col-6">
+                  <div style={{ borderBottom: '3px solid #5BC67AD9' }} />
+                </Col>
+              </Row>
+              {warehouse.managerId
+                ? managerComponent(warehouse.managerId)
+                : assignManagerComponent(managers)}
+            </Col>
+            <Col className="col-6">
+              <WarehouseAnalytics id={warehouse._id} />
+            </Col>
+          </Row>
+        </Container>
+      )}
     </Layout>
   );
 }
