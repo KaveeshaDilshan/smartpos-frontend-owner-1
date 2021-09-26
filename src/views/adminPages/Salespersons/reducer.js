@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const adminSalespersonReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case actionTypes.GET_ALL_SALESPERSONS_SUCCESS:
       return {

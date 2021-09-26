@@ -4,5 +4,5 @@ import 'firebase/storage';
 import config from './config.json';
 
 firebase.initializeApp(config.FIREBASE_CONFIG);
-export const storage = firebase.storage(config.FIREBASE_CONFIG);
-export const auth = firebase.auth(config.FIREBASE_CONFIG);
+export const storage = firebase.storage();
+export const auth = firebase.auth();

@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { Pagination } from '@material-ui/lab';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Layout from '../../Layout';
 import { getAllSalesperson } from './actions';
 import SalespersonItem from './components/SalespersonItem';
@@ -46,7 +47,7 @@ function SalespersonPage() {
       <Layout>
         <Container>
           <Row>
-            <Col className="col-4">
+            <Col className="col-4 d-flex align-items-center justify-content-center">
               <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
                 <Select
@@ -61,7 +62,7 @@ function SalespersonPage() {
               </FormControl>
             </Col>
             {filter === 'warehouse' && (
-              <Col className="col-2">
+              <Col className="col-2 d-flex align-items-center justify-content-center">
                 <FormControl className={classes.formControl}>
                   <InputLabel id="demo-simple-select-label">
                     Select Warehouse
@@ -89,6 +90,16 @@ function SalespersonPage() {
                 onChange={(e, p) => setPage(p)}
                 color="primary"
               />
+            </Col>
+            <Col className="d-flex align-items-center justify-content-center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="mt-3"
+              >
+                VIEW LEADERBOARD
+              </Button>
             </Col>
           </Row>
           <Row>

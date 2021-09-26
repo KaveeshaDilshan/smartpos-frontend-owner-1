@@ -40,7 +40,7 @@ export default function WarehouseForm() {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          height: 30,
+          height: 28,
         }}
       >
         <Button

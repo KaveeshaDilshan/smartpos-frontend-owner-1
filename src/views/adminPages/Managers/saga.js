@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import * as actionTypes from './actionTypes';
 import { BASE_URL } from '../../../const/config';
-// import { auth } from '../../const/firebase.config';
+import { auth } from '../../../const/firebase.config';
 
 const getOneManager = async (id) => {
   const result = await axios.get(`${BASE_URL}/admin/managers/${id}`);
@@ -21,29 +21,6 @@ export function* handleGetOneManager(action) {
 }
 
 const getAllManagers = async (page, filter, warehouse) => {
-  // auth
-  //   .createUserWithEmailAndPassword('mahela@gmail.com', 'mahela')
-  //   .then((userCredential) => {
-  //     const { user } = userCredential;
-  //     console.log(user, 'ww');
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     // ..
-  //   });
-  //
-  // auth
-  //   .signInWithEmailAndPassword('mahela@gmail.com', 'mahela')
-  //   .then((userCredential) => {
-  //     const { user } = userCredential;
-  //     console.log(user, 'gg');
-  //     console.log(user.getIdToken());
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
   if (filter === 'all') {
     return axios.get(
       `${BASE_URL}/admin/managers?sortBy=+firstName&page=${page}&limit=9`
@@ -68,7 +45,13 @@ export function* handleGetAllManagers(data) {
 }
 
 const addManager = async (data) => {
+  const { user } = await auth.createUserWithEmailAndPassword(
+    data.email,
+    data.password
+  );
+  data.uid = user.uid;
   const result = await axios.post(`${BASE_URL}/users/register`, data);
+
   return result;
 };
 
@@ -85,7 +68,10 @@ export function* handleAddManager(action) {
       progress: undefined,
     });
   } catch (error) {
-    toast.error(error.response.data.message);
+    if (error.response) {
+      toast.error(error.response.data.message);
+    }
+    toast.error(error.message);
   }
 }
 
