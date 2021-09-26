@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import * as actionTypes from './actionTypes';
@@ -105,7 +105,6 @@ export function* handleGetOneWarehouseAnalytics(action) {
       type: actionTypes.GET_ONE_WAREHOUSE_ANALYTICS_SUCCESS,
       payload: result.data,
     });
-    console.log(result);
   } catch (error) {
     toast.error(error.response.data.message);
   }

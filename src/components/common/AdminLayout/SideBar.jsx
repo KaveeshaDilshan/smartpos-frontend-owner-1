@@ -1,6 +1,8 @@
 import React from 'react';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import PeopleIcon from '@material-ui/icons/People';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import PersonIcon from '@material-ui/icons/Person';
 import { useHistory } from 'react-router-dom';
 import styles from './sidebar.module.css';
 
@@ -48,7 +50,7 @@ function SideBar() {
         name="Managers"
         route="/admin/managers"
         currentSelect="admin/managers"
-        Icon={PeopleIcon}
+        Icon={PersonIcon}
       />
       <Component
         name="Salespersons"
@@ -60,7 +62,7 @@ function SideBar() {
         name="Sales Analytics"
         route="/admin/analytics"
         currentSelect="admin/analytics"
-        Icon={PeopleIcon}
+        Icon={ShowChartIcon}
       />
     </div>
   );

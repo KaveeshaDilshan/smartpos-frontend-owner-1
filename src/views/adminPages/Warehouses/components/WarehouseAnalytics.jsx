@@ -35,7 +35,11 @@ function WarehouseAnalytics({ id }) {
   const handleChange = (event) => {
     setPeriod(event.target.value);
   };
-  useEffect(() => dispatch(getOneWarehouseAnalytics({ id, period })), [period]);
+  useEffect(() => {
+    if (id) {
+      dispatch(getOneWarehouseAnalytics({ id, period }));
+    }
+  }, [period, id]);
 
   const data = [];
   // eslint-disable-next-line array-callback-return

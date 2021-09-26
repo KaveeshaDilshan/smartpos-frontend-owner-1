@@ -6,6 +6,7 @@ const initialState = {
   managers: [],
   totalManagers: 9,
   loading: false,
+  test: 1,
 };
 
 const managerReducer = (state = initialState, action) => {
@@ -33,10 +34,16 @@ const managerReducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.GET_ALL_UNASSIGNED_MANAGERS_SUCCESS:
+      console.log(action.payload, 'gggggggggg');
       return {
         ...state,
         unassignedManagers: [...action.payload],
         loading: false,
+      };
+    case 'TEST':
+      return {
+        ...state,
+        test: 4,
       };
     default:
       return initialState;

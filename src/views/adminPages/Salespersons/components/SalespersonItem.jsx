@@ -14,7 +14,9 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     marginTop: '20px',
-    minHeight: 200,
+    minHeight: 220,
+    position: 'relative',
+    borderRadius: 10,
   },
   title: {
     fontSize: 14,

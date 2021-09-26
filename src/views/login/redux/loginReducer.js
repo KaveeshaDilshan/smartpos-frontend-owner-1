@@ -2,18 +2,27 @@ import * as actionTypes from './loginActionsType';
 
 const initialState = {
   user: [],
+  isLoggedIn: true,
+  loading: false,
 };
 
-function reducer(state = initialState, action) {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.LOGIN:
+      return {
+        ...state,
+        loading: true,
+      };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         user: action.data,
+        isLoggedIn: true,
+        loading: false,
       };
     default:
       return state;
   }
-}
+};
 
-export default reducer;
+export default loginReducer;
