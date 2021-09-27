@@ -1,7 +1,7 @@
 import * as actionTypes from './dashboardActionTypes';
 
 const initialState = {
-  warehouseID: '61364110017b454634bf0b99',
+  warehouseID: '6150c8bc497d385c88837f2a',
   warehouse: {
     district: 'Colombo',
     town: 'Colombo',
