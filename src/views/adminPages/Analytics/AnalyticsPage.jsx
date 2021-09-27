@@ -11,7 +11,6 @@ function AnalyticsPage() {
   );
   const dispatch = useDispatch();
   useEffect(() => dispatch(getSalespersonLeaderboard()), []);
-  console.log(salespersonLeaderboard);
   return (
     <>
       <Layout>

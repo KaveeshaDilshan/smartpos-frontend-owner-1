@@ -1,5 +1,11 @@
 import { Col, Row, Table } from 'reactstrap';
-import { Divider, Paper, TextField, Typography } from '@material-ui/core';
+import {
+  CircularProgress,
+  Divider,
+  Paper,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import {
   KeyboardDatePicker,
@@ -49,6 +55,9 @@ const DailyProducts = ({ id }) => {
     (state) => state.salespersonsReducer.oneSalespersonDailyProducts
   );
 
+  const loading = useSelector(
+    (state) => state.salespersonsReducer.dailyProductsLoading
+  );
   React.useEffect(() => {
     dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
     dispatch(
@@ -122,62 +131,71 @@ const DailyProducts = ({ id }) => {
                     <th>Remains</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {addedDailyProducts.map((product, index) => (
-                    <tr key={index}>
-                      <td>{product.product.name}</td>
-                      <td>
-                        <div
-                          style={{
-                            marginRight: 10,
-                            display: 'flex',
-                            alignItems: 'center',
-                          }}
-                        >
+                {!loading && (
+                  <tbody>
+                    {addedDailyProducts.map((product, index) => (
+                      <tr key={product._id}>
+                        <td>{product.product.name}</td>
+                        <td>
+                          <div
+                            style={{
+                              marginRight: 10,
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <TextField
+                              style={{
+                                width: 100,
+                              }}
+                              type="number"
+                              id="outlined-size-small"
+                              defaultValue={product.quantity}
+                              variant="outlined"
+                              size="small"
+                              onChange={(e) =>
+                                setQuantityChanges(index, e.target.value)
+                              }
+                            />
+                          </div>
+                        </td>
+                        <td>
                           <TextField
                             style={{
                               width: 100,
                             }}
+                            disabled
                             type="number"
                             id="outlined-size-small"
-                            defaultValue={product.quantity}
+                            defaultValue={product.sales}
                             variant="outlined"
                             size="small"
-                            onChange={(e) =>
-                              setQuantityChanges(index, e.target.value)
-                            }
                           />
-                        </div>
-                      </td>
-                      <td>
-                        <TextField
-                          style={{
-                            width: 100,
-                          }}
-                          disabled
-                          type="number"
-                          id="outlined-size-small"
-                          defaultValue={product.sales}
-                          variant="outlined"
-                          size="small"
-                        />
-                      </td>
-                      <td>
-                        <TextField
-                          style={{
-                            width: 100,
-                          }}
-                          disabled
-                          type="number"
-                          id="outlined-size-small"
-                          defaultValue={product.quantity - product.sales}
-                          variant="outlined"
-                          size="small"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                        </td>
+                        <td>
+                          <TextField
+                            style={{
+                              width: 100,
+                            }}
+                            disabled
+                            type="number"
+                            id="outlined-size-small"
+                            defaultValue={product.quantity - product.sales}
+                            variant="outlined"
+                            size="small"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+                {loading && (
+                  <>
+                    <div style={{ textAlign: 'center', marginTop: 50 }}>
+                      <CircularProgress style={{ color: 'red' }} />
+                    </div>
+                  </>
+                )}
               </Table>
             </div>
           </Row>

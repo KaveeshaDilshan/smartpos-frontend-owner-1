@@ -46,7 +46,6 @@ function WarehouseAnalytics({ id }) {
   Object.keys(warehouseAnalytics).map((value) => {
     data.push({ date: value, income: warehouseAnalytics[value].totalIncome });
   });
-  console.log(period);
   return (
     <>
       <Row className={styles.warehouse}>

@@ -194,6 +194,7 @@ function SalespersonAnalytics({ id }) {
               </ResponsiveContainer>
               <Typography>
                 Total Income Over the Time Period - Rs.
+                {/* eslint-disable-next-line func-names */}
                 {totalIncome.reduce(function (a, b) {
                   return a + b;
                 }, 0)}

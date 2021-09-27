@@ -46,7 +46,6 @@ function SalespersonPage(props) {
       ),
     [oneDate]
   );
-  console.log(salespersonProducts);
   return (
     <Layout>
       <Row>
