@@ -31,7 +31,6 @@ function LeavesPage() {
   const [search, setSearch] = useState('pending');
   const allLeaves = useSelector((state) => state.leavesReducer.allLeaves);
   const loading = useSelector((state) => state.leavesReducer.loading);
-  console.log(allLeaves);
   React.useEffect(() => {
     dispatch(getLeaves(search));
   }, [search]);

@@ -51,7 +51,6 @@ export default function LoginForm() {
   const history = useHistory();
   const user = useSelector((state) => state.loginReducer.user);
   React.useEffect(() => {
-    console.log(user);
     if (user) {
       if (user.role === 'manager') {
         history.push('/manager/dashboard');

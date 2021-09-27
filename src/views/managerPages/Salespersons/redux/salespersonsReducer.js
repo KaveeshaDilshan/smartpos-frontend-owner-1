@@ -1,4 +1,5 @@
 import * as actionTypes from './salespersonsActionTypes';
+import { GET_SALESPERSON_DAILY_PRODUCTS } from './salespersonsActionTypes';
 
 const initialState = {
   allSalespersons: [],
@@ -8,6 +9,7 @@ const initialState = {
   oneSalespersonDailyProducts: [],
   oneSalespersonAssignedShops: [],
   totalSalespersons: 0,
+  dailyProductsLoading: false,
 };
 
 function reducer(state = initialState, action) {
@@ -44,9 +46,16 @@ function reducer(state = initialState, action) {
         ...state,
         oneSalespersonAssignedShops: action.data.shops,
       };
+
+    case actionTypes.GET_SALESPERSON_DAILY_PRODUCTS:
+      return {
+        ...state,
+        dailyProductsLoading: true,
+      };
     case actionTypes.GET_SALESPERSON_DAILY_PRODUCTS_SUCCESS:
       return {
         ...state,
+        dailyProductsLoading: false,
         oneSalespersonDailyProducts: action.data.dailyProducts,
       };
     default:

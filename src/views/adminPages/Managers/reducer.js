@@ -34,7 +34,6 @@ const managerReducer = (state = initialState, action) => {
         loading: true,
       };
     case actionTypes.GET_ALL_UNASSIGNED_MANAGERS_SUCCESS:
-      console.log(action.payload, 'gggggggggg');
       return {
         ...state,
         unassignedManagers: [...action.payload],
