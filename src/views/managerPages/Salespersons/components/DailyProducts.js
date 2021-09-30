@@ -54,7 +54,6 @@ const DailyProducts = ({ id }) => {
   const dailyProducts = useSelector(
     (state) => state.salespersonsReducer.oneSalespersonDailyProducts
   );
-
   const loading = useSelector(
     (state) => state.salespersonsReducer.dailyProductsLoading
   );
@@ -148,6 +147,10 @@ const DailyProducts = ({ id }) => {
                               style={{
                                 width: 100,
                               }}
+                              disabled={
+                                Moment(selectedDate) <
+                                Moment().subtract(1, 'days')
+                              }
                               type="number"
                               id="outlined-size-small"
                               defaultValue={product.quantity}

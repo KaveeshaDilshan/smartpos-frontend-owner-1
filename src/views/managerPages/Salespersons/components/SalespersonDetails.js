@@ -39,13 +39,13 @@ const SalespersonDetails = ({ id }) => {
             >
               SALESPERSON DETAILS
             </Typography>
-            {/*<Button*/}
-            {/*  variant="contained"*/}
-            {/*  size="small"*/}
-            {/*  onClick={() => history.push(`/manager/salespersons/edit/${id}`)}*/}
-            {/*>*/}
-            {/*  Edit*/}
-            {/*</Button>*/}
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => history.push(`/manager/salespersons/edit/${id}`)}
+            >
+              Edit
+            </Button>
           </div>
         </Row>
         <Paper className={classes.paper}>
@@ -65,7 +65,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson._id}
+                  {salesperson.telephone}
                 </h4>
                 <h4
                   style={{
@@ -73,7 +73,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '14px',
                   }}
                 >
-                  salesperson ID
+                  Salesperson telephone
                 </h4>
               </div>
             </Col>

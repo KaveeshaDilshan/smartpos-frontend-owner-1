@@ -82,11 +82,22 @@ export function* updateProduct(action) {
   }
 }
 
+export function* deleteProduct(action) {
+  const id = action.data;
+  try {
+    yield axios.delete(`${BASE_URL}/manager/product/${id}`);
+    toast.success('Product is successfully deleted');
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}
+
 function* ManagerProductSagas() {
   yield takeLatest(actionTypes.GET_ALL_PRODUCTS, getAllProducts);
   yield takeLatest(actionTypes.ADD_PRODUCT, addProduct);
   yield takeLatest(actionTypes.GET_ONE_PRODUCT, getOneProduct);
   yield takeLatest(actionTypes.UPDATE_PRODUCT, updateProduct);
+  yield takeLatest(actionTypes.DELETE_PRODUCT, deleteProduct);
 }
 
 const managerProductSagas = [ManagerProductSagas];

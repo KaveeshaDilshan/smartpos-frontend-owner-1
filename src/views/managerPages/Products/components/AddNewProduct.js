@@ -55,6 +55,10 @@ function AddNewProduct() {
     description: '',
   };
   const onSubmit = (values) => {
+    if (url === '') {
+      toast.error('Please upload the photo');
+      return;
+    }
     dispatch(
       addProduct({
         name: values.product_name,
