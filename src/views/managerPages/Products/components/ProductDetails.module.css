@@ -1,9 +1,10 @@
-.produt_details {
+.product_details {
   font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  min-width: fit-content;
+  min-height: 600px !important;
 }
 
 label {
@@ -15,8 +16,8 @@ label {
 }
 
 .form {
-  margin-top: 30px;
-  width: 700px;
+  margin: 10px;
+  width: 500px;
   padding: 20px;
   border-radius: 10px;
   background-color: rgb(224, 223, 223);

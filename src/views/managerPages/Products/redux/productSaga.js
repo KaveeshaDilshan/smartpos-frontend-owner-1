@@ -6,9 +6,9 @@ import { BASE_URL } from '../../../../const/config';
 
 export function* getAllProducts(action) {
   const { search, category } = action.data;
-  let filter = '';
+  let filter = 'archived eq false';
   if (category) {
-    filter = `categoryId eq ${category}`;
+    filter = `categoryId eq ${category},archived eq false`;
   }
   try {
     const { data } = yield axios.get(

@@ -1,14 +1,19 @@
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Box, CircularProgress, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  Typography,
+} from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { storage } from '../../../../const/firebase.config';
 import styles from './AddNewProduct.module.css';
 import { getAllCategories } from '../../Category/redux/categoryActions';
-import { addProduct } from '../redux/productActions';
-import ManagerLayout from '../../../ManagerLayout';
+import { addProduct, getAllProducts } from '../redux/productActions';
 
 function CircularProgressWithLabel(props) {
   return (
@@ -37,7 +42,7 @@ function CircularProgressWithLabel(props) {
   );
 }
 
-function AddNewProduct() {
+function AddNewProduct({ open, handleClose, setNewProductAdded }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
@@ -68,6 +73,8 @@ function AddNewProduct() {
         photo: url,
       })
     );
+    setNewProductAdded(true);
+    dispatch(getAllProducts({ search: '', category: '' }));
   };
   const validate = (values) => {
     const errors = {};
@@ -82,6 +89,9 @@ function AddNewProduct() {
     }
     if (!values.unit_price) {
       errors.unit_price = 'Unit Price is Required';
+    }
+    if (values.unit_price < 0) {
+      errors.unit_price = 'Unit Price should be positive';
     }
     return errors;
   };
@@ -127,101 +137,127 @@ function AddNewProduct() {
 
   return (
     <>
-      <ManagerLayout>
-        <div className={styles.addnew_product}>
-          <Form onSubmit={formik.handleSubmit} className={styles.form}>
-            <FormGroup>
-              <Label for="product_name">Product Name</Label>
-              <Input
-                type="text"
-                name="product_name"
-                id="product_name"
-                placeholder="enter product name"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.product_name}
-              />
-              {formik.errors.product_name && formik.touched.product_name && (
+      {/*<ManagerLayout>*/}
+      <Dialog
+        open={open}
+        onClose={() => handleClose(false)}
+        className={styles.addnew_product}
+        PaperProps={{
+          style: {
+            fontSize: 15,
+            borderWidth: 5,
+            borderRadius: 10,
+            borderColor: '#777780',
+            borderStyle: 'solid',
+            color: '#fffdfd',
+            margin: 15,
+            opacity: 0.9,
+          },
+        }}
+      >
+        <Form onSubmit={formik.handleSubmit} className={styles.form}>
+          <FormGroup>
+            <Label for="product_name">Product Name</Label>
+            <Input
+              type="text"
+              name="product_name"
+              id="product_name"
+              placeholder="enter product name"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.product_name}
+            />
+            {formik.errors.product_name && formik.touched.product_name && (
+              <p className={styles.input_warning}>
+                {formik.errors.product_name}
+              </p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label for="unit_price">Unit Price(Rs)</Label>
+            <Input
+              type="number"
+              name="unit_price"
+              id="unit_price"
+              placeholder="enter unit price"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.unit_price}
+            />
+            {formik.errors.unit_price && formik.touched.unit_price && (
+              <p className={styles.input_warning}>{formik.errors.unit_price}</p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label for="product_category">Select Category</Label>
+            <Input
+              type="select"
+              name="product_category"
+              id="product_category"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.product_category}
+            >
+              <option>Select Category</option>
+              {allCategories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </Input>
+            {formik.errors.product_category &&
+              formik.touched.product_category && (
                 <p className={styles.input_warning}>
-                  {formik.errors.product_name}
+                  {formik.errors.product_category}
                 </p>
               )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="unit_price">Unit Price(Rs)</Label>
-              <Input
-                type="number"
-                name="unit_price"
-                id="unit_price"
-                placeholder="enter unit price"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.unit_price}
-              />
-              {formik.errors.unit_price && formik.touched.unit_price && (
-                <p className={styles.input_warning}>
-                  {formik.errors.unit_price}
-                </p>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="product_category">Select Category</Label>
-              <Input
-                type="select"
-                name="product_category"
-                id="product_category"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.product_category}
+          </FormGroup>
+          <FormGroup>
+            <Label for="description">Product Description</Label>
+            <Input
+              type="textarea"
+              name="description"
+              id="description"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.description}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="photo">Photo</Label>
+            <div style={{ display: 'flex' }}>
+              <input type="file" onChange={handleChange} />
+              <Button
+                variant="contained"
+                color="primary"
+                type="button"
+                onClick={handleUpload}
               >
-                <option>Select Category</option>
-                {allCategories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </Input>
-              {formik.errors.product_category &&
-                formik.touched.product_category && (
-                  <p className={styles.input_warning}>
-                    {formik.errors.product_category}
-                  </p>
-                )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="description">Product Description</Label>
-              <Input
-                type="textarea"
-                name="description"
-                id="description"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.description}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="photo">Photo</Label>
+                Upload
+              </Button>
               <div style={{ display: 'flex' }}>
-                <input type="file" onChange={handleChange} required />
-                <Button type="button" onClick={handleUpload}>
-                  Upload
-                </Button>
-                <div style={{ display: 'flex' }}>
-                  <img
-                    style={{ height: 100, width: 100, marginRight: 10 }}
-                    src={url || 'http://via.placeholder.com/300'}
-                    alt="product-poto"
-                  />
-                  <div>
-                    <CircularProgressWithLabel value={progress} />
-                  </div>
+                <img
+                  style={{ height: 100, width: 100, marginRight: 10 }}
+                  src={url || 'http://via.placeholder.com/300'}
+                  alt="product-poto"
+                />
+                <div>
+                  <CircularProgressWithLabel value={progress} />
                 </div>
               </div>
-            </FormGroup>
-            <Button type="submit">Submit</Button>
-          </Form>
-        </div>
-      </ManagerLayout>
+            </div>
+          </FormGroup>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            size="small"
+          >
+            Submit
+          </Button>
+        </Form>
+      </Dialog>
+      {/*</ManagerLayout>*/}
     </>
   );
 }
