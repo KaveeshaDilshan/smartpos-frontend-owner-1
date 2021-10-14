@@ -66,7 +66,7 @@ function ManagerProfile({ open, handleClose }) {
               <div className={styles.avatar__box}>
                 <Avatar
                   className={styles.avatar}
-                  alt="kamal silva"
+                  alt="kaveesha dilshan"
                   src={warehouseImage}
                 />
               </div>

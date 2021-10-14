@@ -24,7 +24,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
   React.useEffect(() => {
     dispatch(getAllProducts({ search: '', category: '' }));
   }, []);
-  const handleAddbutton = () => {
+  const handleAddButton = () => {
     dispatch(
       addProductToWarehouse({
         warehouseID,
@@ -34,6 +34,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         },
       })
     );
+    dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
     dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
   };
 
@@ -77,7 +78,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
           <Button onClick={clickCancel} color="primary">
             Cancel
           </Button>
-          <Button autoFocus onClick={handleAddbutton} color="primary">
+          <Button autoFocus onClick={handleAddButton} color="primary">
             Add
           </Button>
         </DialogActions>

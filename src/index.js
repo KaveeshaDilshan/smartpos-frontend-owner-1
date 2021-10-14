@@ -15,10 +15,8 @@ const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <ToastContainer autoClose={3000} hideProgressBar position="top-right" />
-      <App history={history} />
-    </React.StrictMode>
+    <ToastContainer autoClose={3000} hideProgressBar position="top-right" />
+    <App history={history} />
   </Provider>,
   document.getElementById('root')
 );

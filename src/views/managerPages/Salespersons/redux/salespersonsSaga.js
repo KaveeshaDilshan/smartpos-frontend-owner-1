@@ -51,7 +51,6 @@ const addSalespersonCall = async (data) => {
   data.uid = user.uid;
 
   const result = await axios.post(`${BASE_URL}/manager/salespersons`, data);
-  console.log('aerfghbnjkm,l');
   return result;
 };
 

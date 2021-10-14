@@ -12,3 +12,7 @@ export function addProduct(data) {
 export function updateProduct(data) {
   return { type: actionTypes.UPDATE_PRODUCT, data };
 }
+
+export function deleteProduct(data) {
+  return { type: actionTypes.DELETE_PRODUCT, data };
+}

@@ -84,6 +84,9 @@ function ProductDetails(props) {
     if (!values.unit_price) {
       errors.unit_price = 'Unit Price is Required';
     }
+    if (values.unit_price < 0) {
+      errors.unit_price = 'Unit Price should be positive';
+    }
     return errors;
   };
   const formik = useFormik({
@@ -129,7 +132,7 @@ function ProductDetails(props) {
   return (
     <>
       <ManagerLayout>
-        <div className={styles.produt_details}>
+        <div className={styles.product_details}>
           <Form onSubmit={formik.handleSubmit} className={styles.form}>
             <FormGroup>
               <Label for="product_name">Product Name</Label>

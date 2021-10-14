@@ -19,6 +19,9 @@ function AddNewSalesperson() {
     if (!values.lastName) {
       errors.lastName = 'Last name is required';
     }
+    if (!values.telephone) {
+      errors.telephone = 'Telephone is required';
+    }
     if (!values.email) {
       errors.email = 'Email is Required';
     } else if (

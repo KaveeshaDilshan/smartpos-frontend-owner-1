@@ -7,9 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-// import { useHistory } from 'react-router-dom';
-// import EditIcon from '@material-ui/icons/Edit';
-// import DeleteIcon from '@material-ui/icons/Delete';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -18,7 +15,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import { Divider } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { useDispatch } from 'react-redux';
 import ConfirmationBox from '../../common/ConfirmationBox';
+import { deleteProduct, getAllProducts } from '../redux/productActions';
 
 const useStyles = makeStyles({
   root: {
@@ -40,9 +40,6 @@ const useStyles = makeStyles({
     maxHeight: 150,
     minHeight: 150,
   },
-  // price: {
-  //   marginTop: -30,
-  // },
   priceTag: {
     marginTop: -60,
     backgroundColor: 'rgb(211, 216, 247)',
@@ -92,8 +89,9 @@ export default function ProductItem({
 }) {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const [confirmBoxOn, setconfirmBoxOn] = useState(false);
+  const [confirmBoxOn, setConfirmBox] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
   const title = 'Delete';
   const body = 'Are you sure? Do you want to delete this product';
@@ -104,6 +102,8 @@ export default function ProductItem({
 
   useEffect(() => {
     if (deleteConfirm === true) {
+      dispatch(deleteProduct(productId));
+      dispatch(getAllProducts({ search: '', category: '' }));
       setConfirm(false);
     }
   }, [deleteConfirm]);
@@ -144,7 +144,7 @@ export default function ProductItem({
             size="small"
             onClick={setDetailsBoxOn}
           >
-            Show Details
+            Details
           </Button>
           <EditIcon
             className={classes.edit}
@@ -153,16 +153,16 @@ export default function ProductItem({
               history.push(`/manager/products/getOne/${productId}`)
             }
           />
-          {/*<DeleteIcon*/}
-          {/*  className={classes.delete}*/}
-          {/*  color="action"*/}
-          {/*  onClick={setconfirmBoxOn}*/}
-          {/*/>*/}
+          <DeleteIcon
+            className={classes.delete}
+            color="action"
+            onClick={setConfirmBox}
+          />
         </CardActions>
       </Card>
       <ConfirmationBox
         open={confirmBoxOn}
-        handleClose={setconfirmBoxOn}
+        handleClose={setConfirmBox}
         title={title}
         description={body}
         option1={option1}
