@@ -9,7 +9,7 @@ export function* getAllSalespersons(action) {
   const { search, warehouseID, page } = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/salespersons/getAll/${warehouseID}?sortBy=+firstName&query=${search}&page=${page}`
+      `${BASE_URL}/manager/salespersons/getAll/warehouse/${warehouseID}?sortBy=+firstName&query=${search}&page=${page}`
     );
     yield put({
       type: actionTypes.GET_ALL_SALESPERSONS_SUCCESS,
@@ -24,9 +24,7 @@ export function* getAllSalespersons(action) {
 }
 
 const getOneSalespersonCall = async (id) => {
-  const result = await axios.get(
-    `${BASE_URL}/manager/salespersons/getOne/${id}`
-  );
+  const result = await axios.get(`${BASE_URL}/manager/salespersons/${id}`);
   return result;
 };
 
@@ -66,10 +64,18 @@ export function* addSalesperson(action) {
   }
 }
 
+const editSalespersonCall = async ({ id, details }) => {
+  const result = await axios.patch(
+    `${BASE_URL}/manager/salespersons/${id}`,
+    details
+  );
+  return result;
+};
+
 export function* editSalesperson(action) {
   const { id, details } = action.data;
   try {
-    yield axios.patch(`${BASE_URL}/manager/salespersons/${id}`, details);
+    yield call(editSalespersonCall, { id, details });
     toast.success('Salesperson details are edited successfully');
   } catch (error) {
     toast.error(error.response.data.message);
