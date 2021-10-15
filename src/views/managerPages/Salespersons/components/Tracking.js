@@ -22,7 +22,7 @@ function SalespersonTracking() {
     dispatch(getOneSalesperson(id));
     dispatch(getSalespersonShops(id));
   }, []);
-  console.log(assignedShops);
+  console.log(parseFloat(salesperson.latitude));
   return (
     <>
       <ManagerLayout>
@@ -33,7 +33,10 @@ function SalespersonTracking() {
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `700px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            position={{ lat: 6.922 + 0.001, lng: 79.862 }}
+            position={{
+              lat: parseFloat(salesperson.latitude) + 0.001,
+              lng: parseFloat(salesperson.longitude),
+            }}
             shops={assignedShops}
           />
         </div>
