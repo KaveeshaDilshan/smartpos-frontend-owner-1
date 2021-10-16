@@ -15,8 +15,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ManagerProfile from '../../views/managerPages/common/managerProfile/ManagerProfile';
 import profileFallback from '../images.png';
+import { logoutUser } from '../../views/login/redux/loginActions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -94,6 +97,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -117,7 +122,9 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  const handleLogout = () => {
+    dispatch(logoutUser(history));
+  };
   const menuId = 'primary-search-account-menu';
   // const renderMenu = (
   //   <Menu
@@ -221,6 +228,7 @@ export default function PrimarySearchAppBar(props) {
                 color: '#FFF',
                 marginRight: 20,
               }}
+              onClick={handleLogout}
               className="d-flex align-items-center justify-content-center"
             >
               LOGOUT

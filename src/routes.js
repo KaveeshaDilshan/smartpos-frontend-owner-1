@@ -24,6 +24,11 @@ import SalespersonPage from './views/adminPages/Salespersons/components/Salesper
 
 const routes = [
   {
+    path: '*',
+    render: Home,
+    layout: BASE_ADMIN_ROUTE,
+  },
+  {
     path: '',
     render: Home,
     layout: BASE_ADMIN_ROUTE,

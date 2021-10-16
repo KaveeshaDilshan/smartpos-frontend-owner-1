@@ -9,20 +9,17 @@ function App() {
 
   return (
     <>
-      {isLoggedIn ? (
-        routes.map((route, key) => {
-          return (
-            <Route
-              exact={true}
-              path={route.layout + route.path}
-              component={route.render}
-              key={key}
-            />
-          );
-        })
-      ) : (
-        <Route exact={true} path="/login" component={LoginForm} />
-      )}
+      {routes.map((route, key) => {
+        console.log(route);
+        return (
+          <Route
+            exact={true}
+            path={isLoggedIn ? route.layout + route.path : '/login'}
+            component={route.render}
+            key={key}
+          />
+        );
+      })}
     </>
   );
 }
