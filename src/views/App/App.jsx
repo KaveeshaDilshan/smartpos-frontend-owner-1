@@ -1,25 +1,23 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
 import routes from '../../routes';
 import LoginForm from '../login/LoginForm';
+import PrivateRoute from '../../components/common/PrivateRoute';
 
 function App() {
-  const { isLoggedIn } = useSelector((state) => state.loginReducer);
-
   return (
     <>
       {routes.map((route, key) => {
-        console.log(route);
         return (
-          <Route
+          <PrivateRoute
             exact={true}
-            path={isLoggedIn ? route.layout + route.path : '/login'}
+            path={route.layout + route.path}
             component={route.render}
             key={key}
           />
         );
       })}
+      <Route path="/login" component={LoginForm} />
     </>
   );
 }
