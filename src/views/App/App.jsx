@@ -9,59 +9,47 @@ function App() {
   const { user } = useSelector((state) => state.loginReducer);
   const allRoutes = (currentUser) => {
     if (currentUser && currentUser.role === 'admin') {
-      const adminRoutes = routes
-        .filter((route) => route.layout === BASE_ADMIN_ROUTE)
-        .map((route) => `${route.layout}${route.path}`);
-      if (adminRoutes.includes(window.location.pathname)) {
-        return routes
-          .filter((route) => route.layout === BASE_ADMIN_ROUTE)
-          .map((route, key) => {
-            return (
-              <>
-                <Route
-                  exact={true}
-                  path={route.layout + route.path}
-                  component={route.render}
-                  key={key}
-                />
-              </>
-            );
-          });
-      }
+
       return (
         <>
-          <Route exact={true} path="/login" component={LoginForm} key="login" />
-          <Redirect to="/login" />
+          {routes
+            .filter((route) => route.layout === BASE_ADMIN_ROUTE)
+            .map((route, key) => {
+              return (
+                <>
+                  <Route
+                    exact={true}
+                    path={route.layout + route.path}
+                    component={route.render}
+                    key={key}
+                  />
+                </>
+              );
+            })}
         </>
       );
     }
 
     if (currentUser && currentUser.role === 'manager') {
-      const managerRoutes = routes
-        .filter((route) => route.layout === BASE_MANAGER_ROUTE)
-        .map((route) => `${route.layout}${route.path}`);
-      if (managerRoutes.includes(window.location.pathname)) {
-        return routes
-          .filter((route) => route.layout === BASE_MANAGER_ROUTE)
-          .map((route, key) => {
-            return (
-              <>
-                <Route
-                  exact={true}
-                  path={route.layout + route.path}
-                  component={route.render}
-                  key={key}
-                />
-              </>
-            );
-          });
-      }
       return (
         <>
-          <Route exact={true} path="/login" component={LoginForm} key="login" />
-          <Redirect to="/login" />
+          {routes
+            .filter((route) => route.layout === BASE_MANAGER_ROUTE)
+            .map((route, key) => {
+              return (
+                <>
+                  <Route
+                    exact={true}
+                    path={route.layout + route.path}
+                    component={route.render}
+                    key={key}
+                  />
+                </>
+              );
+            })}
         </>
       );
+
     }
     return (
       <>

@@ -67,7 +67,8 @@ export default function LoginForm() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const loginThisUser = () => {
+  const loginThisUser = (e) => {
+    e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
   return (
@@ -80,7 +81,7 @@ export default function LoginForm() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={loginThisUser}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -110,12 +111,11 @@ export default function LoginForm() {
             label="Remember me"
           /> */}
           <Button
-            type="button"
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={loginThisUser}
           >
             Sign In
           </Button>
