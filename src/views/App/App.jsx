@@ -37,20 +37,31 @@ function App() {
     }
 
     if (currentUser && currentUser.role === 'manager') {
-      return routes
+      const managerRoutes = routes
         .filter((route) => route.layout === BASE_MANAGER_ROUTE)
-        .map((route, key) => {
-          return (
-            <>
-              <Route
-                exact={true}
-                path={route.layout + route.path}
-                component={route.render}
-                key={key}
-              />
-            </>
-          );
-        });
+        .map((route) => `${route.layout}${route.path}`);
+      if (managerRoutes.includes(window.location.pathname)) {
+        return routes
+          .filter((route) => route.layout === BASE_MANAGER_ROUTE)
+          .map((route, key) => {
+            return (
+              <>
+                <Route
+                  exact={true}
+                  path={route.layout + route.path}
+                  component={route.render}
+                  key={key}
+                />
+              </>
+            );
+          });
+      }
+      return (
+        <>
+          <Route exact={true} path="/login" component={LoginForm} key="login" />
+          <Redirect to="/login" />
+        </>
+      );
     }
     return (
       <>
