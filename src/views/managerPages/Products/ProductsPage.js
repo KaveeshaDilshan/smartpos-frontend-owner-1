@@ -20,26 +20,25 @@ import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getAllCategories } from '../Category/redux/categoryActions';
+import AddNewProduct from './components/AddNewProduct';
 
 function ProductsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [isNewProductAdded, setNewProductAdded] = useState(false);
   const [search, setSearch] = useState('');
   const [categorySelect, setCategorySelect] = useState({});
-  // const history = useHistory();
+  const [addProductOpen, setAddProductOpen] = useState(false);
   const allProducts = useSelector((state) => state.productReducer.allProducts);
   const loading = useSelector((state) => state.productReducer.loading);
 
   const allCategories = useSelector(
     (state) => state.categoryReducer.allCategories
   );
-  // const category = allCategories.map((m) => m.name);
-
   React.useEffect(() => {
     dispatch(getAllProducts({ search, category: categorySelect._id }));
     dispatch(getAllCategories(''));
-  }, [search, categorySelect]);
-  // console.log(categorySelect);
+  }, [search, categorySelect, isNewProductAdded]);
 
   return (
     <>
@@ -76,7 +75,8 @@ function ProductsPage() {
               className={styles.addNew__button}
               variant="contained"
               type="button"
-              onClick={() => history.push('/manager/products/addnew')}
+              // onClick={() => history.push('/manager/products/addnew')}
+              onClick={setAddProductOpen}
             >
               <AddIcon /> Add New
             </Button>
@@ -84,7 +84,7 @@ function ProductsPage() {
           <Divider />
           <Divider />
           <br />
-          <div className={styles.bottom}>
+          <div>
             {!loading ? (
               <>
                 <Grid container direction="row" spacing={2}>
@@ -119,6 +119,11 @@ function ProductsPage() {
             )}
           </div>
         </div>
+        <AddNewProduct
+          open={addProductOpen}
+          handleClose={setAddProductOpen}
+          setNewProductAdded={setNewProductAdded}
+        />
       </ManagerLayout>
     </>
   );

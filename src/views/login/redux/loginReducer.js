@@ -1,8 +1,8 @@
 import * as actionTypes from './loginActionsType';
 
 const initialState = {
-  user: [],
-  isLoggedIn: true,
+  user: null,
+  isLoggedIn: false,
   loading: false,
 };
 
@@ -19,6 +19,12 @@ const loginReducer = (state = initialState, action) => {
         user: action.data,
         isLoggedIn: true,
         loading: false,
+      };
+    case actionTypes.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        user: null,
+        isLoggedIn: false,
       };
     default:
       return state;

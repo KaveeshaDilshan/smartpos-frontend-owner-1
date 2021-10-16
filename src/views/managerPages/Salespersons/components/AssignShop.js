@@ -49,16 +49,16 @@ const AssignShop = ({ id }) => {
     (state) => state.salespersonsReducer.warehouseShops
   );
 
-  const AssignedShops = useSelector(
+  const assignedShops = useSelector(
     (state) => state.salespersonsReducer.oneSalespersonAssignedShops
   );
 
-  const [chipData, setChipData] = React.useState(AssignedShops);
+  const [chipData, setChipData] = React.useState(assignedShops);
   const [selectedShop, setShopSelect] = React.useState({});
 
   React.useEffect(() => {
-    setChipData(AssignedShops);
-  }, [AssignedShops]);
+    setChipData(assignedShops);
+  }, [assignedShops]);
 
   const handleDelete = (chipToDelete) => () => {
     setChipData((chips) =>

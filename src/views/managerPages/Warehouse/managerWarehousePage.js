@@ -6,8 +6,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-// import TextField from '@material-ui/core/TextField';
-// import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './WarehousePage.module.css';
 import WarehouseItem from './components/WarehouseItem';
@@ -19,8 +17,6 @@ function managerWarehousePage() {
   const dispatch = useDispatch();
   const [clickAdd, setClickAdd] = useState(false);
   const [search, setSearch] = useState('');
-  // const [categorySelect, setCategorySelect] = useState('');
-  // const top100Films = ['Toys', 'Biscuit'];
 
   const allWarehouseProducts = useSelector(
     (state) => state.managerWarehouseReducer.allWarehouseProducts
@@ -35,7 +31,6 @@ function managerWarehousePage() {
     dispatch(getAllWarehouseProducts({ search, warehouseID }));
   }, [search]);
 
-  // console.log(categorySelect);
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
@@ -60,7 +55,7 @@ function managerWarehousePage() {
               </Button>
             </div>
             <Divider />
-            <Divider />
+            <Divider className="mb-3" />
           </div>
           <div className={styles.page_bottom}>
             <div className={styles.warehouse_inventory}>

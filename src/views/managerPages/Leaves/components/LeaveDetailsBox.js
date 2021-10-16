@@ -17,27 +17,44 @@ export default function LeaveDetailsBox({ open, handleClose, description }) {
       <Dialog
         open={open}
         onClose={() => handleClose(false)}
-        // PaperProps={{
-        //   style: {
-        //     minWidth: 650,
-        //     padding: 0,
-        //     minHeight: 500,
-        //   },
-        // }}
+        PaperProps={{
+          style: {
+            // borderWidth: 3,
+            // borderRadius: 10,
+            // borderColor: '#050544',
+            // borderStyle: 'solid',
+            // maskBorder: 5,
+          },
+        }}
       >
-        <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Reason For Leave
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={clickClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
+        <div
+          style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
+        >
+          <DialogTitle>
+            <Typography
+              component="h2"
+              variant="h6"
+              color="primary"
+              gutterBottom
+            >
+              Reason For Leave
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>{description}</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={clickClose}
+              color="primary"
+              variant="text"
+              size="small"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );

@@ -19,6 +19,9 @@ function AddNewSalesperson() {
     if (!values.lastName) {
       errors.lastName = 'Last name is required';
     }
+    if (!values.telephone) {
+      errors.telephone = 'Telephone is required';
+    }
     if (!values.email) {
       errors.email = 'Email is Required';
     } else if (
@@ -58,14 +61,7 @@ function AddNewSalesperson() {
   return (
     <>
       <ManagerLayout>
-        <Container
-          style={{
-            height: '87vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Container style={{ marginTop: 20 }}>
           <Form onSubmit={formik.handleSubmit}>
             <Row form>
               <Row>
@@ -170,22 +166,10 @@ function AddNewSalesperson() {
               </Row>
             </Row>
             <Button
-              variant="contained"
-              color="#1976d2"
               type="submit"
-              style={{
-                marginTop: 10,
-                backgroundImage: 'linear-gradient(#0dccea, #0d70ea)',
-                borderRadius: 4,
-                // boxShadow: 'rgba(0, 0, 0, .3) 0 5px 15px',
-                boxSizing: 'border-box',
-                color: '#fff',
-                cursor: 'pointer',
-                fontFamily: 'Montserrat,sans-serif',
-                fontSize: '.9em',
-                // padding: '10px 15px',
-                textAlign: 'center',
-              }}
+              variant="contained"
+              color="primary"
+              className="mt-3"
             >
               ADD SALESPERSON
             </Button>

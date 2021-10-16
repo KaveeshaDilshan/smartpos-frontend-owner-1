@@ -11,8 +11,8 @@ const useStyles = makeStyles(() => ({
   card: {
     boxSizing: 'border-box',
     width: '100%',
-    marginBottom: 20,
-    padding: 20,
+    marginBottom: 10,
+    padding: 10,
     background: '#ffff',
     borderRadius: 5,
     boxShadow: '0px 0px 5px gray',
