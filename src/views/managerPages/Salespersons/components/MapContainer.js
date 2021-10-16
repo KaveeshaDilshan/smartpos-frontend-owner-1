@@ -25,7 +25,7 @@ const MapContainer = withScriptjs(
             }}
             icon={{
               url: 'https://firebasestorage.googleapis.com/v0/b/smart-pos-9254b.appspot.com/o/images%2Ficons8-shop-24.png?alt=media&token=f63321d1-a16a-4e7e-90d1-faa0d9b08766',
-              scaledSize: new window.google.maps.Size(30, 30),
+              scaledSize: new window.google.maps.Size(18, 18),
             }}
             onClick={() => setSelected(shop)}
           >
@@ -54,6 +54,7 @@ const MapContainer = withScriptjs(
         <Marker
           position={{ lat: props.position.lat, lng: props.position.lng }}
         />
+        {console.log(props.position.lat)}
       </GoogleMap>
     );
   })

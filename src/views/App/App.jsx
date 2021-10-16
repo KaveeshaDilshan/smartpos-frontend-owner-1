@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import routes from '../../routes';
 import LoginForm from '../login/LoginForm';
 import { BASE_ADMIN_ROUTE, BASE_MANAGER_ROUTE } from '../../const/config';
+import CategoryPage from '../managerPages/Category/CategoryPage';
 
 function App() {
   const { user } = useSelector((state) => state.loginReducer);
@@ -45,8 +46,9 @@ function App() {
 
     return (
       <>
-        <Route exact={true} path="*" component={LoginForm} key="login" />
-        <Redirect to="/login" />
+        <Route exact={true} path="/test" component={CategoryPage} key="logi" />
+        <Route path="*" component={LoginForm} key="login" />
+        {/*<Redirect to="/login" />*/}
       </>
     );
   };

@@ -19,10 +19,15 @@ function SalespersonTracking() {
     (state) => state.salespersonsReducer.oneSalespersonAssignedShops
   );
   useEffect(() => {
-    dispatch(getOneSalesperson(id));
     dispatch(getSalespersonShops(id));
   }, []);
-  console.log(parseFloat(salesperson.latitude));
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(getOneSalesperson(id));
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
   return (
     <>
       <ManagerLayout>
@@ -34,7 +39,7 @@ function SalespersonTracking() {
             containerElement={<div style={{ height: `700px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             position={{
-              lat: parseFloat(salesperson.latitude) + 0.001,
+              lat: parseFloat(salesperson.latitude) + 0.0005,
               lng: parseFloat(salesperson.longitude),
             }}
             shops={assignedShops}
