@@ -96,11 +96,6 @@ const routes = [
   },
   { path: 'category', render: CategoryPage, layout: BASE_MANAGER_ROUTE },
   { path: 'leaves', render: LeavesPage, layout: BASE_MANAGER_ROUTE },
-  {
-    path: 'login',
-    render: LoginForm,
-    layout: '/',
-  },
 ];
 
 export default routes;
