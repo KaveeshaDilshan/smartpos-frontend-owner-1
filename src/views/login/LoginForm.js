@@ -56,7 +56,7 @@ export default function LoginForm() {
         history.push('/manager/dashboard');
       }
       if (user.role === 'admin') {
-        history.push('/admin');
+        history.push('/admin/warehouses');
       }
       if (user.role === 'salesperson') {
         toast.error('Salespersons are not allowed to login');
