@@ -19,15 +19,9 @@ import AnalyticsPage from './views/adminPages/Analytics/AnalyticsPage';
 import Salesperson from './views/adminPages/Salespersons/SalespersonPage';
 import AddManager from './views/adminPages/Managers/components/AddManager';
 import ManagerPage from './views/adminPages/Managers/ManagerPage';
-import LoginForm from './views/login/LoginForm';
 import SalespersonPage from './views/adminPages/Salespersons/components/SalespersonPage';
 
 const routes = [
-  {
-    path: '*',
-    render: Home,
-    layout: BASE_ADMIN_ROUTE,
-  },
   {
     path: '',
     render: Home,
