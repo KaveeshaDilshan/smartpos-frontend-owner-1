@@ -66,7 +66,7 @@ export default function LoginForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
-  const [password, setPasssword] = useState();
+  const [password, setPassword] = useState();
   const loginThisUser = () => {
     dispatch(loginUser({ email, password }));
   };
@@ -102,7 +102,7 @@ export default function LoginForm() {
             label="Password"
             type="password"
             id="password"
-            onChange={(e) => setPasssword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
           {/* <FormControlLabel

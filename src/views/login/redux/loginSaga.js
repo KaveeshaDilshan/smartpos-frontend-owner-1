@@ -1,27 +1,26 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../../../axios/axios';
 import * as actionTypes from './loginActionsType';
 import { auth } from '../../../const/firebase.config';
-import { BASE_URL } from '../../../const/config';
 
 const loginUserCall = async (data) => {
   const { email, password } = data;
-  let uid;
-  await auth
-    .signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      uid = user.user.uid;
-    })
-    .catch((error) => toast.error(error.message));
-  return uid;
+
+  console.log(email, password);
+  const user = await auth.signInWithEmailAndPassword(email, password);
+
+  const token = await auth.currentUser.getIdToken(/* forceRefresh */ true);
+  console.log(token);
+  localStorage.setItem('idToken', token);
+  return user.uid;
 };
 
 export function* loginUser(action) {
   const uid = yield call(loginUserCall, action.data);
   if (uid) {
     try {
-      const { data } = yield axios.get(`${BASE_URL}/users/me/${uid}`);
+      const { data } = yield axios.get(`/users/me/${uid}`);
       yield put({
         type: actionTypes.LOGIN_SUCCESS,
         data,
