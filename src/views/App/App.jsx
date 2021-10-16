@@ -3,25 +3,55 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import routes from '../../routes';
 import LoginForm from '../login/LoginForm';
+import { BASE_ADMIN_ROUTE, BASE_MANAGER_ROUTE } from '../../const/config';
 
 function App() {
-  const { isLoggedIn } = useSelector((state) => state.loginReducer);
+  const { user } = useSelector((state) => state.loginReducer);
+  const allRoutes = (currentUser) => {
+    if (currentUser && currentUser.role === 'admin') {
+      return routes
+        .filter((route) => route.layout === BASE_ADMIN_ROUTE)
+        .map((route, key) => {
+          return (
+            <>
+              <Route
+                exact={true}
+                path={route.layout + route.path}
+                component={route.render}
+                key={key}
+              />
+              <Redirect to="/admin" />
+            </>
+          );
+        });
+    }
+    if (currentUser && currentUser.role === 'manager') {
+      return routes
+        .filter((route) => route.layout === BASE_MANAGER_ROUTE)
+        .map((route, key) => {
+          return (
+            <>
+              <Route
+                exact={true}
+                path={route.layout + route.path}
+                component={route.render}
+                key={key}
+              />
+              <Redirect to="/manager/dashboard" />
+            </>
+          );
+        });
+    }
 
-  return (
-    <>
-      {routes.map((route, key) => {
-        console.log(route);
-        return (
-          <Route
-            exact={true}
-            path={isLoggedIn ? route.layout + route.path : '/login'}
-            component={route.render}
-            key={key}
-          />
-        );
-      })}
-    </>
-  );
+    return (
+      <>
+        <Route exact={true} path="*" component={LoginForm} key="login" />
+        <Redirect to="/login" />
+      </>
+    );
+  };
+
+  return <>{allRoutes(user)}</>;
 }
 
 export default App;
