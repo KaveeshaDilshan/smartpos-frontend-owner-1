@@ -27,29 +27,24 @@ function ManagerProfile({ open, handleClose }) {
       TransitionComponent={Transition}
     >
       <Grid container>
-        <Grid item xs={5} className={styles.leftpart}>
-          {/*<div className={styles.avatar__box}>*/}
-          {/*  <Avatar*/}
-          {/*    className={styles.avatar}*/}
-          {/*    alt="kamal silva"*/}
-          {/*    src="https://avatars1.githubusercontent.com/u/35970677?s=60&v=4"*/}
-          {/*  />*/}
-          {/*</div>*/}
-          <div className={styles.managername__box}>Nimal Perera</div>
+        <Grid item xs={5} className={styles.leftPart}>
+          <div
+            className={styles.managerName__box}
+          >{`${warehouse.managerId.firstName} ${warehouse.managerId.lastName}`}</div>
           <div>Manager</div>
-          <div className={styles.leftpart__bottom}>
-            <div className={styles.leftpart__bottom__row}>
-              <PhoneIcon className={styles.leftpart__icon} />
-              +94123456789
+          <div className={styles.leftPart__bottom}>
+            <div className={styles.leftPart__bottom__row}>
+              <PhoneIcon className={styles.leftPart__icon} />
+              {warehouse.managerId.telephone}
             </div>
-            <div className={styles.leftpart__bottom__row}>
-              <EmailOutlinedIcon className={styles.leftpart__icon} />
-              kamal@gmail.com
+            <div className={styles.leftPart__bottom__row}>
+              <EmailOutlinedIcon className={styles.leftPart__icon} />
+              {warehouse.managerId.email}
             </div>
           </div>
         </Grid>
-        <Grid item xs={7} className={styles.rightpart}>
-          <div className={styles.otherdetails}>
+        <Grid item xs={7} className={styles.rightPart}>
+          <div>
             <Typography
               style={{
                 borderBottom: '3px solid #5BC67AD9',
@@ -72,7 +67,7 @@ function ManagerProfile({ open, handleClose }) {
               </div>
               <div style={{ marginLeft: 20, marginTop: 40 }}>
                 <h6>
-                  <PhoneIcon className={styles.leftpart__icon} />
+                  <PhoneIcon className={styles.leftPart__icon} />
                   {warehouse.telephone}
                 </h6>
                 <h6>District - {warehouse.district}</h6>

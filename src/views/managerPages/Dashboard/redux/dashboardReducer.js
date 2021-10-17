@@ -1,13 +1,8 @@
 import * as actionTypes from './dashboardActionTypes';
 
 const initialState = {
-  warehouseID: '6150c8bc497d385c88837f2a',
-  warehouse: {
-    district: 'Colombo',
-    town: 'Colombo',
-    telephone: '0571234567',
-    name: 'Mahela warehouse',
-  },
+  warehouseID: null,
+  warehouse: null,
   loading: false,
   warehouseSales: [],
 };
@@ -29,6 +24,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+      };
+    case actionTypes.M_GET_MANAGER_WAREHOUSE_SUCCESS:
+      return {
+        ...state,
+        warehouseID: action.warehouse._id,
+        warehouse: action.warehouse,
       };
     default:
       return state;

@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginForm() {
   const history = useHistory();
   const user = useSelector((state) => state.loginReducer.user);
+  console.log('aa');
   React.useEffect(() => {
     if (user) {
       if (user.role === 'manager') {

@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableComponent({ data, setPage, totalrows }) {
+export default function TableComponent({ data, setPage, totalRows }) {
   const rows = data.map((d, i) => ({
     ...d,
     name: `${d.firstName} ${d.lastName}`,
@@ -78,52 +78,50 @@ export default function TableComponent({ data, setPage, totalrows }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.index}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.id === 'action' ? (
-                            <>
-                              <Button
-                                style={{
-                                  marginRight: 5,
-                                }}
-                                variant="contained"
-                                size="small"
-                                onClick={() =>
-                                  history.push(
-                                    `/manager/salespersons/tracking/${row._id}`
-                                  )
-                                }
-                              >
-                                Track
-                              </Button>
-                              <Button
-                                variant="contained"
-                                size="small"
-                                onClick={() =>
-                                  history.push(
-                                    `/manager/salespersons/moredetails/${row._id}`
-                                  )
-                                }
-                              >
-                                More
-                              </Button>
-                            </>
-                          ) : (
-                            value
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows.map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.index}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.id === 'action' ? (
+                          <>
+                            <Button
+                              style={{
+                                marginRight: 5,
+                              }}
+                              variant="contained"
+                              size="small"
+                              onClick={() =>
+                                history.push(
+                                  `/manager/salespersons/tracking/${row._id}`
+                                )
+                              }
+                            >
+                              Track
+                            </Button>
+                            <Button
+                              variant="contained"
+                              size="small"
+                              onClick={() =>
+                                history.push(
+                                  `/manager/salespersons/moredetails/${row._id}`
+                                )
+                              }
+                            >
+                              More
+                            </Button>
+                          </>
+                        ) : (
+                          value
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -137,7 +135,7 @@ export default function TableComponent({ data, setPage, totalrows }) {
       >
         <div>
           <Pagination
-            count={Math.ceil(totalrows / 10)}
+            count={Math.ceil(totalRows / 10)}
             onChange={(e, p) => setPage(p)}
             color="primary"
           />
