@@ -11,13 +11,17 @@ import {
 import styles from './Dashboard.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import SalesChart from './components/SalesChart';
-import { getWarehouseSales } from './redux/dashboardActions';
+import {
+  getManagerWarehouse,
+  getWarehouseSales,
+} from './redux/dashboardActions';
 import { loginUser } from '../../login/redux/loginActions';
 
 function Dashboard() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(moment().subtract(7, 'day'));
   const [endDate, setEndDate] = useState(moment().subtract(0, 'day'));
+  const loggedManager = useSelector((state) => state.loginReducer.user);
   const warehouseID = useSelector(
     (state) => state.dashboardReducer.warehouseID
   );
@@ -30,7 +34,9 @@ function Dashboard() {
     () => dispatch(getWarehouseSales({ warehouseID, startDate, endDate })),
     [startDate, endDate]
   );
-
+  useEffect(() => {
+    dispatch(getManagerWarehouse(loggedManager.warehouseId));
+  }, [loggedManager]);
   const handleStartDateChange = (date) => {
     setStartDate(date);
   };
