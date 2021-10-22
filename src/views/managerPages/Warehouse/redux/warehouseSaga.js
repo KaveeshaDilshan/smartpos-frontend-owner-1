@@ -11,7 +11,6 @@ export function* getAllWarehouseProducts(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/warehouse/${warehouseID}?sortBy=+name&query=${search}`
     );
-
     yield put({
       type: actionTypes.GET_ALL_WAREHOUSE_PRODUCTS_SUCCESS,
       data,

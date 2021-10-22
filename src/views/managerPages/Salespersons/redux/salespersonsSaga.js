@@ -103,6 +103,7 @@ export function* getSalespersonShops(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/shops/${salespersonId}`
     );
+
     yield put({
       type: actionTypes.GET_SALESPERSON_SHOPS_SUCCESS,
       data,
@@ -128,6 +129,7 @@ export function* getSalespersonDailyProducts(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/dailyproducts/${id}?date=${date}`
     );
+
     yield put({
       type: actionTypes.GET_SALESPERSON_DAILY_PRODUCTS_SUCCESS,
       data,

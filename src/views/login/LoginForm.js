@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginForm() {
   const history = useHistory();
   const user = useSelector((state) => state.loginReducer.user);
-  console.log('aa');
   React.useEffect(() => {
     if (user) {
       if (user.role === 'manager') {
@@ -70,7 +69,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState();
   const loginThisUser = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    dispatch(loginUser({ email, password, history }));
   };
   return (
     <Container component="main" maxWidth="xs">

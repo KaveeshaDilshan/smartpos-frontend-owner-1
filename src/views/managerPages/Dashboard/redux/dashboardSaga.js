@@ -20,7 +20,16 @@ export function* getWarehouseSales(action) {
       sales,
     });
   } catch (error) {
-    toast.error(error.response.data.message);
+    if (!error.response) {
+      toast.error('error');
+    } else {
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      }
+      if (error.response.data.description) {
+        toast.error(error.response.data.description);
+      }
+    }
     yield put({
       type: actionTypes.GET_WAREHOUSE_SALES_ERROR,
     });
