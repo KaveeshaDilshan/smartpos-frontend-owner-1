@@ -107,11 +107,21 @@ export default function ProductItem({
       setConfirm(false);
     }
   }, [deleteConfirm]);
-
+  if (
+    !productId ||
+    !name ||
+    !categoryName ||
+    !unitPrice ||
+    !photoURL ||
+    !description
+  ) {
+    return null;
+  }
   return (
     <>
       <Card className={classes.root} variant="elevation">
         <CardMedia
+          id="photo"
           component="img"
           alt="Product Image"
           image={photoURL}
@@ -122,8 +132,11 @@ export default function ProductItem({
         <Divider />
         <Divider />
         <CardContent>
-          <Typography className={classes.name}>{name}</Typography>
+          <Typography id="product_name" className={classes.name}>
+            {name}
+          </Typography>
           <Typography
+            id="category_name"
             className={classes.categoryName}
             color="textSecondary"
             gutterBottom
@@ -133,6 +146,7 @@ export default function ProductItem({
         </CardContent>
         <CardContent>
           <Chip
+            id="unitPrice"
             size="small"
             label={`RS ${unitPrice}`}
             className={classes.priceTag}
