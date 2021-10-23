@@ -13,6 +13,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function ManagerProfile({ open, handleClose }) {
   const warehouse = useSelector((state) => state.dashboardReducer.warehouse);
+  if (!warehouse) {
+    return null;
+  }
   return (
     <Dialog
       open={open}
@@ -29,17 +32,17 @@ function ManagerProfile({ open, handleClose }) {
       <Grid container>
         <Grid item xs={5} className={styles.leftPart}>
           <div className={styles.managerName__box}>{`${
-            warehouse && warehouse.managerId.firstName
-          } ${warehouse && warehouse.managerId.lastName}`}</div>
+            warehouse.managerId && warehouse.managerId.firstName
+          } ${warehouse.managerId && warehouse.managerId.lastName}`}</div>
           <div>Manager</div>
           <div className={styles.leftPart__bottom}>
             <div className={styles.leftPart__bottom__row}>
               <PhoneIcon className={styles.leftPart__icon} />
-              {warehouse && warehouse.managerId.telephone}
+              {warehouse.managerId && warehouse.managerId.telephone}
             </div>
             <div className={styles.leftPart__bottom__row}>
               <EmailOutlinedIcon className={styles.leftPart__icon} />
-              {warehouse && warehouse.managerId.email}
+              {warehouse.managerId && warehouse.managerId.email}
             </div>
           </div>
         </Grid>
@@ -55,7 +58,7 @@ function ManagerProfile({ open, handleClose }) {
               color="primary"
               gutterBottom
             >
-              {warehouse && warehouse.name}
+              {warehouse.name && warehouse.name}
             </Typography>
             <div style={{ display: 'flex' }}>
               <div className={styles.avatar__box}>
@@ -68,10 +71,10 @@ function ManagerProfile({ open, handleClose }) {
               <div style={{ marginLeft: 20, marginTop: 40 }}>
                 <h6>
                   <PhoneIcon className={styles.leftPart__icon} />
-                  {warehouse && warehouse.telephone}
+                  {warehouse.telephone && warehouse.telephone}
                 </h6>
-                <h6>District - {warehouse && warehouse.district}</h6>
-                <h6>Town - {warehouse && warehouse.town}</h6>
+                <h6>District - {warehouse.district && warehouse.district}</h6>
+                <h6>Town - {warehouse.town && warehouse.town}</h6>
               </div>
             </div>
           </div>
