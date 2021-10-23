@@ -54,11 +54,22 @@ function WarehouseItem({ productId, poto, productName, unitPrice, count }) {
       })
     );
   };
+  if (
+    !productId ||
+    !poto ||
+    !productName ||
+    !unitPrice ||
+    !unitPrice ||
+    !count
+  ) {
+    return null;
+  }
   return (
     <Card className={classes.card}>
       <div style={{ display: 'flex' }}>
         <div>
           <CardMedia
+            id="photo"
             component="img"
             alt="Product Image"
             src={poto}
@@ -85,8 +96,8 @@ function WarehouseItem({ productId, poto, productName, unitPrice, count }) {
               width: '50%',
             }}
           >
-            <div>{productName}</div>
-            <div>Rs {unitPrice}</div>
+            <div id="product_name">{productName}</div>
+            <div id="unitPrice">Rs {unitPrice}</div>
           </div>
 
           <div
@@ -97,8 +108,8 @@ function WarehouseItem({ productId, poto, productName, unitPrice, count }) {
             }}
           >
             <TextField
+              id="quantity"
               type="number"
-              id="outlined-size-small"
               defaultValue={count}
               variant="outlined"
               size="small"
