@@ -134,7 +134,11 @@ const DailyProducts = ({ id }) => {
                   <tbody>
                     {addedDailyProducts.map((product, index) => (
                       <tr key={product._id}>
-                        <td>{product.product.name}</td>
+                        <td>
+                          {product.product
+                            ? product.product.name
+                            : 'products name'}
+                        </td>
                         <td>
                           <div
                             style={{
@@ -153,7 +157,9 @@ const DailyProducts = ({ id }) => {
                               }
                               type="number"
                               id="outlined-size-small"
-                              defaultValue={product.quantity}
+                              defaultValue={
+                                product.quantity ? product.quantity : 0
+                              }
                               variant="outlined"
                               size="small"
                               onChange={(e) =>
@@ -183,7 +189,11 @@ const DailyProducts = ({ id }) => {
                             disabled
                             type="number"
                             id="outlined-size-small"
-                            defaultValue={product.quantity - product.sales}
+                            defaultValue={
+                              product.quantity
+                                ? product.quantity - product.sales
+                                : 0
+                            }
                             variant="outlined"
                             size="small"
                           />

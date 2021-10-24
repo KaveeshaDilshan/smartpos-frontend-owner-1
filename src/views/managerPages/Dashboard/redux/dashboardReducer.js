@@ -4,7 +4,7 @@ const initialState = {
   warehouseID: null,
   warehouse: null,
   loading: false,
-  warehouseSales: [],
+  warehouseSales: null,
 };
 
 function reducer(state = initialState, action) {

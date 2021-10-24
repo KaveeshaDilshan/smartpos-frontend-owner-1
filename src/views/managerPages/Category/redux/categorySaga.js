@@ -10,6 +10,7 @@ export function* getAllCategories(action) {
     const { data } = yield axios.get(
       `${BASE_URL}/manager/category?sortBy=+name&query=${search}`
     );
+
     yield put({
       type: actionTypes.GET_ALL_CATEGORIES_SUCCESS,
       data,
