@@ -5,7 +5,7 @@ const initialState = {
   warehouseID: null,
   warehouse: null,
   loading: false,
-  warehouseSales: [],
+  warehouseSales: null,
 };
 
 const mockDataWarehouseSales = [

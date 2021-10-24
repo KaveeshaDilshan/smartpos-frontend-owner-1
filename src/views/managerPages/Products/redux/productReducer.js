@@ -1,9 +1,9 @@
 import * as actionTypes from './productActionTypes';
 
 const initialState = {
-  allProducts: [],
+  allProducts: null,
   loading: false,
-  oneProduct: {},
+  oneProduct: null,
   oneProductLoading: false,
 };
 

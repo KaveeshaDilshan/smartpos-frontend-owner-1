@@ -2,7 +2,7 @@ import reducer from '../../views/managerPages/Warehouse/redux/warehouseReducer';
 import * as actions from '../../views/managerPages/Warehouse/redux/warehouseActionTypes';
 
 const initialState = {
-  allWarehouseProducts: [],
+  allWarehouseProducts: null,
   loading: false,
 };
 

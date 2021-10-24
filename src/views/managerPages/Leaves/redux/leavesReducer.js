@@ -1,7 +1,7 @@
 import * as actionTypes from './leavesActionTypes';
 
 const initialState = {
-  allLeaves: [],
+  allLeaves: null,
   loading: false,
 };
 

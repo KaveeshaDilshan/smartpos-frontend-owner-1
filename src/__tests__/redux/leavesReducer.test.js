@@ -2,7 +2,7 @@ import reducer from '../../views/managerPages/Leaves/redux/leavesReducer';
 import * as actions from '../../views/managerPages/Leaves/redux/leavesActionTypes';
 
 const initialState = {
-  allLeaves: [],
+  allLeaves: null,
   loading: false,
 };
 

@@ -2,7 +2,7 @@ import reducer from '../../views/managerPages/Category/redux/categoryReducer';
 import * as actions from '../../views/managerPages/Category/redux/categoryActionTypes';
 
 const initialState = {
-  allCategories: [],
+  allCategories: null,
   loading: false,
 };
 
