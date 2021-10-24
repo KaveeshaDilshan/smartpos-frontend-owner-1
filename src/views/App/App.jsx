@@ -9,7 +9,6 @@ function App() {
   const { user } = useSelector((state) => state.loginReducer);
   const allRoutes = (currentUser) => {
     if (currentUser && currentUser.role === 'admin') {
-
       return (
         <>
           {routes
@@ -49,7 +48,6 @@ function App() {
             })}
         </>
       );
-
     }
     return (
       <>

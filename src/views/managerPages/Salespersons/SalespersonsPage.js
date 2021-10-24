@@ -46,7 +46,7 @@ function SalespersonsPage() {
           <TableComponent
             data={allSalespersons}
             setPage={setPage}
-            totalrows={totalSalespersons}
+            totalRows={totalSalespersons}
           />
           {loading && (
             <>

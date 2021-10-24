@@ -65,49 +65,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson.telephone}
-                </h4>
-                <h4
-                  style={{
-                    fontWeight: '400',
-                    fontSize: '14px',
-                  }}
-                >
-                  Salesperson telephone
-                </h4>
-              </div>
-            </Col>
-            <Col className="col-6">
-              <div>
-                <h4
-                  style={{
-                    fontWeight: '700',
-                    fontSize: '16px',
-                  }}
-                >
-                  {salesperson.email}
-                </h4>
-                <h4
-                  style={{
-                    fontWeight: '400',
-                    fontSize: '14px',
-                  }}
-                >
-                  Salesperson Email
-                </h4>
-              </div>
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col className="col-6">
-              <div>
-                <h4
-                  style={{
-                    fontWeight: '700',
-                    fontSize: '16px',
-                  }}
-                >
-                  {salesperson.firstName}
+                  {salesperson && salesperson.firstName}
                 </h4>
                 <h4
                   style={{
@@ -127,7 +85,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson.lastName}
+                  {salesperson && salesperson.lastName}
                 </h4>
                 <h4
                   style={{
@@ -136,6 +94,48 @@ const SalespersonDetails = ({ id }) => {
                   }}
                 >
                   Last Name
+                </h4>
+              </div>
+            </Col>
+          </Row>
+          <Row className="mt-5">
+            <Col className="col-6">
+              <div>
+                <h4
+                  style={{
+                    fontWeight: '700',
+                    fontSize: '16px',
+                  }}
+                >
+                  {salesperson && salesperson.telephone}
+                </h4>
+                <h4
+                  style={{
+                    fontWeight: '400',
+                    fontSize: '14px',
+                  }}
+                >
+                  Salesperson telephone
+                </h4>
+              </div>
+            </Col>
+            <Col className="col-6">
+              <div>
+                <h4
+                  style={{
+                    fontWeight: '700',
+                    fontSize: '16px',
+                  }}
+                >
+                  {salesperson && salesperson.email}
+                </h4>
+                <h4
+                  style={{
+                    fontWeight: '400',
+                    fontSize: '14px',
+                  }}
+                >
+                  Salesperson Email
                 </h4>
               </div>
             </Col>

@@ -19,13 +19,27 @@ const loginUserCall = async (data) => {
 };
 
 export function* loginUser(action) {
+  const { history } = action.data;
   try {
     const uid = yield call(loginUserCall, action.data);
     const { data } = yield axios.get(`/users/me/${uid}`);
-    yield put({
-      type: actionTypes.LOGIN_SUCCESS,
-      data,
-    });
+    if (data) {
+      if (data.role === 'manager' && data.warehouseId) {
+        yield put({
+          type: actionTypes.LOGIN_SUCCESS,
+          data,
+        });
+        history.push('/manager/dashboard');
+      } else if (data.role === 'admin') {
+        yield put({
+          type: actionTypes.LOGIN_SUCCESS,
+          data,
+        });
+        history.push('/admin/warehouses');
+      } else {
+        toast.error('You are not allowed to login');
+      }
+    }
   } catch (error) {
     if (!error.response) {
       toast.error(error.message);

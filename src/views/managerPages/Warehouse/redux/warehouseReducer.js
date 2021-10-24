@@ -1,7 +1,7 @@
 import * as actionTypes from './warehouseActionTypes';
 
 const initialState = {
-  allWarehouseProducts: [],
+  allWarehouseProducts: null,
   loading: false,
 };
 

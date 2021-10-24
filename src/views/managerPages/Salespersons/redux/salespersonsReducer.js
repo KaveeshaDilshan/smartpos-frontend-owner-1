@@ -2,12 +2,12 @@ import * as actionTypes from './salespersonsActionTypes';
 import { GET_SALESPERSON_DAILY_PRODUCTS } from './salespersonsActionTypes';
 
 const initialState = {
-  allSalespersons: [],
+  allSalespersons: null,
   loading: false,
-  oneSalesperson: {},
-  warehouseShops: [],
-  oneSalespersonDailyProducts: [],
-  oneSalespersonAssignedShops: [],
+  oneSalesperson: null,
+  warehouseShops: null,
+  oneSalespersonDailyProducts: null,
+  oneSalespersonAssignedShops: null,
   totalSalespersons: 0,
   dailyProductsLoading: false,
 };
