@@ -74,7 +74,6 @@ const DailyProducts = ({ id }) => {
   }, [dailyProducts, id]);
 
   function findArrayElementById(array, productId) {
-    console.log(array);
     return array.find((element) => {
       return element.product._id === productId;
     });
@@ -111,7 +110,6 @@ const DailyProducts = ({ id }) => {
   const setQuantityChanges = (index, quantity) => {
     addedDailyProducts[index].quantity = quantity;
   };
-  console.log(dailyProducts);
   return (
     <>
       <Col className="col-6">
