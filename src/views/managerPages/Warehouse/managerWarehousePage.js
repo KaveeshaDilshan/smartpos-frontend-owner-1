@@ -30,7 +30,9 @@ function managerWarehousePage() {
   React.useEffect(() => {
     dispatch(getAllWarehouseProducts({ search, warehouseID }));
   }, [search]);
-
+  if (!allWarehouseProducts) {
+    return null;
+  }
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
@@ -61,19 +63,20 @@ function managerWarehousePage() {
             <div className={styles.warehouse_inventory}>
               {!loading ? (
                 <>
-                  {allWarehouseProducts.map(
-                    (item, i) =>
-                      item.product && (
-                        <WarehouseItem
-                          key={i}
-                          productId={item.product._id}
-                          poto={item.product.photo}
-                          productName={item.product.name}
-                          unitPrice={item.product.unitPrice}
-                          count={item.quantity}
-                        />
-                      )
-                  )}
+                  {allWarehouseProducts &&
+                    allWarehouseProducts.map(
+                      (item, i) =>
+                        item.product && (
+                          <WarehouseItem
+                            key={i}
+                            productId={item.product._id}
+                            poto={item.product.photo}
+                            productName={item.product.name}
+                            unitPrice={item.product.unitPrice}
+                            count={item.quantity}
+                          />
+                        )
+                    )}
                   {allWarehouseProducts.length === 0 && (
                     <h6>No Any Products In The Warehouse</h6>
                   )}

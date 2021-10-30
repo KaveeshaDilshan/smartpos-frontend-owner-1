@@ -117,18 +117,19 @@ function CategoryPage() {
                   </Typography>
                 </div>
                 <Grid container direction="row">
-                  {allCategories.map((category) => (
-                    <Grid
-                      item
-                      xs={11}
-                      sm={4}
-                      md={3}
-                      key={category._id}
-                      className={styles.category}
-                    >
-                      {category.name}
-                    </Grid>
-                  ))}
+                  {allCategories &&
+                    allCategories.map((category) => (
+                      <Grid
+                        item
+                        xs={11}
+                        sm={4}
+                        md={3}
+                        key={category._id}
+                        className={styles.category}
+                      >
+                        {category.name}
+                      </Grid>
+                    ))}
                 </Grid>
               </>
             ) : (

@@ -20,3 +20,10 @@ export const changeWarehouseProductQuantity = (data) => {
     data,
   };
 };
+
+export const deleteWarehouseProduct = (data) => {
+  return {
+    type: actionTypes.DELETE_WAREHOUSE_PRODUCT,
+    data,
+  };
+};

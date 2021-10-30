@@ -11,20 +11,6 @@ import {
 } from 'recharts';
 
 function SalesChart({ sales }) {
-  // const data = [
-  //   {
-  //     name: '2021-09-19',
-  //     sales: 2400,
-  //   },
-  //   {
-  //     name: '2021-09-20',
-  //     sales: 1398,
-  //   },
-  //   {
-  //     name: '2021-09-21',
-  //     sales: 9800,
-  //   },
-  // ];
   return (
     <>
       <div style={{ margin: 10 }}>

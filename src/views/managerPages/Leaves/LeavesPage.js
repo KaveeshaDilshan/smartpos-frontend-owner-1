@@ -62,6 +62,7 @@ function LeavesPage() {
     setescription(reason);
     setClickView(true);
   };
+
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
@@ -85,51 +86,52 @@ function LeavesPage() {
 
             {!loading && (
               <tbody>
-                {allLeaves.map((leave, index) => (
-                  <tr key={leave._id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>
-                      {leave.userId.firstName} {leave.userId.lastName}
-                    </td>
-                    <td>{leave.userId.email}</td>
-                    <td>
-                      <Moment format="YYYY/MM/DD">{leave.from}</Moment>
-                    </td>
-                    <td>
-                      <Moment format="YYYY/MM/DD">{leave.to}</Moment>
-                    </td>
-                    <td>
-                      <VisibilityIcon
-                        className={classes.eyeIcon}
-                        onClick={() => showReason(leave.description)}
-                      />
-                    </td>
-                    <td>
-                      {leave.approved === 'pending' ? (
-                        <>
-                          <Button
-                            className={styles.button}
-                            color="success"
-                            size="sm"
-                            onClick={() => handleClickApprove(leave._id)}
-                          >
-                            Approve
-                          </Button>
-                          <Button
-                            className={styles.button}
-                            color="danger"
-                            size="sm"
-                            onClick={() => handleClickDisapprove(leave._id)}
-                          >
-                            Reject
-                          </Button>
-                        </>
-                      ) : (
-                        <div>{leave.approved}</div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                {allLeaves &&
+                  allLeaves.map((leave, index) => (
+                    <tr key={leave._id}>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        {leave.userId.firstName} {leave.userId.lastName}
+                      </td>
+                      <td>{leave.userId.email}</td>
+                      <td>
+                        <Moment format="YYYY/MM/DD">{leave.from}</Moment>
+                      </td>
+                      <td>
+                        <Moment format="YYYY/MM/DD">{leave.to}</Moment>
+                      </td>
+                      <td>
+                        <VisibilityIcon
+                          className={classes.eyeIcon}
+                          onClick={() => showReason(leave.description)}
+                        />
+                      </td>
+                      <td>
+                        {leave.approved === 'pending' ? (
+                          <>
+                            <Button
+                              className={styles.button}
+                              color="success"
+                              size="sm"
+                              onClick={() => handleClickApprove(leave._id)}
+                            >
+                              Approve
+                            </Button>
+                            <Button
+                              className={styles.button}
+                              color="danger"
+                              size="sm"
+                              onClick={() => handleClickDisapprove(leave._id)}
+                            >
+                              Reject
+                            </Button>
+                          </>
+                        ) : (
+                          <div>{leave.approved}</div>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             )}
           </Table>
