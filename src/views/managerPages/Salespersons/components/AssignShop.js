@@ -95,18 +95,19 @@ const AssignShop = ({ id }) => {
         <Row className="mt-3">
           <div>
             <Paper component="ul" className={classes.paper1}>
-              {chipData.map((data) => {
-                return (
-                  <li key={data._id}>
-                    <Chip
-                      icon={StorefrontIcon}
-                      label={data.name}
-                      onDelete={handleDelete(data)}
-                      className={classes.chip}
-                    />
-                  </li>
-                );
-              })}
+              {chipData &&
+                chipData.map((data) => {
+                  return (
+                    <li key={data._id}>
+                      <Chip
+                        icon={StorefrontIcon}
+                        label={data.name}
+                        onDelete={handleDelete(data)}
+                        className={classes.chip}
+                      />
+                    </li>
+                  );
+                })}
             </Paper>
           </div>
         </Row>

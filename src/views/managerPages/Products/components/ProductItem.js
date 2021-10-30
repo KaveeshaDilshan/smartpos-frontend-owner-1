@@ -107,14 +107,7 @@ export default function ProductItem({
       setConfirm(false);
     }
   }, [deleteConfirm]);
-  if (
-    !productId ||
-    !name ||
-    !categoryName ||
-    !unitPrice ||
-    !photoURL ||
-    !description
-  ) {
+  if (!productId || !name || !categoryName) {
     return null;
   }
   return (
@@ -154,6 +147,7 @@ export default function ProductItem({
         </CardContent>
         <CardActions>
           <Button
+            id="detailsButton"
             className={classes.button}
             size="small"
             onClick={setDetailsBoxOn}

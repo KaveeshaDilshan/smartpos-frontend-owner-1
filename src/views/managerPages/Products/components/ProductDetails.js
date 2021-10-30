@@ -42,25 +42,25 @@ function ProductDetails(props) {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const product = useSelector((state) => state.productReducer.oneProduct);
-  const [url, setUrl] = useState(product.photo);
+  const [url, setUrl] = useState(product ? product.photo : 'photo');
   let category = {};
 
   useEffect(() => {
-    setUrl(product.photo);
+    setUrl(product ? product.photo : 'photo');
   }, [product]);
   useEffect(() => {
     dispatch(getOneProduct(id));
   }, []);
 
-  if (product.categoryId) {
+  if (product && product.categoryId) {
     category = product.categoryId;
   }
 
   const initialValues = {
-    product_category: category.name,
-    product_name: product.name,
-    unit_price: product.unitPrice,
-    description: product.description,
+    product_category: category ? category.name : 'category',
+    product_name: product ? product.name : 'product name',
+    unit_price: product ? product.unitPrice : 'unit price',
+    description: product ? product.description : 'description',
   };
 
   const onSubmit = (values) => {
@@ -140,7 +140,7 @@ function ProductDetails(props) {
                 type="text"
                 name="product_name"
                 id="product_name"
-                placeholder={product.name}
+                placeholder={product ? product.name : 'product name'}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.product_name}
@@ -157,7 +157,7 @@ function ProductDetails(props) {
                 type="number"
                 name="unit_price"
                 id="unit_price"
-                placeholder={product.unitPrice}
+                placeholder={product ? product.unitPrice : 'unit price'}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.unit_price}
@@ -175,7 +175,9 @@ function ProductDetails(props) {
                 name="product_category"
                 id="product_category"
               >
-                <option value={category._id}>{category.name}</option>
+                <option value={category ? category._id : 'category id'}>
+                  {category ? category.name : 'category name'}
+                </option>
               </Input>
             </FormGroup>
             <FormGroup>

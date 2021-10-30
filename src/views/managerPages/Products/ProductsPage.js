@@ -88,26 +88,27 @@ function ProductsPage() {
             {!loading ? (
               <>
                 <Grid container direction="row" spacing={2}>
-                  {allProducts.map((product) => (
-                    <Grid
-                      item
-                      xs={11}
-                      sm={6}
-                      md={4}
-                      lg={2}
-                      className={styles.product}
-                      key={product._id}
-                    >
-                      <ProductItem
-                        productId={product._id}
-                        name={product.name}
-                        categoryName={product.categoryId.name}
-                        unitPrice={product.unitPrice}
-                        photoURL={product.photo}
-                        description={product.description}
-                      />
-                    </Grid>
-                  ))}
+                  {allProducts &&
+                    allProducts.map((product) => (
+                      <Grid
+                        item
+                        xs={11}
+                        sm={6}
+                        md={4}
+                        lg={2}
+                        className={styles.product}
+                        key={product._id}
+                      >
+                        <ProductItem
+                          productId={product._id}
+                          name={product.name}
+                          categoryName={product.categoryId.name}
+                          unitPrice={product.unitPrice}
+                          photoURL={product.photo}
+                          description={product.description}
+                        />
+                      </Grid>
+                    ))}
                 </Grid>
               </>
             ) : (

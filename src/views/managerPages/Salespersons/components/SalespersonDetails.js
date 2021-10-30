@@ -65,7 +65,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson && salesperson.firstName}
+                  {salesperson ? salesperson.firstName : 'first name'}
                 </h4>
                 <h4
                   style={{
@@ -85,7 +85,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson && salesperson.lastName}
+                  {salesperson ? salesperson.lastName : 'last name'}
                 </h4>
                 <h4
                   style={{
@@ -107,7 +107,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson && salesperson.telephone}
+                  {salesperson ? salesperson.telephone : 'telephone'}
                 </h4>
                 <h4
                   style={{
@@ -127,7 +127,7 @@ const SalespersonDetails = ({ id }) => {
                     fontSize: '16px',
                   }}
                 >
-                  {salesperson && salesperson.email}
+                  {salesperson ? salesperson.email : 'email'}
                 </h4>
                 <h4
                   style={{
