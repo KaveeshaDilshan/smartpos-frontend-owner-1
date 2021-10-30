@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import axios from '../../../../axios/axios';
 import * as actionTypes from './dashboardActionTypes';
 import { BASE_URL } from '../../../../const/config';
 import { auth } from '../../../../const/firebase.config';

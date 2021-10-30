@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from '../../../../axios/axios';
 import * as actionTypes from './leavesActionTypes';
 import { BASE_URL } from '../../../../const/config';
 
@@ -8,7 +8,7 @@ export function* getLeaves(action) {
   const search = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/leaves?sortBy=+name&query=${search}`
+      `${BASE_URL}/manager/leaves?sortBy=+name&query=${search}&filter=userId.warehouseId eq 6150c8bc497d385c88837f2a`
     );
     yield put({
       type: actionTypes.GET_LEAVES_SUCCESS,

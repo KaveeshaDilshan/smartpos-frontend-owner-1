@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from '../../../../axios/axios';
 import { BASE_URL } from '../../../../const/config';
 import * as actionTypes from './salesActionTypes';
 

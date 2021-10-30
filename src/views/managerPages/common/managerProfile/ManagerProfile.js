@@ -8,8 +8,6 @@ import styles from './ManagerProfile.module.css';
 import warehouseImage from '../../../adminPages/Warehouses/components/Capture.PNG';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  console.log(props);
-  console.log(ref);
   return <Slide direction="right" ref={ref} {...props} />;
 });
 
