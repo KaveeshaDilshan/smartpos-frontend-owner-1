@@ -36,6 +36,9 @@ const useStyles = makeStyles({
 });
 
 export default function TableComponent({ data, setPage, totalRows }) {
+  if (!data) {
+    return null;
+  }
   const rows = data.map((d, i) => ({
     ...d,
     name: `${d.firstName} ${d.lastName}`,

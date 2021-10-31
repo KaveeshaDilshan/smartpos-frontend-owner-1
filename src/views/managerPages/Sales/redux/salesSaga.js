@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { put, takeLatest } from 'redux-saga/effects';
-import { BASE_URL } from '../../../../const/config';
+import axios from '../../../../axios/axios';
 import * as actionTypes from './salesActionTypes';
 
 export function* getSalespersonsSales(action) {
   const { warehouseId, startDate, endDate } = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/sales/warehouse/${warehouseId}?startDate=${startDate}&endDate=${endDate}`
+      `/manager/sales/warehouse/${warehouseId}?startDate=${startDate}&endDate=${endDate}`
     );
     yield put({
       type: actionTypes.GET_SALESPERSONS_SALES_BY_DATE_RANGE_SUCCESS,

@@ -42,6 +42,7 @@ function SalesPage() {
       })
     );
   };
+
   return (
     <>
       <ManagerLayout>
@@ -108,16 +109,17 @@ function SalesPage() {
             </thead>
             {!loading && (
               <tbody>
-                {sales.map((row, index) => (
-                  <tr key={row._id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>
-                      {row.firstName} {row.lastName}
-                    </td>
-                    <td>{row.email}</td>
-                    <td>{row.income}</td>
-                  </tr>
-                ))}
+                {sales &&
+                  sales.map((row, index) => (
+                    <tr key={row._id}>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        {row.firstName} {row.lastName}
+                      </td>
+                      <td>{row.email}</td>
+                      <td>{row.income}</td>
+                    </tr>
+                  ))}
               </tbody>
             )}
           </Table>

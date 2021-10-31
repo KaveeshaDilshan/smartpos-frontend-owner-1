@@ -107,14 +107,7 @@ export default function ProductItem({
       setConfirm(false);
     }
   }, [deleteConfirm]);
-  if (
-    !productId ||
-    !name ||
-    !categoryName ||
-    !unitPrice ||
-    !photoURL ||
-    !description
-  ) {
+  if (!productId || !name || !categoryName) {
     return null;
   }
   return (
@@ -154,6 +147,7 @@ export default function ProductItem({
         </CardContent>
         <CardActions>
           <Button
+            id="detailsButton"
             className={classes.button}
             size="small"
             onClick={setDetailsBoxOn}
@@ -184,23 +178,32 @@ export default function ProductItem({
         setState={setConfirm}
       />
       <Dialog open={detailsBoxOn} onClose={() => setDetailsBoxOn(false)}>
-        <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Products Details
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={() => setDetailsBoxOn(false)}
-            color="primary"
-          >
-            Close
-          </Button>
-        </DialogActions>
+        <div
+          style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
+        >
+          <DialogTitle>
+            <Typography
+              component="h2"
+              variant="h6"
+              color="primary"
+              gutterBottom
+            >
+              Products Details
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>{description}</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={() => setDetailsBoxOn(false)}
+              color="primary"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </>
   );

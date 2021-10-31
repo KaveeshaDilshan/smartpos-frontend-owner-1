@@ -23,6 +23,17 @@ function reducer(state = initialState, action) {
         ...state,
         loading: false,
       };
+    case actionTypes.DELETE_WAREHOUSE_PRODUCT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionTypes.DELETE_WAREHOUSE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        allWarehouseProducts: action.data.products,
+      };
     default:
       return state;
   }

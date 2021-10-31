@@ -15,7 +15,6 @@ import {
   getManagerWarehouse,
   getWarehouseSales,
 } from './redux/dashboardActions';
-import { loginUser } from '../../login/redux/loginActions';
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -96,7 +95,7 @@ function Dashboard() {
                 />
               </MuiPickersUtilsProvider>
             </Col>
-            <SalesChart sales={warehouseSales} />
+            {warehouseSales && <SalesChart sales={warehouseSales} />}
           </Row>
         </div>
       </ManagerLayout>
