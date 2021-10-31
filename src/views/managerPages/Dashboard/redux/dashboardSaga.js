@@ -2,14 +2,12 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from '../../../../axios/axios';
 import * as actionTypes from './dashboardActionTypes';
-import { BASE_URL } from '../../../../const/config';
-import { auth } from '../../../../const/firebase.config';
 
 export function* getWarehouseSales(action) {
   const { warehouseID, startDate, endDate } = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/sales/warehousesales/${warehouseID}/?startDate=${startDate}&endDate=${endDate}`
+      `/manager/sales/warehousesales/${warehouseID}/?startDate=${startDate}&endDate=${endDate}`
     );
     const sales = Object.keys(data).map((key, index) => ({
       date: key,
@@ -37,7 +35,7 @@ export function* getWarehouseSales(action) {
 }
 
 const getManagerWarehouseCall = async (id) => {
-  return axios.get(`${BASE_URL}/manager/warehouse/${id}/details`);
+  return axios.get(`/manager/warehouse/${id}/details`);
 };
 
 export function* getManagerWarehouse(action) {

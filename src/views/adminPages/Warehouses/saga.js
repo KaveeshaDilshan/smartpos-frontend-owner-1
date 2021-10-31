@@ -3,15 +3,14 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
-import { BASE_URL } from '../../../const/config';
 import { getOneWarehouseSuccess, getWarehousesSuccess } from './actions';
 
 const getAllWarehouses = async (search, page) => {
   if (!page) {
-    return axios.get(`${BASE_URL}/admin/warehouse?limit=9&sortBy=+name&query=`);
+    return axios.get(`/admin/warehouse?limit=9&sortBy=+name&query=`);
   }
   return axios.get(
-    `${BASE_URL}/admin/warehouse?sortBy=+name&query=${search}&limit=9&page=${page}`
+    `/admin/warehouse?sortBy=+name&query=${search}&limit=9&page=${page}`
   );
 };
 
@@ -30,7 +29,7 @@ export function* handleGetWarehouses(data) {
 }
 
 const getOneWarehouse = async (id) => {
-  return axios.get(`${BASE_URL}/admin/warehouse/${id}`);
+  return axios.get(`/admin/warehouse/${id}`);
 };
 
 export function* handleGetOneWarehouse(action) {
@@ -44,7 +43,7 @@ export function* handleGetOneWarehouse(action) {
 }
 
 const addWarehouse = async (data) => {
-  await axios.post(`${BASE_URL}/admin/warehouse`, data);
+  await axios.post(`/admin/warehouse`, data);
 };
 
 export function* handleAddWarehouse(action) {
@@ -66,7 +65,7 @@ export function* handleAddWarehouse(action) {
 }
 
 const assignManager = async (data) => {
-  await axios.patch(`${BASE_URL}/admin/warehouse/${data.warehouseId}`, {
+  await axios.patch(`/admin/warehouse/${data.warehouseId}`, {
     managerId: data.managerId,
   });
 };
@@ -92,9 +91,7 @@ export function* handleAssignManager(action) {
 
 const getOneWarehouseAnalytics = (id, period) => {
   const day = moment().subtract(period, 'day');
-  return axios.get(
-    `${BASE_URL}/admin/warehouse/${id}/analytics?startDate=${day}`
-  );
+  return axios.get(`/admin/warehouse/${id}/analytics?startDate=${day}`);
 };
 
 export function* handleGetOneWarehouseAnalytics(action) {

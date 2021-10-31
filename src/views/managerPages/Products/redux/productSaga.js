@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from '../../../../axios/axios';
 import * as actionTypes from './productActionTypes';
-import { BASE_URL } from '../../../../const/config';
 
 export function* getAllProducts(action) {
   const { search, category } = action.data;
@@ -12,7 +11,7 @@ export function* getAllProducts(action) {
   }
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/product?sortBy=+name&query=${search}&filter=${filter}`
+      `/manager/product?sortBy=+name&query=${search}&filter=${filter}`
     );
     yield put({
       type: actionTypes.GET_ALL_PRODUCTS_SUCCESS,
@@ -27,7 +26,7 @@ export function* getAllProducts(action) {
 }
 
 const getOneProductCall = async (id) => {
-  const result = await axios.get(`${BASE_URL}/manager/product/${id}`);
+  const result = await axios.get(`/manager/product/${id}`);
   return result;
 };
 
@@ -49,7 +48,7 @@ export function* getOneProduct(action) {
 
 export function* addProduct(action) {
   try {
-    yield axios.post(`${BASE_URL}/manager/product`, action.data);
+    yield axios.post(`/manager/product`, action.data);
     yield put({
       type: actionTypes.ADD_PRODUCT_SUCCESS,
     });
@@ -66,7 +65,7 @@ export function* addProduct(action) {
 export function* updateProduct(action) {
   const { id } = action.data;
   try {
-    yield axios.patch(`${BASE_URL}/manager/product/${id}`, action.data.details);
+    yield axios.patch(`/manager/product/${id}`, action.data.details);
     const { data } = yield call(getOneProductCall, id);
     yield put({
       type: actionTypes.UPDATE_PRODUCT_SUCCESS,
@@ -85,7 +84,7 @@ export function* updateProduct(action) {
 export function* deleteProduct(action) {
   const id = action.data;
   try {
-    yield axios.delete(`${BASE_URL}/manager/product/${id}`);
+    yield axios.delete(`/manager/product/${id}`);
     toast.success('Product is successfully deleted');
   } catch (error) {
     toast.error(error.response.data.message);

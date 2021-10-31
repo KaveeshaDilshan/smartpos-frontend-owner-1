@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Button, Table } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Moment from 'react-moment';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { makeStyles } from '@material-ui/core/styles';
+import { Autocomplete } from '@material-ui/lab';
 import styles from './LeavesPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getLeaves, updateLeaves } from './redux/leavesActions';
@@ -52,7 +53,7 @@ function LeavesPage() {
       updateLeaves({
         id: leaveId,
         details: {
-          approved: 'reject',
+          approved: 'rejected',
         },
       })
     );
@@ -65,11 +66,34 @@ function LeavesPage() {
 
   return (
     <>
-      <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.leavespage}>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Leave Requests
-          </Typography>
+      <ManagerLayout isShow={false}>
+        <div className={styles.leavesPage}>
+          <div className={styles.leavesPageTop}>
+            <Typography
+              component="h2"
+              variant="h6"
+              color="primary"
+              gutterBottom
+            >
+              Leave Requests
+            </Typography>
+            <div>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={['pending', 'approved', 'rejected']}
+                defaultValue="pending"
+                // getOptionLabel={(option) => option.name}
+                onChange={(e, value) => setSearch(value)}
+                style={{ width: 200 }}
+                size="small"
+                renderInput={(params) => (
+                  <TextField {...params} label="State" />
+                )}
+              />
+            </div>
+          </div>
+
           <br />
           <Table>
             <thead>
@@ -87,51 +111,56 @@ function LeavesPage() {
             {!loading && (
               <tbody>
                 {allLeaves &&
-                  allLeaves.map((leave, index) => (
-                    <tr key={leave._id}>
-                      <th scope="row">{index + 1}</th>
-                      <td>
-                        {leave.userId.firstName} {leave.userId.lastName}
-                      </td>
-                      <td>{leave.userId.email}</td>
-                      <td>
-                        <Moment format="YYYY/MM/DD">{leave.from}</Moment>
-                      </td>
-                      <td>
-                        <Moment format="YYYY/MM/DD">{leave.to}</Moment>
-                      </td>
-                      <td>
-                        <VisibilityIcon
-                          className={classes.eyeIcon}
-                          onClick={() => showReason(leave.description)}
-                        />
-                      </td>
-                      <td>
-                        {leave.approved === 'pending' ? (
-                          <>
-                            <Button
-                              className={styles.button}
-                              color="success"
-                              size="sm"
-                              onClick={() => handleClickApprove(leave._id)}
-                            >
-                              Approve
-                            </Button>
-                            <Button
-                              className={styles.button}
-                              color="danger"
-                              size="sm"
-                              onClick={() => handleClickDisapprove(leave._id)}
-                            >
-                              Reject
-                            </Button>
-                          </>
-                        ) : (
-                          <div>{leave.approved}</div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                  allLeaves.map(
+                    (leave, index) =>
+                      leave.userId && (
+                        <tr key={leave._id}>
+                          <th scope="row">{index + 1}</th>
+                          <td>
+                            {leave.userId.firstName} {leave.userId.lastName}
+                          </td>
+                          <td>{leave.userId.email}</td>
+                          <td>
+                            <Moment format="YYYY/MM/DD">{leave.from}</Moment>
+                          </td>
+                          <td>
+                            <Moment format="YYYY/MM/DD">{leave.to}</Moment>
+                          </td>
+                          <td>
+                            <VisibilityIcon
+                              className={classes.eyeIcon}
+                              onClick={() => showReason(leave.description)}
+                            />
+                          </td>
+                          <td>
+                            {leave.approved === 'pending' ? (
+                              <>
+                                <Button
+                                  className={styles.button}
+                                  color="success"
+                                  size="sm"
+                                  onClick={() => handleClickApprove(leave._id)}
+                                >
+                                  Approve
+                                </Button>
+                                <Button
+                                  className={styles.button}
+                                  color="danger"
+                                  size="sm"
+                                  onClick={() =>
+                                    handleClickDisapprove(leave._id)
+                                  }
+                                >
+                                  Reject
+                                </Button>
+                              </>
+                            ) : (
+                              <div>{leave.approved}</div>
+                            )}
+                          </td>
+                        </tr>
+                      )
+                  )}
               </tbody>
             )}
           </Table>

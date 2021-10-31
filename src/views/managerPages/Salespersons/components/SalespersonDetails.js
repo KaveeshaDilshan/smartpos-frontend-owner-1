@@ -23,7 +23,7 @@ const SalespersonDetails = ({ id }) => {
   );
 
   useEffect(() => {
-    dispatch(getOneSalesperson(id));
+    dispatch(getOneSalesperson({ id, history }));
   }, []);
 
   return (

@@ -2,13 +2,12 @@ import { toast } from 'react-toastify';
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from '../../../../axios/axios';
 import * as actionTypes from './categoryActionTypes';
-import { BASE_URL } from '../../../../const/config';
 
 export function* getAllCategories(action) {
   const search = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/category?sortBy=+name&query=${search}`
+      `/manager/category?sortBy=+name&query=${search}`
     );
 
     yield put({
@@ -26,7 +25,7 @@ export function* getAllCategories(action) {
 
 export function* addCategory(action) {
   try {
-    yield axios.post(`${BASE_URL}/manager/category`, action.data);
+    yield axios.post(`/manager/category`, action.data);
     yield put({
       type: actionTypes.ADD_CATEGORY_SUCCESS,
     });
