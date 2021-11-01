@@ -42,7 +42,7 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
     handleClose(false);
   };
   return (
-    <div>
+    <>
       <Dialog
         open={open}
         onClose={() => handleClose(false)}
@@ -54,25 +54,28 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
         }}
       >
         <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Add Product To Warehouse
-          </Typography>
+          <div>
+            <Typography
+              component="h2"
+              variant="h6"
+              color="primary"
+              gutterBottom
+            >
+              Add Product To Warehouse
+            </Typography>
+          </div>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={allProducts}
-              getOptionLabel={(option) => option.name}
-              onChange={(e, value) => setProductSelect({ ...value })}
-              style={{ width: 300 }}
-              size="small"
-              renderInput={(params) => (
-                <TextField {...params} label="Product" />
-              )}
-            />
-          </DialogContentText>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={allProducts}
+            getOptionLabel={(option) => option.name}
+            onChange={(e, value) => setProductSelect({ ...value })}
+            style={{ width: 300 }}
+            size="small"
+            renderInput={(params) => <TextField {...params} label="Product" />}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={clickCancel} color="primary">
@@ -83,6 +86,6 @@ export default function AddNewWarehouseProduct({ open, handleClose }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

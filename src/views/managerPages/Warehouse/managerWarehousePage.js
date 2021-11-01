@@ -36,8 +36,8 @@ function managerWarehousePage() {
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.warehousepage}>
-          <div className={styles.page_top}>
+        <div className={styles.warehousePage}>
+          <div>
             <div className={styles.top}>
               <Typography
                 component="h2"
@@ -51,7 +51,7 @@ function managerWarehousePage() {
                 className={styles.addNew__button}
                 variant="contained"
                 type="button"
-                onClick={setClickAdd}
+                onClick={() => setClickAdd(true)}
               >
                 <AddIcon /> Add New
               </Button>
@@ -60,7 +60,7 @@ function managerWarehousePage() {
             <Divider className="mb-3" />
           </div>
           <div className={styles.page_bottom}>
-            <div className={styles.warehouse_inventory}>
+            <div>
               {!loading ? (
                 <>
                   {allWarehouseProducts &&

@@ -19,14 +19,16 @@ export default function LeaveDetailsBox({ open, handleClose, description }) {
           style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
         >
           <DialogTitle>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              Reason For Leave
-            </Typography>
+            <div>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                Reason For Leave
+              </Typography>
+            </div>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>{description}</DialogContentText>

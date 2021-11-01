@@ -150,7 +150,7 @@ export default function ProductItem({
             id="detailsButton"
             className={classes.button}
             size="small"
-            onClick={setDetailsBoxOn}
+            onClick={() => setDetailsBoxOn(true)}
           >
             Details
           </Button>
@@ -164,7 +164,7 @@ export default function ProductItem({
           <DeleteIcon
             className={classes.delete}
             color="action"
-            onClick={setConfirmBox}
+            onClick={() => setConfirmBox(true)}
           />
         </CardActions>
       </Card>
@@ -182,14 +182,16 @@ export default function ProductItem({
           style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
         >
           <DialogTitle>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              Products Details
-            </Typography>
+            <div>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                Products Details
+              </Typography>
+            </div>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>{description}</DialogContentText>

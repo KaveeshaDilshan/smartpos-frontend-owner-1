@@ -203,14 +203,14 @@ const DailyProducts = ({ id }) => {
                       ))}
                   </tbody>
                 )}
-                {loading && (
-                  <>
-                    <div style={{ textAlign: 'center', marginTop: 50 }}>
-                      <CircularProgress style={{ color: 'red' }} />
-                    </div>
-                  </>
-                )}
               </Table>
+              {loading && (
+                <>
+                  <div style={{ textAlign: 'center', marginTop: 50 }}>
+                    <CircularProgress style={{ color: 'red' }} />
+                  </div>
+                </>
+              )}
             </div>
           </Row>
         </Paper>

@@ -43,7 +43,7 @@ function ProductsPage() {
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.productspage}>
+        <div className={styles.productsPage}>
           <div className={styles.top}>
             <Typography
               style={{
@@ -75,8 +75,7 @@ function ProductsPage() {
               className={styles.addNew__button}
               variant="contained"
               type="button"
-              // onClick={() => history.push('/manager/products/addnew')}
-              onClick={setAddProductOpen}
+              onClick={() => setAddProductOpen(true)}
             >
               <AddIcon /> Add New
             </Button>
