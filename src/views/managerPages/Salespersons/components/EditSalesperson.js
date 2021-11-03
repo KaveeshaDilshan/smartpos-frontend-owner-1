@@ -31,6 +31,9 @@ function EditSalesperson(props) {
     if (!values.telephone) {
       errors.telephone = 'Telephone is required';
     }
+    if (values.telephone.length !== 10) {
+      errors.telephone = 'Phone number must contained 10 digits';
+    }
     return errors;
   };
   const formik = useFormik({

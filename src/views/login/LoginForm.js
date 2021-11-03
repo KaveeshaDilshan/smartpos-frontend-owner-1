@@ -83,7 +83,7 @@ export default function LoginForm() {
         </Typography>
         <form className={classes.form} onSubmit={loginThisUser}>
           <TextField
-            variant="outlined"
+            variant="filled"
             margin="normal"
             required
             fullWidth
@@ -95,7 +95,7 @@ export default function LoginForm() {
             autoFocus
           />
           <TextField
-            variant="outlined"
+            variant="filled"
             margin="normal"
             required
             fullWidth

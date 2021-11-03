@@ -22,6 +22,9 @@ function AddNewSalesperson() {
     if (!values.telephone) {
       errors.telephone = 'Telephone is required';
     }
+    if (values.telephone.length !== 10) {
+      errors.telephone = 'Phone number must contained 10 digits';
+    }
     if (!values.email) {
       errors.email = 'Email is Required';
     } else if (
