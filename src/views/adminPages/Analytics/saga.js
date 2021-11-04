@@ -6,7 +6,7 @@ import { BASE_URL } from '../../../const/config';
 
 const getSalespersonLeaderboard = async () => {
   return axios.get(
-    `${BASE_URL}/admin/salespersons/analyticsByIncome-range?startDate=2021-08-05T19:08:44.274Z&order=asc`
+    `${BASE_URL}/admin/salespersons/analyticsByIncome-range?startDate=2021-08-05T19:08:44.274Z&order=dsc`
   );
 };
 

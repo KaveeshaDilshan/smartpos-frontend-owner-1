@@ -50,7 +50,7 @@ const addManager = async (data) => {
     data.password
   );
   data.uid = user.uid;
-  const result = await axios.post(`${BASE_URL}/users/register`, data);
+  const result = await axios.post(`/admin/managers`, data););
 
   return result;
 };
