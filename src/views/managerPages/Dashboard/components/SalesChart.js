@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import {
   LineChart,
   CartesianGrid,
@@ -11,7 +10,6 @@ import {
 } from 'recharts';
 
 function SalesChart({ sales }) {
-  console.log(sales);
   return (
     <>
       <div style={{ margin: 10 }}>
