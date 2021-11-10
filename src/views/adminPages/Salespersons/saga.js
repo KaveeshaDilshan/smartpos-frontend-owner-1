@@ -3,16 +3,15 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
-import { BASE_URL } from '../../../const/config';
 
 const getAllSalespersons = async (page, filter, warehouse) => {
   if (filter === 'all') {
     return axios.get(
-      `${BASE_URL}/admin/salespersons?limit=9&sortBy=+firstName&page=${page}`
+      `/admin/salespersons?limit=9&sortBy=+firstName&page=${page}`
     );
   }
   return axios.get(
-    `${BASE_URL}/admin/salespersons?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
+    `/admin/salespersons?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
 };
 

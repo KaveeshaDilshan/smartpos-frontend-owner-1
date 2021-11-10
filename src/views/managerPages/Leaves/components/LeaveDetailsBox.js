@@ -14,31 +14,21 @@ export default function LeaveDetailsBox({ open, handleClose, description }) {
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={() => handleClose(false)}
-        PaperProps={{
-          style: {
-            // borderWidth: 3,
-            // borderRadius: 10,
-            // borderColor: '#050544',
-            // borderStyle: 'solid',
-            // maskBorder: 5,
-          },
-        }}
-      >
+      <Dialog open={open} onClose={() => handleClose(false)}>
         <div
           style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
         >
           <DialogTitle>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              Reason For Leave
-            </Typography>
+            <div>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                Reason For Leave
+              </Typography>
+            </div>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>{description}</DialogContentText>

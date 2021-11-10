@@ -235,7 +235,7 @@ export default function PrimarySearchAppBar(props) {
             </Button>
             <Avatar
               src={profileFallback}
-              onClick={setOpen}
+              onClick={() => setOpen(true)}
               className={classes.profile}
             />
           </div>

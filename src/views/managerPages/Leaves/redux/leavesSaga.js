@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from '../../../../axios/axios';
 import * as actionTypes from './leavesActionTypes';
-import { BASE_URL } from '../../../../const/config';
 
 export function* getLeaves(action) {
   const search = action.data;
   try {
     const { data } = yield axios.get(
-      `${BASE_URL}/manager/leaves?sortBy=+name&query=${search}`
+      `/manager/leaves?sortBy=+name&query=${search}`
     );
     yield put({
       type: actionTypes.GET_LEAVES_SUCCESS,
@@ -25,7 +24,7 @@ export function* getLeaves(action) {
 export function* updateLeave(action) {
   const { id } = action.data;
   try {
-    yield axios.patch(`${BASE_URL}/manager/leaves/${id}`, action.data.details);
+    yield axios.patch(`/manager/leaves/${id}`, action.data.details);
     yield put({
       type: actionTypes.UPDATE_LEAVE_SUCCESS,
     });

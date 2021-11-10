@@ -43,7 +43,7 @@ function ProductsPage() {
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.productspage}>
+        <div className={styles.productsPage}>
           <div className={styles.top}>
             <Typography
               style={{
@@ -75,8 +75,7 @@ function ProductsPage() {
               className={styles.addNew__button}
               variant="contained"
               type="button"
-              // onClick={() => history.push('/manager/products/addnew')}
-              onClick={setAddProductOpen}
+              onClick={() => setAddProductOpen(true)}
             >
               <AddIcon /> Add New
             </Button>
@@ -88,26 +87,27 @@ function ProductsPage() {
             {!loading ? (
               <>
                 <Grid container direction="row" spacing={2}>
-                  {allProducts.map((product) => (
-                    <Grid
-                      item
-                      xs={11}
-                      sm={6}
-                      md={4}
-                      lg={2}
-                      className={styles.product}
-                      key={product._id}
-                    >
-                      <ProductItem
-                        productId={product._id}
-                        name={product.name}
-                        categoryName={product.categoryId.name}
-                        unitPrice={product.unitPrice}
-                        photoURL={product.photo}
-                        description={product.description}
-                      />
-                    </Grid>
-                  ))}
+                  {allProducts &&
+                    allProducts.map((product) => (
+                      <Grid
+                        item
+                        xs={11}
+                        sm={6}
+                        md={4}
+                        lg={2}
+                        className={styles.product}
+                        key={product._id}
+                      >
+                        <ProductItem
+                          productId={product._id}
+                          name={product.name}
+                          categoryName={product.categoryId.name}
+                          unitPrice={product.unitPrice}
+                          photoURL={product.photo}
+                          description={product.description}
+                        />
+                      </Grid>
+                    ))}
                 </Grid>
               </>
             ) : (

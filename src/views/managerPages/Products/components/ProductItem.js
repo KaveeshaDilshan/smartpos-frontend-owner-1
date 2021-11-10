@@ -107,11 +107,14 @@ export default function ProductItem({
       setConfirm(false);
     }
   }, [deleteConfirm]);
-
+  if (!productId || !name || !categoryName) {
+    return null;
+  }
   return (
     <>
       <Card className={classes.root} variant="elevation">
         <CardMedia
+          id="photo"
           component="img"
           alt="Product Image"
           image={photoURL}
@@ -122,8 +125,11 @@ export default function ProductItem({
         <Divider />
         <Divider />
         <CardContent>
-          <Typography className={classes.name}>{name}</Typography>
+          <Typography id="product_name" className={classes.name}>
+            {name}
+          </Typography>
           <Typography
+            id="category_name"
             className={classes.categoryName}
             color="textSecondary"
             gutterBottom
@@ -133,6 +139,7 @@ export default function ProductItem({
         </CardContent>
         <CardContent>
           <Chip
+            id="unitPrice"
             size="small"
             label={`RS ${unitPrice}`}
             className={classes.priceTag}
@@ -140,9 +147,10 @@ export default function ProductItem({
         </CardContent>
         <CardActions>
           <Button
+            id="detailsButton"
             className={classes.button}
             size="small"
-            onClick={setDetailsBoxOn}
+            onClick={() => setDetailsBoxOn(true)}
           >
             Details
           </Button>
@@ -156,7 +164,7 @@ export default function ProductItem({
           <DeleteIcon
             className={classes.delete}
             color="action"
-            onClick={setConfirmBox}
+            onClick={() => setConfirmBox(true)}
           />
         </CardActions>
       </Card>
@@ -170,23 +178,34 @@ export default function ProductItem({
         setState={setConfirm}
       />
       <Dialog open={detailsBoxOn} onClose={() => setDetailsBoxOn(false)}>
-        <DialogTitle>
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Products Details
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={() => setDetailsBoxOn(false)}
-            color="primary"
-          >
-            Close
-          </Button>
-        </DialogActions>
+        <div
+          style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
+        >
+          <DialogTitle>
+            <div>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                Products Details
+              </Typography>
+            </div>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>{description}</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={() => setDetailsBoxOn(false)}
+              color="primary"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </>
   );

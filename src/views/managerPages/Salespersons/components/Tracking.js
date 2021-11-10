@@ -32,18 +32,19 @@ function SalespersonTracking() {
     <>
       <ManagerLayout>
         <div className={styles.tracking}>
-          {/* SalespersonTrackingPage {id} */}
-          <MapContainer
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh8Mcle_XHWuQVfUQr-EjGL2p6SqvQK50&v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `700px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            position={{
-              lat: parseFloat(salesperson.latitude) + 0.0005,
-              lng: parseFloat(salesperson.longitude),
-            }}
-            shops={assignedShops}
-          />
+          {salesperson && (
+            <MapContainer
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh8Mcle_XHWuQVfUQr-EjGL2p6SqvQK50&v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `700px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              position={{
+                lat: parseFloat(salesperson.latitude) + 0.0005,
+                lng: parseFloat(salesperson.longitude),
+              }}
+              shops={assignedShops}
+            />
+          )}
         </div>
       </ManagerLayout>
     </>

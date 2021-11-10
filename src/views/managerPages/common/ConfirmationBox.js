@@ -38,18 +38,22 @@ export default function ConfirmationBox({
         //   },
         // }}
       >
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={clickOptionOne} color="primary">
-            {option1}
-          </Button>
-          <Button onClick={clickOptionTwo} color="primary">
-            {option2}
-          </Button>
-        </DialogActions>
+        <div
+          style={{ margin: 3, border: '3px solid #070381', borderRadius: 5 }}
+        >
+          <DialogTitle>{title}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>{description}</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={clickOptionOne} color="primary">
+              {option1}
+            </Button>
+            <Button onClick={clickOptionTwo} color="primary">
+              {option2}
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );

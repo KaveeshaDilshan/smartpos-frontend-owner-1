@@ -132,74 +132,85 @@ const DailyProducts = ({ id }) => {
                 </thead>
                 {!loading && (
                   <tbody>
-                    {addedDailyProducts.map((product, index) => (
-                      <tr key={product._id}>
-                        <td>{product.product.name}</td>
-                        <td>
-                          <div
-                            style={{
-                              marginRight: 10,
-                              display: 'flex',
-                              alignItems: 'center',
-                            }}
-                          >
+                    {addedDailyProducts &&
+                      addedDailyProducts.map((product, index) => (
+                        <tr key={product._id}>
+                          <td>
+                            {product.product
+                              ? product.product.name
+                              : 'products name'}
+                          </td>
+                          <td>
+                            <div
+                              style={{
+                                marginRight: 10,
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <TextField
+                                style={{
+                                  width: 100,
+                                }}
+                                disabled={
+                                  Moment(selectedDate) <
+                                  Moment().subtract(1, 'days')
+                                }
+                                type="number"
+                                id="outlined-size-small"
+                                defaultValue={
+                                  product.quantity ? product.quantity : 0
+                                }
+                                variant="outlined"
+                                size="small"
+                                onChange={(e) =>
+                                  setQuantityChanges(index, e.target.value)
+                                }
+                              />
+                            </div>
+                          </td>
+                          <td>
                             <TextField
                               style={{
                                 width: 100,
                               }}
-                              disabled={
-                                Moment(selectedDate) <
-                                Moment().subtract(1, 'days')
-                              }
+                              disabled
                               type="number"
                               id="outlined-size-small"
-                              defaultValue={product.quantity}
+                              defaultValue={product.sales}
                               variant="outlined"
                               size="small"
-                              onChange={(e) =>
-                                setQuantityChanges(index, e.target.value)
-                              }
                             />
-                          </div>
-                        </td>
-                        <td>
-                          <TextField
-                            style={{
-                              width: 100,
-                            }}
-                            disabled
-                            type="number"
-                            id="outlined-size-small"
-                            defaultValue={product.sales}
-                            variant="outlined"
-                            size="small"
-                          />
-                        </td>
-                        <td>
-                          <TextField
-                            style={{
-                              width: 100,
-                            }}
-                            disabled
-                            type="number"
-                            id="outlined-size-small"
-                            defaultValue={product.quantity - product.sales}
-                            variant="outlined"
-                            size="small"
-                          />
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td>
+                            <TextField
+                              style={{
+                                width: 100,
+                              }}
+                              disabled
+                              type="number"
+                              id="outlined-size-small"
+                              defaultValue={
+                                product.quantity
+                                  ? product.quantity - product.sales
+                                  : 0
+                              }
+                              variant="outlined"
+                              size="small"
+                            />
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 )}
-                {loading && (
-                  <>
-                    <div style={{ textAlign: 'center', marginTop: 50 }}>
-                      <CircularProgress style={{ color: 'red' }} />
-                    </div>
-                  </>
-                )}
               </Table>
+              {loading && (
+                <>
+                  <div style={{ textAlign: 'center', marginTop: 50 }}>
+                    <CircularProgress style={{ color: 'red' }} />
+                  </div>
+                </>
+              )}
             </div>
           </Row>
         </Paper>
