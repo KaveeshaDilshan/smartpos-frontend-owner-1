@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 
 function SalesChart({ sales }) {
+  console.log(sales);
   return (
     <>
       <div style={{ margin: 10 }}>
