@@ -7,3 +7,7 @@ export function loginUser(data) {
 export function logoutUser(data) {
   return { type: actionTypes.LOGOUT, data };
 }
+
+export function getToken() {
+  return { type: actionTypes.GET_TOKEN };
+}

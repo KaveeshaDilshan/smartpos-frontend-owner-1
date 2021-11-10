@@ -16,7 +16,7 @@ const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persister}>
+    <PersistGate persistor={persister}>
       <ToastContainer autoClose={3000} hideProgressBar position="top-right" />
       <App history={history} />
     </PersistGate>
