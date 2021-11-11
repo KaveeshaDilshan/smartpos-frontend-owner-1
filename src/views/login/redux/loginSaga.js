@@ -81,6 +81,7 @@ const getToken = async () => {
 export function* handleGetToken() {
   const token = yield call(getToken);
   localStorage.setItem('idToken', token);
+  axios.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
 function* UserSagas() {

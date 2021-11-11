@@ -16,7 +16,7 @@ import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
 import styles from './ProductsPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
-import { getAllCategories } from '../Category/redux/categoryActions';
+import { getAllCategories } from '../../managerPages/Category/redux/categoryActions';
 
 function ProductsPage() {
   const dispatch = useDispatch();
