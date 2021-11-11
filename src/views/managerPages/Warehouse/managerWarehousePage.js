@@ -30,9 +30,7 @@ function managerWarehousePage() {
   React.useEffect(() => {
     dispatch(getAllWarehouseProducts({ search, warehouseID }));
   }, [search]);
-  if (!allWarehouseProducts) {
-    return null;
-  }
+
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
@@ -77,9 +75,10 @@ function managerWarehousePage() {
                           />
                         )
                     )}
-                  {allWarehouseProducts.length === 0 && (
-                    <h6>No Any Products In The Warehouse</h6>
-                  )}
+                  {allWarehouseProducts &&
+                    allWarehouseProducts.length === 0 && (
+                      <h6>No Any Products In The Warehouse</h6>
+                    )}
                 </>
               ) : (
                 <>
