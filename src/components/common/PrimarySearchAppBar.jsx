@@ -12,7 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router-dom';
@@ -20,7 +19,6 @@ import { useDispatch } from 'react-redux';
 import ManagerProfile from '../../views/managerPages/common/managerProfile/ManagerProfile';
 import profileFallback from '../images.png';
 import { logoutUser } from '../../views/login/redux/loginActions';
-import { deleteWarehouseProduct } from '../../views/managerPages/Warehouse/redux/warehouseActions';
 import ConfirmationBox from '../../views/managerPages/common/ConfirmationBox';
 
 const useStyles = makeStyles((theme) => ({
@@ -101,11 +99,10 @@ export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -127,34 +124,6 @@ export default function PrimarySearchAppBar(props) {
       setConfirm(false);
     }
   }, [deleteConfirm]);
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-  // const handleLogout = () => {
-  //   dispatch(logoutUser(history));
-  // };
-  const menuId = 'primary-search-account-menu';
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-  //   </Menu>
-  // );
-
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu

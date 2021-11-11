@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Layout from '../../views/Layout';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -9,7 +9,7 @@ const getSalespersonLeaderboard = async () => {
   );
 };
 
-export function* handleGetSalespersonLeaderboard(action) {
+export function* handleGetSalespersonLeaderboard() {
   try {
     const result = yield call(getSalespersonLeaderboard);
     yield put({

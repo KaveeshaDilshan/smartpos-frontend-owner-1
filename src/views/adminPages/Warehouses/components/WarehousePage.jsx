@@ -29,7 +29,6 @@ function WarehousePage(props) {
     dispatch(getAllUnassignedManagers());
   }, [warehouse, warehouseAnalytics]);
   const [selectedManager, setSelectedManager] = useState('');
-  const [open, setOpen] = React.useState(false);
   const [confirmBoxOn, setConfirmBox] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
   const title = 'Remove';
