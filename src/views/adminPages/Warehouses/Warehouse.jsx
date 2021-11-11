@@ -24,6 +24,7 @@ function Warehouse() {
           <Col className="col-4 d-flex align-items-center justify-content-center">
             <TextField
               defaultValue={search}
+              label="Search By Name"
               onChange={(e, value) => setSearch(e.target.value)}
             />
           </Col>

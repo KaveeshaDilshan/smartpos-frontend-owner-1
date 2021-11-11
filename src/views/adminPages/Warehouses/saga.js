@@ -107,6 +107,21 @@ export function* handleGetOneWarehouseAnalytics(action) {
   }
 }
 
+const removeManager = async (id) => {
+  await axios.delete(`/admin/warehouse/${id}`);
+};
+
+export function* handleRemoveManager(action) {
+  const id = action.payload;
+  try {
+    yield call(removeManager, id);
+    yield put({ type: actionTypes.REMOVE_MANAGER_FROM_WAREHOUSE_SUCCESS });
+    toast.success('Successfully removed manager');
+  } catch (error) {
+    toast.error('Please try again');
+  }
+}
+
 function* watchWarehouseSagas() {
   yield takeLatest(actionTypes.ASSIGN_MANAGER, handleAssignManager);
   yield takeLatest(actionTypes.ADD_WAREHOUSE, handleAddWarehouse);
@@ -115,6 +130,10 @@ function* watchWarehouseSagas() {
   yield takeLatest(
     actionTypes.GET_ONE_WAREHOUSE_ANALYTICS,
     handleGetOneWarehouseAnalytics
+  );
+  yield takeLatest(
+    actionTypes.REMOVE_MANAGER_FROM_WAREHOUSE,
+    handleRemoveManager
   );
 }
 

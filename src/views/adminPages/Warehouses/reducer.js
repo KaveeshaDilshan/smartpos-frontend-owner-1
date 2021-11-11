@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import { REMOVE_MANAGER_FROM_WAREHOUSE_SUCCESS } from './actionTypes';
 
 const initialState = {
   warehouses: [],
@@ -30,6 +31,11 @@ const warehouseReducer = (state = initialState, action) => {
         ...state,
         warehouseAnalytics: { ...action.payload },
         loading: false,
+      };
+    case actionTypes.REMOVE_MANAGER_FROM_WAREHOUSE_SUCCESS:
+      return {
+        ...state,
+        warehouse: { ...state.warehouse, managerId: undefined },
       };
     default:
       return state;

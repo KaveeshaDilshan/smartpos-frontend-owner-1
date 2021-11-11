@@ -5,12 +5,14 @@ import { Avatar, Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import styles from './warehouse.module.css';
-import { assignManager, getOneWarehouse } from '../actions';
+import { assignManager, getOneWarehouse, removeManager } from '../actions';
 import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
 import WarehouseAnalytics from './WarehouseAnalytics';
+import RemoveManagerModal from './RemoveManagerModal';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
@@ -34,9 +36,22 @@ function WarehousePage(props) {
       <>
         <Row className="mt-4">
           <Col className="col-6">
-            <div>
-              <Avatar />
-            </div>
+            {manager && (
+              <div className="d-flex align-items-center">
+                <div>
+                  <button
+                    type="button"
+                    style={{ backgroundColor: 'transparent', border: 'none' }}
+                    onClick={() => dispatch(removeManager(id))}
+                  >
+                    <HighlightOffIcon scale={2} />
+                  </button>
+                </div>
+                <h6 style={{ color: 'red', paddingTop: '10px' }}>
+                  Remove the manager
+                </h6>
+              </div>
+            )}
           </Col>
         </Row>
         <Row className="mt-5">
@@ -350,16 +365,17 @@ function WarehousePage(props) {
                         </div>
                       </div>
                       <div>
-                        <Button
-                          size="small"
-                          type="submit"
-                          color="primary"
-                          variant="outlined"
-                          style={{ marginBottom: 0 }}
-                          onClick={() => setOpen(open)}
-                        >
-                          Show Details
-                        </Button>
+                        {/*<Button*/}
+                        {/*  size="small"*/}
+                        {/*  type="submit"*/}
+                        {/*  color="primary"*/}
+                        {/*  variant="outlined"*/}
+                        {/*  style={{ marginBottom: 0 }}*/}
+                        {/*  onClick={() => setOpen(open)}*/}
+                        {/*>*/}
+                        {/*  Show Details*/}
+                        {/*</Button>*/}
+                        <h5>x {p.quantity}</h5>
                       </div>
                     </div>
                   ))}
