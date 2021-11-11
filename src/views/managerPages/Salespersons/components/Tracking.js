@@ -26,7 +26,7 @@ function SalespersonTracking() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(getOneSalesperson({ id, history }));
-    }, 1000);
+    }, 100);
     return () => clearTimeout(timer);
   });
 
