@@ -67,9 +67,25 @@ export function* logoutUser(action) {
   }
 }
 
+const getToken = async () => {
+  await new Promise((resolve) => {
+    auth.onAuthStateChanged((user) => {
+      resolve(user);
+    });
+  });
+  const idToken = await auth.currentUser.getIdToken(true);
+  return idToken;
+};
+
+export function* handleGetToken() {
+  const token = yield call(getToken);
+  localStorage.setItem('idToken', token);
+}
+
 function* UserSagas() {
   yield takeLatest(actionTypes.LOGIN, loginUser);
   yield takeLatest(actionTypes.LOGOUT, logoutUser);
+  yield takeLatest(actionTypes.GET_TOKEN, handleGetToken);
 }
 
 const userSagas = [UserSagas];

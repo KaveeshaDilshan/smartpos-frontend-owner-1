@@ -10,10 +10,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
-  const persistReducers = persistReducer({ key: 'root', storage }, rootReducer);
+  //const persistReducers = persistReducer({ key: 'root', storage }, rootReducer);
   const store = createStore(
-    persistReducers,
-    composeEnhancers(applyMiddleware(...middlewares))
+    rootReducer,
+    composeEnhancers(applyMiddleware(sagaMiddleware))
   );
 
   const persister = persistStore(store);
