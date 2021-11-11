@@ -12,7 +12,6 @@ import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
 import WarehouseAnalytics from './WarehouseAnalytics';
-import RemoveManagerModal from './RemoveManagerModal';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
