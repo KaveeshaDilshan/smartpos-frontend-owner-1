@@ -1,5 +1,4 @@
 import * as actionTypes from './salespersonsActionTypes';
-import { GET_SALESPERSON_DAILY_PRODUCTS } from './salespersonsActionTypes';
 
 const initialState = {
   allSalespersons: null,

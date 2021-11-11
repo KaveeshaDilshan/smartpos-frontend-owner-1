@@ -7,7 +7,6 @@ import styles from './SalespersonsPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getAllSalespersons } from './redux/salespersonsActions';
 import TableComponent from './components/TableComponent';
-import Loading from '../../../components/common/Loading';
 
 function SalespersonsPage() {
   const history = useHistory();
