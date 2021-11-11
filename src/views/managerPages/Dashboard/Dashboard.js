@@ -29,13 +29,13 @@ function Dashboard() {
     (state) => state.dashboardReducer.warehouseSales
   );
 
-  useEffect(
-    () => dispatch(getWarehouseSales({ warehouseID, startDate, endDate })),
-    [startDate, endDate]
-  );
   useEffect(() => {
     dispatch(getManagerWarehouse(loggedManager.warehouseId));
   }, [loggedManager]);
+  useEffect(
+    () => dispatch(getWarehouseSales({ warehouseID, startDate, endDate })),
+    [startDate, endDate, warehouseID]
+  );
   const handleStartDateChange = (date) => {
     setStartDate(date);
   };
