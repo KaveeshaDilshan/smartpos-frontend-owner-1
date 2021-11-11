@@ -9,7 +9,7 @@ export function* getWarehouseSales(action) {
     const { data } = yield axios.get(
       `/manager/sales/warehousesales/${warehouseID}/?startDate=${startDate}&endDate=${endDate}`
     );
-    const sales = Object.keys(data).map((key, index) => ({
+    const sales = Object.keys(data).map((key) => ({
       date: key,
       totalSales: data[key].totalIncome,
     }));

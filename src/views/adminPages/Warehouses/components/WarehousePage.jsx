@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Form, Label, FormGroup, Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,7 +12,6 @@ import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
 import WarehouseAnalytics from './WarehouseAnalytics';
-import { logoutUser } from '../../../login/redux/loginActions';
 import ConfirmationBox from '../../../managerPages/common/ConfirmationBox';
 
 function WarehousePage(props) {
@@ -30,7 +29,6 @@ function WarehousePage(props) {
     dispatch(getAllUnassignedManagers());
   }, [warehouse, warehouseAnalytics]);
   const [selectedManager, setSelectedManager] = useState('');
-  const [open, setOpen] = React.useState(false);
   const [confirmBoxOn, setConfirmBox] = useState(false);
   const [deleteConfirm, setConfirm] = useState(false);
   const title = 'Remove';

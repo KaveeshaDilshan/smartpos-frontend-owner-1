@@ -25,7 +25,7 @@ function Warehouse() {
             <TextField
               defaultValue={search}
               label="Search By Name"
-              onChange={(e, value) => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </Col>
           <Col className="col-lg-4 d-flex align-items-center justify-content-center">

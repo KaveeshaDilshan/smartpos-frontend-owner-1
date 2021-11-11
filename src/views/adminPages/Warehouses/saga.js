@@ -1,4 +1,4 @@
-import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import * as actionTypes from './actionTypes';

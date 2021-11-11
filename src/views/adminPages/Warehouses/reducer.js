@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import { REMOVE_MANAGER_FROM_WAREHOUSE_SUCCESS } from './actionTypes';
 
 const initialState = {
   warehouses: [],
