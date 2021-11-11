@@ -36,11 +36,9 @@ const AssignShop = ({ id }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
   React.useEffect(() => {
-    dispatch(getWarehouseShops(warehouseID));
+    dispatch(getWarehouseShops(loggedManager.warehouseId));
     dispatch(getSalespersonShops(id));
   }, []);
 
@@ -116,22 +114,24 @@ const AssignShop = ({ id }) => {
         </Typography>
         <Paper className={classes.paper2}>
           <Row className="mt-3">
-            <div>
-              <Autocomplete
-                id="tags-standard"
-                options={warehouseShops}
-                getOptionLabel={(option) => option.name}
-                onChange={(e, value) => setShopSelect({ ...value })}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="standard"
-                    label="Select Shops"
-                    placeholder="Shops"
-                  />
-                )}
-              />
-            </div>
+            {warehouseShops && (
+              <div>
+                <Autocomplete
+                  id="tags-standard"
+                  options={warehouseShops}
+                  getOptionLabel={(option) => option.name}
+                  onChange={(e, value) => setShopSelect({ ...value })}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      label="Select Shops"
+                      placeholder="Shops"
+                    />
+                  )}
+                />
+              </div>
+            )}
           </Row>
           <Row className="mt-3" style={{ textAlign: 'end' }}>
             <div>

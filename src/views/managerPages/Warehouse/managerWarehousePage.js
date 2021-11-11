@@ -23,16 +23,17 @@ function managerWarehousePage() {
   );
 
   const loading = useSelector((state) => state.managerWarehouseReducer.loading);
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
 
   React.useEffect(() => {
-    dispatch(getAllWarehouseProducts({ search, warehouseID }));
+    dispatch(
+      getAllWarehouseProducts({
+        search,
+        warehouseID: loggedManager.warehouseId,
+      })
+    );
   }, [search]);
-  if (!allWarehouseProducts) {
-    return null;
-  }
+
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
@@ -77,9 +78,10 @@ function managerWarehousePage() {
                           />
                         )
                     )}
-                  {allWarehouseProducts.length === 0 && (
-                    <h6>No Any Products In The Warehouse</h6>
-                  )}
+                  {allWarehouseProducts &&
+                    allWarehouseProducts.length === 0 && (
+                      <h6>No Any Products In The Warehouse</h6>
+                    )}
                 </>
               ) : (
                 <>

@@ -71,7 +71,7 @@ function ProductDetails(props) {
           name: values.product_name,
           unitPrice: values.unit_price,
           description: values.description,
-          photo: values.photo,
+          photo: url,
         },
       })
     );

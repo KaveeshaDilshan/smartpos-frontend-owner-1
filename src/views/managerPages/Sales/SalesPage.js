@@ -21,13 +21,11 @@ function SalesPage() {
 
   const loading = useSelector((state) => state.salesReducer.loading);
   const sales = useSelector((state) => state.salesReducer.sales);
-  const warehouseId = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
   React.useEffect(() => {
     dispatch(
       getSalespersonsSalesByDateRange({
-        warehouseId,
+        warehouseId: loggedManager.warehouseId,
         startDate,
         endDate,
       })
@@ -36,7 +34,7 @@ function SalesPage() {
   const handleBtnClick = () => {
     dispatch(
       getSalespersonsSalesByDateRange({
-        warehouseId,
+        warehouseId: loggedManager.warehouseId,
         startDate: Moment(startDate),
         endDate: Moment(endDate),
       })

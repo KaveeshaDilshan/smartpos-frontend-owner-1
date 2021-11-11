@@ -21,21 +21,24 @@ function Dashboard() {
   const [startDate, setStartDate] = useState(moment().subtract(7, 'day'));
   const [endDate, setEndDate] = useState(moment().subtract(0, 'day'));
   const loggedManager = useSelector((state) => state.loginReducer.user);
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
-
   const warehouseSales = useSelector(
     (state) => state.dashboardReducer.warehouseSales
   );
 
-  useEffect(
-    () => dispatch(getWarehouseSales({ warehouseID, startDate, endDate })),
-    [startDate, endDate]
-  );
   useEffect(() => {
     dispatch(getManagerWarehouse(loggedManager.warehouseId));
   }, [loggedManager]);
+  useEffect(
+    () =>
+      dispatch(
+        getWarehouseSales({
+          warehouseID: loggedManager.warehouseId,
+          startDate,
+          endDate,
+        })
+      ),
+    [startDate, endDate]
+  );
   const handleStartDateChange = (date) => {
     setStartDate(date);
   };
