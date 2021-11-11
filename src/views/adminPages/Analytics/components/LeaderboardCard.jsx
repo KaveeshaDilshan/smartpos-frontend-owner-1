@@ -51,17 +51,15 @@ function LeaderboardCard({
       <CardContent
         style={{
           paddingLeft: 50,
-          paddingRight: 200,
         }}
       >
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
             alignItems: 'center',
           }}
         >
-          <div className="d-flex align-items-center justify-content-start">
+          <div className="d-flex align-items-center">
             <div>
               <Avatar
                 style={{ height: 70, width: 70, marginRight: 80 }}
@@ -81,7 +79,7 @@ function LeaderboardCard({
               </Typography>
             </div>
           </div>
-          <div>
+          <div style={{ marginLeft: 200 }}>
             <Typography
               style={{ height: '20px' }}
               className={classes.title}

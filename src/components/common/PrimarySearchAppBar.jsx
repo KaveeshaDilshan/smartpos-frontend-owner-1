@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,6 +20,8 @@ import { useDispatch } from 'react-redux';
 import ManagerProfile from '../../views/managerPages/common/managerProfile/ManagerProfile';
 import profileFallback from '../images.png';
 import { logoutUser } from '../../views/login/redux/loginActions';
+import { deleteWarehouseProduct } from '../../views/managerPages/Warehouse/redux/warehouseActions';
+import ConfirmationBox from '../../views/managerPages/common/ConfirmationBox';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -113,6 +115,18 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+  const [confirmBoxOn, setConfirmBox] = useState(false);
+  const [deleteConfirm, setConfirm] = useState(false);
+  const title = 'Log out';
+  const body = 'Are you sure? Do you want to log out?';
+  const option1 = 'Cancel';
+  const option2 = 'Yes';
+  useEffect(() => {
+    if (deleteConfirm === true) {
+      dispatch(logoutUser(history));
+      setConfirm(false);
+    }
+  }, [deleteConfirm]);
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -122,9 +136,9 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const handleLogout = () => {
-    dispatch(logoutUser(history));
-  };
+  // const handleLogout = () => {
+  //   dispatch(logoutUser(history));
+  // };
   const menuId = 'primary-search-account-menu';
   // const renderMenu = (
   //   <Menu
@@ -228,7 +242,7 @@ export default function PrimarySearchAppBar(props) {
                 color: '#FFF',
                 marginRight: 20,
               }}
-              onClick={handleLogout}
+              onClick={() => setConfirmBox(!confirmBoxOn)}
               className="d-flex align-items-center justify-content-center"
             >
               LOGOUT
@@ -256,6 +270,15 @@ export default function PrimarySearchAppBar(props) {
       <ManagerProfile open={open} handleClose={setOpen} />
       {renderMobileMenu}
       {/*{renderMenu}*/}
+      <ConfirmationBox
+        open={confirmBoxOn}
+        handleClose={setConfirmBox}
+        title={title}
+        description={body}
+        option1={option1}
+        option2={option2}
+        setState={setConfirm}
+      />
     </div>
   );
 }

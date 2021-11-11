@@ -12,6 +12,8 @@ import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
 import WarehouseAnalytics from './WarehouseAnalytics';
+import { logoutUser } from '../../../login/redux/loginActions';
+import ConfirmationBox from '../../../managerPages/common/ConfirmationBox';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
@@ -29,6 +31,18 @@ function WarehousePage(props) {
   }, [warehouse, warehouseAnalytics]);
   const [selectedManager, setSelectedManager] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [confirmBoxOn, setConfirmBox] = useState(false);
+  const [deleteConfirm, setConfirm] = useState(false);
+  const title = 'Remove';
+  const body = 'Do you want to remove the manager?';
+  const option1 = 'Cancel';
+  const option2 = 'Yes';
+  useEffect(() => {
+    if (deleteConfirm === true) {
+      dispatch(removeManager(id));
+      setConfirm(false);
+    }
+  }, [deleteConfirm]);
 
   const managerComponent = (manager) => {
     return (
@@ -41,7 +55,7 @@ function WarehousePage(props) {
                   <button
                     type="button"
                     style={{ backgroundColor: 'transparent', border: 'none' }}
-                    onClick={() => dispatch(removeManager(id))}
+                    onClick={() => setConfirmBox(!confirmBoxOn)}
                   >
                     <HighlightOffIcon scale={2} />
                   </button>
@@ -378,6 +392,15 @@ function WarehousePage(props) {
                       </div>
                     </div>
                   ))}
+                <ConfirmationBox
+                  open={confirmBoxOn}
+                  handleClose={setConfirmBox}
+                  title={title}
+                  description={body}
+                  option1={option1}
+                  option2={option2}
+                  setState={setConfirm}
+                />
               </div>
             </Col>
           </Row>
