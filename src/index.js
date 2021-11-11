@@ -14,8 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const { store, persister } = configureStore();
 const history = createBrowserHistory();
 
-console.log('aaaa');
-
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persister}>
