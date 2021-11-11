@@ -8,9 +8,7 @@ import { addSalesperson } from '../redux/salespersonsActions';
 
 function AddNewSalesperson() {
   const dispatch = useDispatch();
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
   const validate = (values) => {
     const errors = {};
     if (!values.firstName) {
@@ -56,7 +54,7 @@ function AddNewSalesperson() {
     validate,
     onSubmit: (values) => {
       values.role = 'salesperson';
-      values.warehouseId = warehouseID;
+      values.warehouseId = loggedManager.warehouseId;
       dispatch(addSalesperson(values));
     },
   });

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
 import {
   editSalesperson,
   getOneSalesperson,
@@ -12,12 +13,13 @@ import ManagerLayout from '../../../ManagerLayout';
 function EditSalesperson(props) {
   const { id } = props.match.params;
   const dispatch = useDispatch();
+  const history = useHistory();
   const salesperson = useSelector(
     (state) => state.salespersonsReducer.oneSalesperson
   );
 
   useEffect(() => {
-    dispatch(getOneSalesperson(id));
+    dispatch(getOneSalesperson({ id, history }));
   }, []);
 
   const validate = (values) => {

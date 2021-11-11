@@ -23,12 +23,15 @@ function managerWarehousePage() {
   );
 
   const loading = useSelector((state) => state.managerWarehouseReducer.loading);
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
 
   React.useEffect(() => {
-    dispatch(getAllWarehouseProducts({ search, warehouseID }));
+    dispatch(
+      getAllWarehouseProducts({
+        search,
+        warehouseID: loggedManager.warehouseId,
+      })
+    );
   }, [search]);
 
   return (
