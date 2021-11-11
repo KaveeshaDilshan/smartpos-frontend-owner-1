@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShopArray({ id }) {
-  console.log(id);
   const allShops = [
     { shopId: '4556', shop: { name: 'shop1' } },
     { shopId: '4557', shop: { name: 'shop2' } },

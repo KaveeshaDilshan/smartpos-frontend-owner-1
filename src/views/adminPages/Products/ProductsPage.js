@@ -35,7 +35,6 @@ function ProductsPage() {
     dispatch(getAllProducts(search));
     dispatch(getAllCategories(''));
   }, [search]);
-  console.log(categorySelect);
 
   return (
     <>
