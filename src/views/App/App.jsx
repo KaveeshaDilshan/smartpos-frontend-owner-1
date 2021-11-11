@@ -31,7 +31,7 @@ function App() {
               );
             })}
           <Route exact={true} path="/login" component={LoginForm} key="login" />
-          <Route>
+          <Route exact path="/">
             <Redirect to="/login" />
           </Route>
         </>
@@ -56,7 +56,7 @@ function App() {
               );
             })}
           <Route exact={true} path="/login" component={LoginForm} key="login" />
-          <Route>
+          <Route exact path="/">
             <Redirect to="/login" />
           </Route>
         </>
