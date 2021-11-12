@@ -320,7 +320,7 @@ function WarehousePage(props) {
                         fontSize: '16px',
                       }}
                     >
-                      {warehouse.location}
+                      {warehouse.town}
                     </h4>
                     <h4
                       style={{
