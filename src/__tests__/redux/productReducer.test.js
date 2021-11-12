@@ -2,9 +2,9 @@ import reducer from '../../views/managerPages/Products/redux/productReducer';
 import * as actions from '../../views/managerPages/Products/redux/productActionTypes';
 
 const initialState = {
-  allProducts: [],
+  allProducts: null,
   loading: false,
-  oneProduct: {},
+  oneProduct: null,
   oneProductLoading: false,
 };
 

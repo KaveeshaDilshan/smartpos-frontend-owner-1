@@ -2,7 +2,7 @@ import reducer from '../../views/managerPages/Sales/redux/salesReducer';
 import * as actions from '../../views/managerPages/Sales/redux/salesActionTypes';
 
 const initialState = {
-  sales: [],
+  sales: null,
   loading: false,
 };
 const mockDataSales = {

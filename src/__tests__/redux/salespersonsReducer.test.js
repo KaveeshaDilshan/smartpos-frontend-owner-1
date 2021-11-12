@@ -2,12 +2,12 @@ import reducer from '../../views/managerPages/Salespersons/redux/salespersonsRed
 import * as actions from '../../views/managerPages/Salespersons/redux/salespersonsActionTypes';
 
 const initialState = {
-  allSalespersons: [],
+  allSalespersons: null,
   loading: false,
-  oneSalesperson: {},
-  warehouseShops: [],
-  oneSalespersonDailyProducts: [],
-  oneSalespersonAssignedShops: [],
+  oneSalesperson: null,
+  warehouseShops: null,
+  oneSalespersonDailyProducts: null,
+  oneSalespersonAssignedShops: null,
   totalSalespersons: 0,
   dailyProductsLoading: false,
 };
