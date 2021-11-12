@@ -1,3 +1,5 @@
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 import * as actionTypes from './loginActionsType';
 
 const initialState = {
@@ -31,4 +33,16 @@ const loginReducer = (state = initialState, action) => {
   }
 };
 
-export default loginReducer;
+const persistConfig = {
+  keyPrefix: 'fcode-',
+
+  key: 'loginReducer',
+
+  blacklist: ['loading'],
+
+  storage,
+};
+
+export default persistReducer(persistConfig, loginReducer);
+
+//export default loginReducer;

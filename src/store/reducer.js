@@ -13,7 +13,6 @@ import adminAnalyticsReducer from '../views/adminPages/Analytics/reducer';
 import loginReducer from '../views/login/redux/loginReducer';
 
 const rootReducer = combineReducers({
-  // appReducer: appReducer,
   warehouseReducer,
   managerReducer,
   adminSalespersonReducer,

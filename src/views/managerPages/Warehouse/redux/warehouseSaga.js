@@ -1,12 +1,11 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import axios from '../../../../axios/axios';
 import * as actionTypes from './warehouseActionTypes';
-import { BASE_URL } from '../../../../const/config';
 
 const getAllWarehouseProductsCall = async ({ search, warehouseID }) => {
   const result = await axios.get(
-    `${BASE_URL}/manager/warehouse/${warehouseID}?sortBy=+name&query=${search}`
+    `/manager/warehouse/${warehouseID}?sortBy=+name&query=${search}`
   );
   return result;
 };
@@ -33,7 +32,7 @@ export function* getAllWarehouseProducts(action) {
 export function* addProductToWarehouse(action) {
   const { warehouseID, details } = action.data;
   try {
-    yield axios.post(`${BASE_URL}/manager/warehouse/${warehouseID}`, details);
+    yield axios.post(`/manager/warehouse/${warehouseID}`, details);
     toast.success('New Product is added to Warehouse');
   } catch (error) {
     toast.error(error.response.data.description);
@@ -43,7 +42,7 @@ export function* addProductToWarehouse(action) {
 export function* changeWarehouseProductQuantity(action) {
   const { warehouseID, details } = action.data;
   try {
-    yield axios.patch(`${BASE_URL}/manager/warehouse/${warehouseID}`, details);
+    yield axios.patch(`/manager/warehouse/${warehouseID}`, details);
     toast.success('Product quantity is changed successfully');
   } catch (error) {
     toast.error(error.response.data.message);
@@ -54,7 +53,7 @@ export function* deleteWarehouseProduct(action) {
   const { warehouseID, productId } = action.data;
   try {
     yield axios.delete(
-      `${BASE_URL}/manager/warehouse/${warehouseID}/product/${productId}`
+      `/manager/warehouse/${warehouseID}/product/${productId}`
     );
     const { data } = yield call(getAllWarehouseProductsCall, {
       search: '',

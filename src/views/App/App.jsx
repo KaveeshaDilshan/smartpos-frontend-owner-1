@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../routes';
 import LoginForm from '../login/LoginForm';
 import { BASE_ADMIN_ROUTE, BASE_MANAGER_ROUTE } from '../../const/config';
+import { getToken } from '../login/redux/loginActions';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getToken());
+  }, []);
   const { user } = useSelector((state) => state.loginReducer);
   const allRoutes = (currentUser) => {
     if (currentUser && currentUser.role === 'admin') {
@@ -25,6 +30,10 @@ function App() {
                 </>
               );
             })}
+          <Route exact={true} path="/login" component={LoginForm} key="login" />
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
         </>
       );
     }
@@ -46,6 +55,10 @@ function App() {
                 </>
               );
             })}
+          <Route exact={true} path="/login" component={LoginForm} key="login" />
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
         </>
       );
     }

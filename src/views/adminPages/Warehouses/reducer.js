@@ -31,6 +31,11 @@ const warehouseReducer = (state = initialState, action) => {
         warehouseAnalytics: { ...action.payload },
         loading: false,
       };
+    case actionTypes.REMOVE_MANAGER_FROM_WAREHOUSE_SUCCESS:
+      return {
+        ...state,
+        warehouse: { ...state.warehouse, managerId: undefined },
+      };
     default:
       return state;
   }

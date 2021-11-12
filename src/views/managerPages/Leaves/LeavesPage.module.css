@@ -1,8 +1,12 @@
-.leavespage {
+.leavesPage {
   padding-top: 30px;
   padding-left: 50px;
   padding-right: 50px;
 }
 .button{
   margin-right: 10px;
+}
+.leavesPageTop {
+  display: flex;
+  justify-content: space-between;
 }

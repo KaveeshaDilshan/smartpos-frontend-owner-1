@@ -7,7 +7,6 @@ import styles from './SalespersonsPage.module.css';
 import ManagerLayout from '../../ManagerLayout';
 import { getAllSalespersons } from './redux/salespersonsActions';
 import TableComponent from './components/TableComponent';
-import Loading from '../../../components/common/Loading';
 
 function SalespersonsPage() {
   const history = useHistory();
@@ -23,12 +22,16 @@ function SalespersonsPage() {
   );
   const loading = useSelector((state) => state.salespersonsReducer.loading);
 
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
 
   React.useEffect(() => {
-    dispatch(getAllSalespersons({ search, warehouseID, page }));
+    dispatch(
+      getAllSalespersons({
+        search,
+        warehouseID: loggedManager.warehouseId,
+        page,
+      })
+    );
   }, [search, page]);
   return (
     <>

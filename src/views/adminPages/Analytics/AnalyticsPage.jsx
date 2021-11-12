@@ -6,7 +6,7 @@ import { getSalespersonLeaderboard } from './actions';
 import LeaderboardCard from './components/LeaderboardCard';
 
 function AnalyticsPage() {
-  const { salespersonLeaderboard, loading } = useSelector(
+  const { salespersonLeaderboard } = useSelector(
     (state) => state.adminAnalyticsReducer
   );
   const dispatch = useDispatch();

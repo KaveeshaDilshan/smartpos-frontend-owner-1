@@ -48,3 +48,10 @@ export const getOneWarehouseAnalytics = (data) => {
     payload: data,
   };
 };
+
+export const removeManager = (data) => {
+  return {
+    type: actionTypes.REMOVE_MANAGER_FROM_WAREHOUSE,
+    payload: data,
+  };
+};

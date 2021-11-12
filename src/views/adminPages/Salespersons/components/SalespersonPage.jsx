@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import ToggleButton from '@material-ui/lab/ToggleButton';
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
-import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../../Layout';
 import ProductCard from './ProductCard';

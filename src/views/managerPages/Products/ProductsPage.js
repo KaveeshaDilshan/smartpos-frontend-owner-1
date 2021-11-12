@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Container, Row, Col } from 'reactstrap';
 import {
   Button,
-  // Button,
   CircularProgress,
   Divider,
   Grid,
   TextField,
   Typography,
 } from '@material-ui/core';
-// import AddIcon from '@material-ui/icons/Add';
-// import { useHistory } from 'react-router-dom';
 import { Autocomplete } from '@material-ui/lab';
-import { useHistory } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
 import ProductItem from './components/ProductItem';
 import { getAllProducts } from './redux/productActions';
@@ -24,7 +19,6 @@ import AddNewProduct from './components/AddNewProduct';
 
 function ProductsPage() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [isNewProductAdded, setNewProductAdded] = useState(false);
   const [search, setSearch] = useState('');
   const [categorySelect, setCategorySelect] = useState({});
@@ -43,7 +37,7 @@ function ProductsPage() {
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.productspage}>
+        <div className={styles.productsPage}>
           <div className={styles.top}>
             <Typography
               style={{
@@ -57,26 +51,27 @@ function ProductsPage() {
             >
               Products List
             </Typography>
-            <div>
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={allCategories}
-                getOptionLabel={(option) => option.name}
-                onChange={(e, value) => setCategorySelect({ ...value })}
-                style={{ width: 300 }}
-                size="small"
-                renderInput={(params) => (
-                  <TextField {...params} label="Category" />
-                )}
-              />
-            </div>
+            {allCategories && (
+              <div>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={allCategories}
+                  getOptionLabel={(option) => option.name}
+                  onChange={(e, value) => setCategorySelect({ ...value })}
+                  style={{ width: 300 }}
+                  size="small"
+                  renderInput={(params) => (
+                    <TextField {...params} label="Category" />
+                  )}
+                />
+              </div>
+            )}
             <Button
               className={styles.addNew__button}
               variant="contained"
               type="button"
-              // onClick={() => history.push('/manager/products/addnew')}
-              onClick={setAddProductOpen}
+              onClick={() => setAddProductOpen(true)}
             >
               <AddIcon /> Add New
             </Button>

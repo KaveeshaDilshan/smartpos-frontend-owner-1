@@ -1,12 +1,11 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
-import axios from 'axios';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import axios from '../../../axios/axios';
 import * as actionTypes from './actionTypes';
-import { BASE_URL } from '../../../const/config';
 import { auth } from '../../../const/firebase.config';
 
 const getOneManager = async (id) => {
-  const result = await axios.get(`${BASE_URL}/admin/managers/${id}`);
+  const result = await axios.get(`/admin/managers/${id}`);
   return result;
 };
 
@@ -22,12 +21,10 @@ export function* handleGetOneManager(action) {
 
 const getAllManagers = async (page, filter, warehouse) => {
   if (filter === 'all') {
-    return axios.get(
-      `${BASE_URL}/admin/managers?sortBy=+firstName&page=${page}&limit=9`
-    );
+    return axios.get(`/admin/managers?sortBy=+firstName&page=${page}&limit=9`);
   }
   return axios.get(
-    `${BASE_URL}/admin/managers?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
+    `/admin/managers?limit=9&sortBy=+firstName&page=${page}&filter=warehouseId eq ${warehouse}`
   );
 };
 
@@ -50,7 +47,7 @@ const addManager = async (data) => {
     data.password
   );
   data.uid = user.uid;
-  const result = await axios.post(`${BASE_URL}/users/register`, data);
+  const result = await axios.post(`/users/register`, data);
 
   return result;
 };
@@ -76,7 +73,7 @@ export function* handleAddManager(action) {
 }
 
 const getUnassignedManagers = async () => {
-  const result = await axios.get(`${BASE_URL}/admin/managers/unassigned`);
+  const result = await axios.get(`/admin/managers/unassigned`);
   return result.data;
 };
 

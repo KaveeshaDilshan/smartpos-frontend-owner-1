@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Form, Label, FormGroup, Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import styles from './warehouse.module.css';
-import { assignManager, getOneWarehouse } from '../actions';
+import { assignManager, getOneWarehouse, removeManager } from '../actions';
 import Layout from '../../../Layout';
 import { getAllUnassignedManagers } from '../../Managers/actions';
 import Loading from '../../../../components/common/Loading';
 import WarehouseAnalytics from './WarehouseAnalytics';
+import ConfirmationBox from '../../../managerPages/common/ConfirmationBox';
 
 function WarehousePage(props) {
   const dispatch = useDispatch();
@@ -27,16 +29,40 @@ function WarehousePage(props) {
     dispatch(getAllUnassignedManagers());
   }, [warehouse, warehouseAnalytics]);
   const [selectedManager, setSelectedManager] = useState('');
-  const [open, setOpen] = React.useState(false);
+  const [confirmBoxOn, setConfirmBox] = useState(false);
+  const [deleteConfirm, setConfirm] = useState(false);
+  const title = 'Remove';
+  const body = 'Do you want to remove the manager?';
+  const option1 = 'Cancel';
+  const option2 = 'Yes';
+  useEffect(() => {
+    if (deleteConfirm === true) {
+      dispatch(removeManager(id));
+      setConfirm(false);
+    }
+  }, [deleteConfirm]);
 
   const managerComponent = (manager) => {
     return (
       <>
         <Row className="mt-4">
           <Col className="col-6">
-            <div>
-              <Avatar />
-            </div>
+            {manager && (
+              <div className="d-flex align-items-center">
+                <div>
+                  <button
+                    type="button"
+                    style={{ backgroundColor: 'transparent', border: 'none' }}
+                    onClick={() => setConfirmBox(!confirmBoxOn)}
+                  >
+                    <HighlightOffIcon scale={2} />
+                  </button>
+                </div>
+                <h6 style={{ color: 'red', paddingTop: '10px' }}>
+                  Remove the manager
+                </h6>
+              </div>
+            )}
           </Col>
         </Row>
         <Row className="mt-5">
@@ -350,19 +376,29 @@ function WarehousePage(props) {
                         </div>
                       </div>
                       <div>
-                        <Button
-                          size="small"
-                          type="submit"
-                          color="primary"
-                          variant="outlined"
-                          style={{ marginBottom: 0 }}
-                          onClick={() => setOpen(open)}
-                        >
-                          Show Details
-                        </Button>
+                        {/*<Button*/}
+                        {/*  size="small"*/}
+                        {/*  type="submit"*/}
+                        {/*  color="primary"*/}
+                        {/*  variant="outlined"*/}
+                        {/*  style={{ marginBottom: 0 }}*/}
+                        {/*  onClick={() => setOpen(open)}*/}
+                        {/*>*/}
+                        {/*  Show Details*/}
+                        {/*</Button>*/}
+                        <h5>x {p.quantity}</h5>
                       </div>
                     </div>
                   ))}
+                <ConfirmationBox
+                  open={confirmBoxOn}
+                  handleClose={setConfirmBox}
+                  title={title}
+                  description={body}
+                  option1={option1}
+                  option2={option2}
+                  setState={setConfirm}
+                />
               </div>
             </Col>
           </Row>

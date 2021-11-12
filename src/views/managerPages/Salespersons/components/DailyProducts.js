@@ -48,9 +48,7 @@ const DailyProducts = ({ id }) => {
   const allWarehouseProducts = useSelector(
     (state) => state.managerWarehouseReducer.allWarehouseProducts
   );
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
   const dailyProducts = useSelector(
     (state) => state.salespersonsReducer.oneSalespersonDailyProducts
   );
@@ -58,7 +56,12 @@ const DailyProducts = ({ id }) => {
     (state) => state.salespersonsReducer.dailyProductsLoading
   );
   React.useEffect(() => {
-    dispatch(getAllWarehouseProducts({ search: '', warehouseID }));
+    dispatch(
+      getAllWarehouseProducts({
+        search: '',
+        warehouseID: loggedManager.warehouseId,
+      })
+    );
     dispatch(
       getSalespersonDailyProducts({
         id,
@@ -98,7 +101,7 @@ const DailyProducts = ({ id }) => {
   const handleSaveClick = () => {
     dispatch(
       addDailyProduct({
-        warehouseId: warehouseID,
+        warehouseId: loggedManager.warehouseId,
         details: {
           salesperson: id,
           createdAt: Moment.utc(selectedDate),
@@ -203,14 +206,14 @@ const DailyProducts = ({ id }) => {
                       ))}
                   </tbody>
                 )}
-                {loading && (
-                  <>
-                    <div style={{ textAlign: 'center', marginTop: 50 }}>
-                      <CircularProgress style={{ color: 'red' }} />
-                    </div>
-                  </>
-                )}
               </Table>
+              {loading && (
+                <>
+                  <div style={{ textAlign: 'center', marginTop: 50 }}>
+                    <CircularProgress style={{ color: 'red' }} />
+                  </div>
+                </>
+              )}
             </div>
           </Row>
         </Paper>
@@ -245,22 +248,24 @@ const DailyProducts = ({ id }) => {
         </div>
         <Paper className={classes.paper}>
           <Row className="mt-3">
-            <div>
-              <Autocomplete
-                id="tags-standard"
-                options={allWarehouseProducts}
-                getOptionLabel={(option) => option.product.name}
-                onChange={(e, value) => handleProductSelect({ ...value })}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="standard"
-                    label="Select a Product"
-                    placeholder="Product"
-                  />
-                )}
-              />
-            </div>
+            {allWarehouseProducts && (
+              <div>
+                <Autocomplete
+                  id="tags-standard"
+                  options={allWarehouseProducts}
+                  getOptionLabel={(option) => option.product.name}
+                  onChange={(e, value) => handleProductSelect({ ...value })}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      label="Select a Product"
+                      placeholder="Product"
+                    />
+                  )}
+                />
+              </div>
+            )}
           </Row>
           <Row className="mt-3" style={{ textAlign: 'end' }}>
             <div>

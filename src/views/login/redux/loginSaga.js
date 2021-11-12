@@ -6,12 +6,10 @@ import { auth } from '../../../const/firebase.config';
 
 const loginUserCall = async (data) => {
   const { email, password } = data;
-
-  // console.log(email, password);
   const { user } = await auth.signInWithEmailAndPassword(email, password);
   const token = await auth.currentUser.getIdToken(/* forceRefresh */ true);
-  // console.log(token);
   localStorage.setItem('idToken', token);
+  axios.defaults.headers.Authorization = `Bearer ${token}`;
   if (!user.uid) {
     throw new Error('user not exist');
   }
@@ -67,9 +65,29 @@ export function* logoutUser(action) {
   }
 }
 
+const getToken = async () => {
+  await new Promise((resolve) => {
+    auth.onAuthStateChanged((user) => {
+      resolve(user);
+    });
+  });
+  if (await auth.currentUser) {
+    const idToken = await auth.currentUser.getIdToken(true);
+    return idToken;
+  }
+  return null;
+};
+
+export function* handleGetToken() {
+  const token = yield call(getToken);
+  localStorage.setItem('idToken', token);
+  axios.defaults.headers.Authorization = `Bearer ${token}`;
+}
+
 function* UserSagas() {
   yield takeLatest(actionTypes.LOGIN, loginUser);
   yield takeLatest(actionTypes.LOGOUT, logoutUser);
+  yield takeLatest(actionTypes.GET_TOKEN, handleGetToken);
 }
 
 const userSagas = [UserSagas];

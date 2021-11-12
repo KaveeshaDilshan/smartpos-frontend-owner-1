@@ -23,21 +23,22 @@ function managerWarehousePage() {
   );
 
   const loading = useSelector((state) => state.managerWarehouseReducer.loading);
-  const warehouseID = useSelector(
-    (state) => state.dashboardReducer.warehouseID
-  );
+  const loggedManager = useSelector((state) => state.loginReducer.user);
 
   React.useEffect(() => {
-    dispatch(getAllWarehouseProducts({ search, warehouseID }));
+    dispatch(
+      getAllWarehouseProducts({
+        search,
+        warehouseID: loggedManager.warehouseId,
+      })
+    );
   }, [search]);
-  if (!allWarehouseProducts) {
-    return null;
-  }
+
   return (
     <>
       <ManagerLayout search={search} setSearch={setSearch} isShow={true}>
-        <div className={styles.warehousepage}>
-          <div className={styles.page_top}>
+        <div className={styles.warehousePage}>
+          <div>
             <div className={styles.top}>
               <Typography
                 component="h2"
@@ -51,7 +52,7 @@ function managerWarehousePage() {
                 className={styles.addNew__button}
                 variant="contained"
                 type="button"
-                onClick={setClickAdd}
+                onClick={() => setClickAdd(true)}
               >
                 <AddIcon /> Add New
               </Button>
@@ -60,7 +61,7 @@ function managerWarehousePage() {
             <Divider className="mb-3" />
           </div>
           <div className={styles.page_bottom}>
-            <div className={styles.warehouse_inventory}>
+            <div>
               {!loading ? (
                 <>
                   {allWarehouseProducts &&
@@ -77,9 +78,10 @@ function managerWarehousePage() {
                           />
                         )
                     )}
-                  {allWarehouseProducts.length === 0 && (
-                    <h6>No Any Products In The Warehouse</h6>
-                  )}
+                  {allWarehouseProducts &&
+                    allWarehouseProducts.length === 0 && (
+                      <h6>No Any Products In The Warehouse</h6>
+                    )}
                 </>
               ) : (
                 <>

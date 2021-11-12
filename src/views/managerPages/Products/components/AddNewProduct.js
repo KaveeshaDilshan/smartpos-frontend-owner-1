@@ -199,11 +199,12 @@ function AddNewProduct({ open, handleClose, setNewProductAdded }) {
               value={formik.values.product_category}
             >
               <option>Select Category</option>
-              {allCategories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
+              {allCategories &&
+                allCategories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
             </Input>
             {formik.errors.product_category &&
               formik.touched.product_category && (

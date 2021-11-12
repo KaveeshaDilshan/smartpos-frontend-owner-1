@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styles from './Tracking.module.css';
 import ManagerLayout from '../../../ManagerLayout';
 import {
@@ -11,6 +11,7 @@ import MapContainer from './MapContainer';
 
 function SalespersonTracking() {
   const { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const salesperson = useSelector(
     (state) => state.salespersonsReducer.oneSalesperson
@@ -20,11 +21,12 @@ function SalespersonTracking() {
   );
   useEffect(() => {
     dispatch(getSalespersonShops(id));
+    dispatch(getOneSalesperson({ id, history }));
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(getOneSalesperson(id));
-    }, 1000);
+      dispatch(getOneSalesperson({ id, history }));
+    }, 100);
     return () => clearTimeout(timer);
   });
 

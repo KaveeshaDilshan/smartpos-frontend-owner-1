@@ -153,27 +153,3 @@ describe('should render the correct values which have been passed', () => {
     );
   });
 });
-
-// describe('should call the function', () => {
-//   it('should call the function on click on the product Item', () => {
-//     let button;
-//     act(() => {
-//       render(
-//         <Provider store={store}>
-//           <ProductItem
-//             productId={product._id}
-//             name={product.name}
-//             categoryName={product.categoryId.name}
-//             unitPrice={product.unitPrice}
-//             photoURL={product.photo}
-//             description={product.description}
-//           />
-//         </Provider>,
-//         container
-//       );
-//       button = container.querySelector('#detailsButton');
-//       fireEvent.click(button);
-//     });
-//     expect(button).toHaveBeenCalledTimes(1);
-//   });
-// });

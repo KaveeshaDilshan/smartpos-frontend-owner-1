@@ -2,15 +2,14 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import * as actionTypes from './actionTypes';
 import axios from '../../../axios/axios';
-import { BASE_URL } from '../../../const/config';
 
 const getSalespersonLeaderboard = async () => {
   return axios.get(
-    `${BASE_URL}/admin/salespersons/analyticsByIncome-range?startDate=2021-08-05T19:08:44.274Z&order=asc`
+    `/admin/salespersons/analyticsByIncome-range?startDate=2021-08-05T19:08:44.274Z&order=asc`
   );
 };
 
-export function* handleGetSalespersonLeaderboard(action) {
+export function* handleGetSalespersonLeaderboard() {
   try {
     const result = yield call(getSalespersonLeaderboard);
     yield put({

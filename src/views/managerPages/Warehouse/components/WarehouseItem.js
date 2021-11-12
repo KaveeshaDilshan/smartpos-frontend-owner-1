@@ -146,7 +146,7 @@ function WarehouseItem({ productId, poto, productName, unitPrice, count }) {
                 <DeleteIcon
                   className={classes.deleteIcon}
                   color="action"
-                  onClick={setConfirmBox}
+                  onClick={() => setConfirmBox(true)}
                 />
               </div>
             </div>
