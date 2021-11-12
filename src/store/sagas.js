@@ -13,7 +13,6 @@ import userSagas from '../views/login/redux/loginSaga';
 import analyticsSagas from '../views/adminPages/Analytics/saga';
 
 export default function* rootSaga() {
-  // yield all(appSagas.map((s) => fork(s)));
   yield all(warehouseSagas.map((s) => fork(s)));
   yield all(managerSagas.map((s) => fork(s)));
   yield all(managerCategorySagas.map((s) => fork(s)));

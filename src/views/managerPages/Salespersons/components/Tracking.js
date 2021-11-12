@@ -21,11 +21,12 @@ function SalespersonTracking() {
   );
   useEffect(() => {
     dispatch(getSalespersonShops(id));
+    dispatch(getOneSalesperson({ id, history }));
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(getOneSalesperson({ id, history }));
-    }, 1000);
+    }, 100);
     return () => clearTimeout(timer);
   });
 

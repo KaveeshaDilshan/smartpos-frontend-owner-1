@@ -28,7 +28,7 @@ function LeavesPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [clickView, setClickView] = useState(false);
-  const [description, setescription] = useState('');
+  const [description, setDescription] = useState('');
   const [search, setSearch] = useState('pending');
   const allLeaves = useSelector((state) => state.leavesReducer.allLeaves);
   const loading = useSelector((state) => state.leavesReducer.loading);
@@ -60,7 +60,7 @@ function LeavesPage() {
     dispatch(getLeaves(search));
   };
   const showReason = (reason) => {
-    setescription(reason);
+    setDescription(reason);
     setClickView(true);
   };
 
@@ -83,7 +83,6 @@ function LeavesPage() {
                 id="combo-box-demo"
                 options={['pending', 'approved', 'rejected']}
                 defaultValue="pending"
-                // getOptionLabel={(option) => option.name}
                 onChange={(e, value) => setSearch(value)}
                 style={{ width: 200 }}
                 size="small"
