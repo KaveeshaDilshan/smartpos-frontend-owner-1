@@ -34,7 +34,7 @@ function SalespersonTracking() {
     <>
       <ManagerLayout>
         <div className={styles.tracking}>
-          {salesperson && (
+          {salesperson && salesperson.latitude && salesperson.longitude ? (
             <MapContainer
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh8Mcle_XHWuQVfUQr-EjGL2p6SqvQK50&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
@@ -46,6 +46,19 @@ function SalespersonTracking() {
               }}
               shops={assignedShops}
             />
+          ) : (
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  margin: 100,
+                }}
+              >
+                <h4>This salesperson does not start selling yet.</h4>
+              </div>
+            </>
           )}
         </div>
       </ManagerLayout>
